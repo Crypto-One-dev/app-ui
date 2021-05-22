@@ -2,10 +2,9 @@
 // 1. ownerAddSigner(muon_node_1/2/3)
 
 // Deploy bridge
-// step 1. set network
-// step 2. ownerAddToken
-// setp 3. mint token
-// setp 4. ownerSetSideContract
+// step 1. ownerAddToken
+// setp 2. mint token
+// setp 3. ownerSetSideContract (address other contract)
 
 import { makeContract } from '../../utils/Stakefun'
 import { BridgeABI } from '../../utils/StakingABI'
@@ -86,9 +85,9 @@ const tokens = [
 ]
 
 const chains = [
-  { id: 97, name: 'BSC', network: 2, networkName: 'bsctest' },
-  { id: 4, name: 'ETH', network: 1, networkName: 'rinkeby' },
-  { id: 4002, name: 'FTM', network: 3, networkName: 'ftmtest' }
+  { id: 1, name: 'BSC', network: 97, networkName: 'bsctest' },
+  { id: 2, name: 'ETH', network: 4, networkName: 'rinkeby' },
+  { id: 3, name: 'FTM', network: 4002, networkName: 'ftmtest' }
 ]
 
 const instructions = [

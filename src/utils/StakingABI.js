@@ -1297,8 +1297,8 @@ export const YearnStrategyABI = [
 export const BridgeABI = [
   {
     inputs: [
-      { internalType: 'uint256', name: '_network', type: 'uint256' },
-      { internalType: 'address', name: '_muon', type: 'address' }
+      { internalType: 'address', name: '_muon', type: 'address' },
+      { internalType: 'bool', name: '_mintable', type: 'bool' }
     ],
     stateMutability: 'nonpayable',
     type: 'constructor'
@@ -1451,6 +1451,13 @@ export const BridgeABI = [
     type: 'function'
   },
   {
+    inputs: [],
+    name: 'getExecutingChainID',
+    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    stateMutability: 'view',
+    type: 'function'
+  },
+  {
     inputs: [{ internalType: 'uint256', name: '_txId', type: 'uint256' }],
     name: 'getTx',
     outputs: [
@@ -1471,6 +1478,13 @@ export const BridgeABI = [
     ],
     name: 'getUserTxs',
     outputs: [{ internalType: 'uint256[]', name: '', type: 'uint256[]' }],
+    stateMutability: 'view',
+    type: 'function'
+  },
+  {
+    inputs: [],
+    name: 'mintable',
+    outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
     stateMutability: 'view',
     type: 'function'
   },
@@ -1501,6 +1515,13 @@ export const BridgeABI = [
       { internalType: 'address', name: 'tokenContract', type: 'address' }
     ],
     name: 'ownerAddToken',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
+    inputs: [{ internalType: 'bool', name: '_mintable', type: 'bool' }],
+    name: 'ownerSetMintable',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function'

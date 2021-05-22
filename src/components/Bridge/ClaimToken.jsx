@@ -35,13 +35,13 @@ const ClaimToken = (props) => {
     }
     let originContractAddress = ''
     switch (Number(claim.fromChain)) {
-      case 1:
+      case 4:
         originContractAddress = ETHContract
         break
-      case 2:
+      case 97:
         originContractAddress = BSCContract
         break
-      case 3:
+      case 4002:
         originContractAddress = FTMContract
         break
       default:

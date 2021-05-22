@@ -88,7 +88,7 @@ const Bridge = () => {
         const chain = chains[index]
 
         let originContract = ''
-        switch (chain.network) {
+        switch (chain.id) {
           case 1:
             originContract = ethContract
             break
@@ -106,7 +106,7 @@ const Bridge = () => {
         for (let index = 0; index < dest.length; index++) {
           const item = dest[index]
           let destContract = ''
-          switch (item.network) {
+          switch (item.id) {
             case 1:
               destContract = ethContract
               break
@@ -145,10 +145,10 @@ const Bridge = () => {
     const getBalance = async () => {
       let bridgeWeb3 = ''
       let bridgeToWeb3 = ''
-      let toChain = chains.find((item) => item.id === bridge.to.chainId).network
+      let toChain = chains.find((item) => item.network === bridge.to.chainId).id
       let fromChain = chains.find(
-        (item) => item.id === bridge.from.chainId
-      ).network
+        (item) => item.network === bridge.from.chainId
+      ).id
       switch (fromChain) {
         case 1:
           bridgeWeb3 = ethWeb3
@@ -205,8 +205,8 @@ const Bridge = () => {
       let bridgeWeb3 = ''
       let bridgeContract = ''
       let fromChain = chains.find(
-        (item) => item.id === bridge.from.chainId
-      ).network
+        (item) => item.network === bridge.from.chainId
+      ).id
       switch (fromChain) {
         case 1:
           bridgeContract = ETHContract
@@ -254,7 +254,7 @@ const Bridge = () => {
     setOpen(true)
   }
   const changeToken = (token, chainId) => {
-    let chain = chains.find((item) => item.id === chainId).name
+    let chain = chains.find((item) => item.network === chainId).name
     setBridge((prev) => ({
       ...prev,
       [target]: {
@@ -278,8 +278,8 @@ const Bridge = () => {
       let amount = web3.utils.toWei('1000000000000000000')
       let bridgeContract = ''
       let fromChain = chains.find(
-        (item) => item.id === bridge.from.chainId
-      ).network
+        (item) => item.network === bridge.from.chainId
+      ).id
       switch (fromChain) {
         case 1:
           bridgeContract = ETHContract
@@ -328,10 +328,10 @@ const Bridge = () => {
         return
       }
       if (amount === '0' || amount === '') return
-      let toChain = chains.find((item) => item.id === bridge.to.chainId).network
+      // let toChain = chains.find((item) => item.network === bridge.to.chainId).id
       let fromChain = chains.find(
-        (item) => item.id === bridge.from.chainId
-      ).network
+        (item) => item.network === bridge.from.chainId
+      ).id
 
       let Contract = ''
 
@@ -353,7 +353,7 @@ const Bridge = () => {
       sendTransaction(
         Contract,
         `deposit`,
-        [amountWie, toChain, bridge.from.tokenId],
+        [amountWie, bridge.to.chainId, bridge.from.tokenId],
         account,
         chainId,
         `Deposite ${amount} ${bridge.from.name}`
@@ -395,10 +395,10 @@ const Bridge = () => {
       return
     }
 
-    let toChain = chains.find((item) => item.id === bridge.to.chainId).network
+    let toChain = chains.find((item) => item.network === bridge.to.chainId).id
     let fromChain = chains.find(
-      (item) => item.id === bridge.from.chainId
-    ).network
+      (item) => item.network === bridge.from.chainId
+    ).id
 
     let destContract = ''
     let originContract = ''
@@ -434,11 +434,11 @@ const Bridge = () => {
         break
     }
     let userTxs = await originContract.methods
-      .getUserTxs(account, toChain)
+      .getUserTxs(account, bridge.to.chainId)
       .call()
 
     let pendingTxs = await destContract.methods
-      .pendingTxs(fromChain, userTxs)
+      .pendingTxs(bridge.from.chainId, userTxs)
       .call()
     let currentPending = pendingTxs[pendingTxs.length - 1]
     if (!currentPending) {
@@ -448,7 +448,7 @@ const Bridge = () => {
         'getTx',
         [txId],
         BridgeABI,
-        fromChain
+        bridge.from.chainId
       )
       console.log({ nodesSigResults, currentPending })
       let sigs = nodesSigResults.result.signatures.map(
@@ -489,10 +489,10 @@ const Bridge = () => {
         break
     }
     let amountWie = web3.utils.toWei(amount)
-    let toChain = chains.find((item) => item.id === bridge.to.chainId).network
-    let fromChain = chains.find(
-      (item) => item.id === bridge.from.chainId
-    ).network
+    // let toChain = chains.find((item) => item.id === bridge.to.chainId).network
+    // let fromChain = chains.find(
+    //   (item) => item.id === bridge.from.chainId
+    // ).network
     // const Contract = makeContract(web3, BridgeABI, bridgeContract)
 
     sendTransaction(
@@ -501,8 +501,8 @@ const Bridge = () => {
       [
         account,
         amountWie,
-        fromChain,
-        toChain,
+        bridge.from.chainId,
+        bridge.to.chainId,
         bridge.from.tokenId,
         currentTx.txId,
         currentTx.sigs
