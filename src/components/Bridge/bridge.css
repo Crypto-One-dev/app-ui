@@ -38,7 +38,10 @@ input:focus {
   background: transparent;
   border: transparent;
 }
-
+.wrap-bridge {
+  padding-top: 20px;
+  display: flex;
+}
 .container-bridge {
   font-family: 'Monument Grotesk Semi';
   max-width: 830px;
@@ -65,9 +68,10 @@ input:focus {
 
 .bridge {
   position: relative;
-  display: flex;
+  padding-bottom: 72px;
+  /* display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; */
 }
 .bridge img {
   width: 100%;
@@ -85,8 +89,8 @@ input:focus {
   display: flex;
   justify-content: space-between;
   max-width: 530px;
-  width: 100%;
-  margin-top: 100px;
+  width: 70%;
+  margin-top: 15px;
 }
 .bridge-approve {
   max-width: 255px;
@@ -103,6 +107,7 @@ input:focus {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0 3px;
 }
 .bridge-deposit {
   display: flex;
@@ -118,6 +123,7 @@ input:focus {
   font-weight: normal;
   font-size: 25px;
   color: rgba(255, 255, 255, 0.5);
+  margin: 0 3px;
 }
 .bridge-from {
   height: 14.98px;
@@ -215,7 +221,17 @@ input:focus {
   background: #335cff;
   color: #ffffff;
 }
-
+.wrap-box {
+  position: absolute;
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  bottom: 0;
+  height: 250px;
+  align-items: center;
+}
 .bridge-assets {
   /* width: 85px; */
   height: 35px;
@@ -234,16 +250,17 @@ input:focus {
   width: 18px;
 }
 .bridge-box-1 {
-  position: absolute;
-  bottom: 118px;
+  /* position: absolute;
+  bottom: 118px; */
+  flex-grow: 3;
   max-width: 530px;
-  width: 100%;
+  width: 70%;
 }
 .bridge-box-2 {
-  position: absolute;
-  bottom: -78px;
+  /* position: absolute;
+  bottom: -78px; */
   max-width: 530px;
-  width: 100%;
+  width: 70%;
 }
 
 /* The Modal (background) */
@@ -427,15 +444,15 @@ input:focus {
 .opacity-5 {
   opacity: 0.5;
 }
-
+.width-340 {
+  max-width: 340px;
+  width: 100%;
+}
 .instruction {
   font-family: 'Monument Grotesk Semi';
 
-  position: absolute;
-  max-width: 340px;
   width: 100%;
-  left: 21px;
-  top: 75px;
+
   padding: 20px 25px;
   background: #0d0d0d;
   border: 1px solid #1c1c1c;
@@ -508,8 +525,6 @@ input:focus {
   position: absolute;
   width: 35px;
   height: 35px;
-  bottom: 50px;
-
   background: #b5d4ff;
   border: 1px solid #ffffff;
   box-sizing: border-box;
@@ -523,7 +538,7 @@ input:focus {
 }
 
 .pink-btn {
-  width: 100%;
+  width: 70%;
   height: 55px;
   background: linear-gradient(90deg, #e26ba2 0%, #fdb9af 100%);
   border-radius: 10px;
@@ -536,11 +551,11 @@ input:focus {
   font-weight: normal;
   font-size: 25px;
   margin-bottom: 5px;
-  margin-top: 100px;
+  margin-top: 15px;
 }
 .wrong-network {
   max-width: 530px;
-  width: 100%;
+  width: 70%;
   height: 55px;
   background: #1c1c1c;
   border: 1px solid #000000;
@@ -552,21 +567,16 @@ input:focus {
   font-style: normal;
   font-weight: normal;
   font-size: 25px;
-  margin-top: 100px;
+  margin-top: 15px;
 }
 
 .claim-token {
-  position: absolute;
-  max-width: 478px;
+  max-width: 350px;
   width: 100%;
-  right: 21px;
-  top: 75px;
-
   background: #242424;
   border: 1px solid #1c1c1c;
   border-radius: 10px;
   padding: 20px;
-  z-index: 2;
 }
 .claim-token-title {
   font-style: normal;
@@ -612,7 +622,7 @@ input:focus {
 .container-claim-btn {
   display: flex;
   align-items: center;
-  flex-basis: 35%;
+  flex-basis: 43%;
   justify-content: flex-end;
 }
 .claim-btn {
@@ -628,22 +638,51 @@ input:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 5px;
+  margin: 0 3px;
   color: #000000;
+  padding: 0 3px;
 }
-.logo {
+.ftm-logo {
   width: 32px !important;
   position: absolute;
+  left: 50%;
 }
 .bsc-logo {
   width: 25px !important;
   position: absolute;
-  top: 50px;
-  left: 73px;
+  top: 10%;
+  left: 9%;
 }
 .eth-logo {
   width: 32px !important;
   position: absolute;
-  right: 10px;
-  top: 155px;
+  right: 1.2%;
+  top: 30.5%;
+}
+
+@media screen and (max-width: 1200px) {
+  .wrap-bridge {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .wrap-box {
+    height: 285px;
+  }
+}
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+}
+@media screen and (min-width: 768px) and (max-width: 992px) {
+}
+@media screen and (min-width: 576px) and (max-width: 768px) {
+  .wrap-box {
+    height: 254px;
+  }
+}
+@media screen and (max-width: 576px) {
+  .wrap-box {
+    height: 228px;
+  }
 }

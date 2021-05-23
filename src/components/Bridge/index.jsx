@@ -507,14 +507,11 @@ const Bridge = () => {
     await activate(injected)
   }
   return (
-    <>
-      <Instruction collapse={collapse} />
-      <ClaimToken
-        claims={claims}
-        chainId={chainId}
-        account={account}
-        setFetch={(data) => setFetch(data)}
-      />
+    <div className="wrap-bridge">
+      <div className="width-340">
+        <Instruction collapse={collapse} />
+      </div>
+
       <div className="container-bridge">
         <div className="bridge-title">
           <h1>DEUS Bridge</h1>
@@ -531,32 +528,32 @@ const Bridge = () => {
             alt="eth-logo"
             className="eth-logo"
           />
-          <img src="/img/bridge/image 1.svg" alt="logo" className="logo" />
-
-          <div className="bridge-box-1">
-            <BridgeBox
-              title="from"
-              {...bridge.from}
-              balance={fromBalance}
-              amount={amount}
-              setAmount={(data) => setAmount(data)}
-              max={true}
-              handleOpenModal={() => handleOpenModal('from')}
-            />
-          </div>
-          <div className="arrow">
-            <img src="/img/swap/swap-arrow.svg" alt="arrow" />
-          </div>
-
-          <div className="bridge-box-2">
-            <BridgeBox
-              title="to"
-              {...bridge.to}
-              balance={toBalance}
-              amount={amount}
-              readonly={true}
-              handleOpenModal={() => handleOpenModal('to')}
-            />
+          <img src="/img/bridge/image 1.svg" alt="logo" className="ftm-logo" />
+          <div className="wrap-box">
+            <div className="bridge-box-1">
+              <BridgeBox
+                title="from"
+                {...bridge.from}
+                balance={fromBalance}
+                amount={amount}
+                setAmount={(data) => setAmount(data)}
+                max={true}
+                handleOpenModal={() => handleOpenModal('from')}
+              />
+            </div>
+            <div className="arrow">
+              <img src="/img/swap/swap-arrow.svg" alt="arrow" />
+            </div>
+            <div className="bridge-box-2">
+              <BridgeBox
+                title="to"
+                {...bridge.to}
+                balance={toBalance}
+                amount={amount}
+                readonly={true}
+                handleOpenModal={() => handleOpenModal('to')}
+              />
+            </div>
           </div>
         </div>
         {account ? (
@@ -627,7 +624,15 @@ const Bridge = () => {
           changeToken={(token, chainId) => changeToken(token, chainId)}
         />
       </div>
-    </>
+      <div className="width-340">
+        <ClaimToken
+          claims={claims}
+          chainId={chainId}
+          account={account}
+          setFetch={(data) => setFetch(data)}
+        />
+      </div>
+    </div>
   )
 }
 
