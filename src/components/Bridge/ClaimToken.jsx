@@ -14,8 +14,8 @@ const ClaimToken = (props) => {
   const activeBscContract = makeContract(web3, BridgeABI, BSCContract)
   const activeFtmContract = makeContract(web3, BridgeABI, FTMContract)
 
-  const handleClaim = async (claim, id) => {
-    if (chainId !== id) {
+  const handleClaim = async (claim, network) => {
+    if (chainId !== network) {
       return
     }
     let Contract = ''
@@ -98,12 +98,16 @@ const ClaimToken = (props) => {
                 </div>
                 <div className="claim-amount">{amount}</div>
                 <div className="container-claim-btn">
-                  {chain.id !== chainId && (
+                  {chain.network !== chainId && (
                     <div className="claim-btn">Change Network</div>
                   )}
                   <div
-                    className="claim-btn"
-                    onClick={() => handleClaim(claim, chain.id)}
+                    className={
+                      chain.network !== chainId
+                        ? 'claim-btn'
+                        : 'claim-btn pointer'
+                    }
+                    onClick={() => handleClaim(claim, chain.network)}
                   >
                     CLAIM
                   </div>
