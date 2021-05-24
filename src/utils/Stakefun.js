@@ -65,42 +65,45 @@ const sendTransaction2 = (
   web3
 ) => {
   return new Promise(async (resolve, reject) => {
-    // try {
-    let hash = null
-    let check = true
-    contract.methods[methodName](...params)
-      .send({ from: owner })
-      .once('transactionHash', (tx) => {
-        hash = tx
-        CustomTranaction(TransactionState.LOADING, {
-          hash,
-          chainId,
-          message
-        })
-      })
-    const interval = setInterval(async () => {
-      let tx = await web3.eth.getTransactionReceipt(hash)
-      if (tx) {
-        check = false
-        if (tx.status) {
-          CustomTranaction(TransactionState.SUCCESS, {
-            hash: tx.transactionHash,
+    try {
+      let hash = null
+      let check = true
+      contract.methods[methodName](...params)
+        .send({ from: owner })
+        .once('transactionHash', (tx) => {
+          hash = tx
+          CustomTranaction(TransactionState.LOADING, {
+            hash,
             chainId,
             message
           })
-          resolve()
-        } else {
-          CustomTranaction(TransactionState.FAILED, {
-            hash,
-            chainId
-          })
-          reject()
+        })
+      const interval = setInterval(async () => {
+        let tx = await web3.eth.getTransactionReceipt(hash)
+        if (tx) {
+          check = false
+          if (tx.status) {
+            CustomTranaction(TransactionState.SUCCESS, {
+              hash: tx.transactionHash,
+              chainId,
+              message
+            })
+            resolve()
+          } else {
+            CustomTranaction(TransactionState.FAILED, {
+              hash,
+              chainId
+            })
+            reject()
+          }
+          if (!check) {
+            clearInterval(interval)
+          }
         }
-        if (!check) {
-          clearInterval(interval)
-        }
-      }
-    }, 15000)
+      }, 15000)
+    } catch (error) {
+      console.log('**************error happend in send Transaction2', error)
+    }
   })
 }
 

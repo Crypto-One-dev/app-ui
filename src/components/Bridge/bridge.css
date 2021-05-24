@@ -39,7 +39,7 @@ input:focus {
   border: transparent;
 }
 .wrap-bridge {
-  padding-top: 20px;
+  padding: 20px 5px;
   display: flex;
 }
 .container-bridge {
@@ -638,6 +638,7 @@ input:focus {
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   margin: 0 3px;
   color: #000000;
   padding: 0 3px;
@@ -681,8 +682,129 @@ input:focus {
     height: 254px;
   }
 }
-@media screen and (max-width: 576px) {
+@media screen and (min-width: 415px) and (max-width: 576px) {
   .wrap-box {
-    height: 228px;
+    height: 240px;
+  }
+  .arrow {
+    width: 25px;
+    height: 25px;
+  }
+  .arrow img {
+    width: 11px;
+  }
+}
+@media screen and (min-width: 415px) and (max-width: 460px) {
+  .bridge {
+    padding-bottom: 60px;
+  }
+  .wrap-box {
+    height: 200px;
+  }
+  .bridge-box {
+    height: 70px;
+    padding: 10px;
+  }
+  .bridge-from {
+    font-size: 10px;
+    height: 8px;
+  }
+  .bridge-amount {
+    width: 70px;
+    height: 35px;
+    font-size: 18px;
+  }
+  .bridge-max {
+    font-size: 9px;
+    height: 18px;
+    line-height: 15px;
+  }
+  .bridge-assets {
+    font-size: 16px;
+  }
+  .bridge-token img {
+    width: 15px;
+  }
+  .notify .badge {
+    width: 25px;
+    font-size: 8px;
+  }
+  .bridge-approve {
+    height: 43px;
+    font-size: 16px;
+  }
+  .bridge-deposit {
+    height: 45px;
+    font-size: 16px;
+  }
+  .arrow {
+    width: 17px;
+    height: 17px;
+  }
+  .arrow img {
+    width: 11px;
+  }
+  .wrong-network {
+    font-size: 18px;
+  }
+  .pink-btn {
+    font-size: 18px;
+  }
+}
+@media screen and (max-width: 415px) {
+  .bridge {
+    padding-bottom: 60px;
+  }
+  .wrap-box {
+    height: 180px;
+  }
+  .bridge-box {
+    height: 70px;
+    padding: 10px;
+  }
+  .bridge-from {
+    font-size: 10px;
+    height: 8px;
+  }
+  .bridge-amount {
+    width: 70px;
+    height: 35px;
+    font-size: 18px;
+  }
+  .bridge-max {
+    font-size: 9px;
+    height: 18px;
+    line-height: 15px;
+  }
+  .bridge-assets {
+    font-size: 16px;
+  }
+  .bridge-token img {
+    width: 15px;
+  }
+  .notify .badge {
+    width: 25px;
+    font-size: 8px;
+  }
+  .bridge-approve {
+    height: 43px;
+    font-size: 16px;
+  }
+  .bridge-deposit {
+    height: 45px;
+    font-size: 16px;
+  }
+  .arrow {
+    width: 17px;
+    height: 17px;
+  }
+  .arrow img {
+    width: 11px;
+  }
+  .wrong-network {
+    font-size: 18px;
+  }
+  .pink-btn {
+    font-size: 18px;
   }
 }
