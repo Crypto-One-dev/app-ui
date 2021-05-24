@@ -32,7 +32,6 @@ const sendTransaction = (
             message
           })
         })
-
         .once('receipt', ({ transactionHash }) => {
           console.log({ transactionHash })
           CustomTranaction(TransactionState.SUCCESS, {
@@ -43,7 +42,7 @@ const sendTransaction = (
           resolve()
         })
         .once('error', (error) => {
-          console.log('error happend', error)
+          console.log('************error happend', error)
           CustomTranaction(TransactionState.FAILED, {
             hash,
             chainId
@@ -56,10 +55,59 @@ const sendTransaction = (
   })
 }
 
+const sendTransaction2 = (
+  contract,
+  methodName,
+  params,
+  owner,
+  chainId,
+  message,
+  web3
+) => {
+  return new Promise(async (resolve, reject) => {
+    // try {
+    let hash = null
+    let check = true
+    contract.methods[methodName](...params)
+      .send({ from: owner })
+      .once('transactionHash', (tx) => {
+        hash = tx
+        CustomTranaction(TransactionState.LOADING, {
+          hash,
+          chainId,
+          message
+        })
+      })
+    const interval = setInterval(async () => {
+      let tx = await web3.eth.getTransactionReceipt(hash)
+      if (tx) {
+        check = false
+        if (tx.status) {
+          CustomTranaction(TransactionState.SUCCESS, {
+            hash: tx.transactionHash,
+            chainId,
+            message
+          })
+          resolve()
+        } else {
+          CustomTranaction(TransactionState.FAILED, {
+            hash,
+            chainId
+          })
+          reject()
+        }
+        if (!check) {
+          clearInterval(interval)
+        }
+      }
+    }, 15000)
+  })
+}
+
 const diffHours = (customDate) => {
   const date = moment(customDate)
   let now = moment(new Date())
   return date.diff(now)
 }
 
-export { makeContract, diffHours, sendTransaction }
+export { makeContract, diffHours, sendTransaction, sendTransaction2 }

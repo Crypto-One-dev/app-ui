@@ -21,7 +21,7 @@ import {
   ftmWeb3
 } from './data'
 import { abi, BridgeABI } from '../../utils/StakingABI'
-import { sendTransaction } from '../../utils/Stakefun'
+import { sendTransaction, sendTransaction2 } from '../../utils/Stakefun'
 import useWeb3 from '../../helper/useWeb3'
 import { ethCallContract } from './utils'
 import Loading from './Loading'
@@ -32,6 +32,7 @@ const Bridge = () => {
   const { activate } = web3React
   const [open, setOpen] = React.useState(false)
   const [claims, setClaims] = React.useState([])
+  const [lock, setLock] = React.useState('')
   const [currentTx, setCurrentTx] = React.useState('')
   const [wrongNetwork, setWrongNetwork] = React.useState(false)
   const [loading, setLoading] = React.useState(false)
@@ -326,32 +327,38 @@ const Bridge = () => {
       }
 
       let Contract = ''
+      let originWeb3 = ''
 
       switch (bridge.from.chainId) {
         case 4:
           Contract = activeEthContract
+          originWeb3 = ethWeb3
           break
         case 97:
           Contract = activeBscContract
+          originWeb3 = bscWeb3
           break
         case 4002:
           Contract = activeFtmContract
+          originWeb3 = ftmWeb3
           break
         default:
           break
       }
       let amountWie = web3.utils.toWei(amount)
-      sendTransaction(
+      sendTransaction2(
         Contract,
         `deposit`,
         [amountWie, bridge.to.chainId, bridge.from.tokenId],
         account,
         chainId,
-        `Deposite ${amount} ${bridge.from.name}`
+        `Deposite ${amount} ${bridge.from.name}`,
+        originWeb3
       ).then(() => {
         setCollapse((prev) => {
           return {
             ...prev,
+            approve: { pending: false, success: true },
             deposit: {
               pending: false,
               success: true
@@ -460,6 +467,9 @@ const Bridge = () => {
       return
     }
     let Contract = ''
+    if (lock) {
+      return
+    }
 
     switch (chainId) {
       case 4:
@@ -475,7 +485,7 @@ const Bridge = () => {
         break
     }
     let amountWie = web3.utils.toWei(amount)
-
+    setLock(true)
     sendTransaction(
       Contract,
       `claim`,
@@ -501,6 +511,7 @@ const Bridge = () => {
         claim: { pending: false, success: false }
       })
       setAmount('0')
+      setLock('')
     })
   }
   const handleConnectWallet = async () => {

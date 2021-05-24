@@ -9,6 +9,7 @@ import { ethCallContract } from './utils'
 
 const ClaimToken = (props) => {
   const { claims, chainId, account, setFetch } = props
+  const [lock, setLock] = React.useState('')
   const web3 = useWeb3()
   const activeEthContract = makeContract(web3, BridgeABI, ETHContract)
   const activeBscContract = makeContract(web3, BridgeABI, BSCContract)
@@ -16,6 +17,14 @@ const ClaimToken = (props) => {
 
   const handleClaim = async (claim, network) => {
     if (chainId !== network) {
+      return
+    }
+    if (
+      lock &&
+      lock.fromChain === claim.fromChain &&
+      lock.toChain === claim.toChain &&
+      lock.txId === claim.txId
+    ) {
       return
     }
     let Contract = ''
@@ -60,6 +69,7 @@ const ClaimToken = (props) => {
     let sigs = nodesSigResults.result.signatures.map(
       ({ signature }) => signature
     )
+    setLock(claim)
     sendTransaction(
       Contract,
       `claim`,
@@ -77,6 +87,7 @@ const ClaimToken = (props) => {
       `Claim ${amount} ${chain.name}`
     ).then(() => {
       setFetch(claim)
+      setLock('')
     })
   }
   return (

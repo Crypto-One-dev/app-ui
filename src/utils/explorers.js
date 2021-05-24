@@ -285,6 +285,7 @@ export function ApproveTranaction(type, payload) {
 
 //to do
 export function CustomTranaction(type, payload) {
+  console.log({ type, payload })
   toast.dismiss()
 
   switch (type) {
@@ -321,18 +322,22 @@ export function CustomTranaction(type, payload) {
       break
 
     case TransactionState.FAILED:
+      if (!payload.hash) {
+        ToastTransaction('warn', 'Transaction Rejected')
+        return
+      }
       ToastTransaction(
         'warn',
-        'Transaction Failed'
-        // <ExternalLink
-        //   href={getTransactionLink(
-        //     payload.chainId,
-        //     payload.hash,
-        //     'transaction'
-        //   )}
-        // >
-        //   {`View On Explorer`}
-        // </ExternalLink>
+        'Transaction Failed',
+        <ExternalLink
+          href={getTransactionLink(
+            payload.chainId,
+            payload.hash,
+            'transaction'
+          )}
+        >
+          {`View On Explorer`}
+        </ExternalLink>
       )
       break
 
