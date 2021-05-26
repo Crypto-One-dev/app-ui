@@ -143,7 +143,7 @@ input:focus {
 .bridge-amount {
   width: 131px;
   height: 42px;
-
+  font-family: 'Monument Grotesk';
   font-style: normal;
   font-weight: normal;
   font-size: 30px;
@@ -155,13 +155,15 @@ input:focus {
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
-  line-height: 17px;
-  text-align: center;
-
+  /* line-height: 17px;
+  text-align: center; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
   color: #ffffff;
   width: 39px;
   height: 22px;
-  padding: 1px 5px;
 
   background: linear-gradient(
     135deg,
@@ -410,6 +412,12 @@ input:focus {
   line-height: 21px;
 
   color: rgba(255, 255, 255, 0.5);
+}
+.container-token {
+  overflow-y: auto;
+  height: calc(50vh - 100px);
+  box-sizing: border-box;
+  padding: 20px 0;
 }
 .token-list {
   display: flex;
@@ -752,6 +760,12 @@ input:focus {
   }
 }
 @media screen and (max-width: 415px) {
+  .token-list-item > span {
+    font-size: 15px;
+  }
+  .token-list-item img {
+    width: 25px;
+  }
   .bridge {
     padding-bottom: 60px;
   }

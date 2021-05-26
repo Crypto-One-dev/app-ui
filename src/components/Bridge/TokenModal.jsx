@@ -19,10 +19,12 @@ const customStyles = {
     display: 'flex',
     flexDirection: 'column',
     maxHeight: '95%',
-    width: '560px',
+    maxWidth: '560px',
+    width: '95% ',
     background: '#242424',
     border: '1px solid #242424',
-    padding: '26px 20px'
+    padding: '26px 20px',
+    overflow: 'unset'
   }
 }
 
@@ -31,6 +33,11 @@ const TokenModal = (props) => {
   const [chainToken, setChainToken] = React.useState(chains)
   const [searchQuery, setSearchQuery] = React.useState('')
   const [showTokens, setShowTokens] = React.useState(tokens)
+  const [checked, setChecked] = React.useState({
+    FTM: true,
+    ETH: true,
+    BSC: true
+  })
 
   const handleSearchModal = (e) => {
     let search = e.target.value
@@ -38,19 +45,15 @@ const TokenModal = (props) => {
   }
   const handleFilter = (e) => {
     if (e.target.checked) {
-      let result = chainToken.filter((item) => item.name === e.target.value)
-      if (result.length === 0) {
-        setChainToken(chains)
-      } else {
-        setChainToken(result)
-      }
+      // Add to chainToken if not exist
+      setChecked((prev) => ({ ...prev, [e.target.value]: true }))
+      let result = chains.filter((item) => item.name === e.target.value)
+      setChainToken((prev) => [...prev, ...result])
     } else {
+      // remove from chainToken
+      setChecked((prev) => ({ ...prev, [e.target.value]: false }))
       let result = chainToken.filter((item) => item.name !== e.target.value)
-      if (result.length === 0) {
-        setChainToken(chains)
-      } else {
-        setChainToken(result)
-      }
+      setChainToken(result)
     }
   }
   React.useEffect(() => {
@@ -60,6 +63,19 @@ const TokenModal = (props) => {
     )
     setShowTokens(resultFilter)
   }, [chainToken, searchQuery])
+  console.log(chainToken)
+  const closeModal = (token, network) => {
+    changeToken(token, network)
+    hide()
+    setShowTokens(tokens)
+    setChecked({
+      FTM: true,
+      ETH: true,
+      BSC: true
+    })
+    setSearchQuery('')
+    setChainToken(chains)
+  }
   return (
     <ReactModal
       isOpen={open}
@@ -95,6 +111,7 @@ const TokenModal = (props) => {
                     name={chain.name}
                     defaultValue={chain.name}
                     onChange={handleFilter}
+                    checked={checked[chain.name]}
                   />
                   <label htmlFor={chain.name}>{chain.name}</label>
                 </span>
@@ -106,18 +123,14 @@ const TokenModal = (props) => {
               <div>Balance</div>
             </div>
             <div className="border-bottom mb-5"></div>
-            <div className="pt-20">
+            <div className="container-token">
               {chainToken.map((chain) =>
                 showTokens.map((token, index) => {
                   return (
                     <div
                       className="token-list"
                       key={index}
-                      onClick={() => {
-                        changeToken(token, chain.network)
-                        setChainToken(chains)
-                        hide()
-                      }}
+                      onClick={() => closeModal(token, chain.network)}
                     >
                       <div className="token-list-item">
                         <TokenBadge chain={chain.name} icon={token.icon} />

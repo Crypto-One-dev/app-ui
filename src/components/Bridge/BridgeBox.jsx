@@ -19,7 +19,7 @@ const BridgeBox = (props) => {
     <div className="bridge-box">
       <div className="flex-between">
         <div className="bridge-from">{title}</div>
-        <div className="bridge-from font-weight-600">{`Balance: ${balance}`}</div>
+        <div className="bridge-from">{`Balance: ${balance}`}</div>
       </div>
       <div className="flex-between pt-13">
         <div>
@@ -45,7 +45,7 @@ const BridgeBox = (props) => {
             </div>
           )}
           <TokenBadge chain={chain} icon={icon} />
-          <div className="bridge-assets" onClick={handleOpenModal}>
+          <div className="bridge-assets pointer" onClick={handleOpenModal}>
             {name} <img src="/img/arrow-nav.svg" alt="arrow" />
           </div>
         </div>
