@@ -8,6 +8,12 @@
       format('otf');
 }
 
+@font-face {
+  font-family: 'Monument Grotesk';
+  src: url('../../assets/fonts/MonumentGrotesk/MonumentGrotesk-Regular.woff')
+    format('woff');
+}
+
 .flex-between {
   display: flex;
   justify-content: space-between;
@@ -68,7 +74,7 @@ input:focus {
 
 .bridge {
   position: relative;
-  padding-bottom: 72px;
+  padding-bottom: 85px;
   /* display: flex;
   flex-direction: column;
   align-items: center; */
@@ -142,12 +148,12 @@ input:focus {
 
 .bridge-amount {
   width: 131px;
-  height: 42px;
+  height: 29px;
   font-family: 'Monument Grotesk';
   font-style: normal;
   font-weight: normal;
   font-size: 30px;
-  line-height: 42px;
+  line-height: 29px;
   color: #000000;
 }
 
@@ -235,7 +241,7 @@ input:focus {
   justify-content: center;
   flex-direction: column;
   bottom: 0;
-  height: 250px;
+  height: 246px;
   align-items: center;
 }
 .bridge-assets {
@@ -328,6 +334,10 @@ input:focus {
   }
 }
 
+.ReactModal__Body--open {
+  overflow-y: hidden;
+}
+
 /* The Close Button */
 .close {
   color: white;
@@ -338,7 +348,7 @@ input:focus {
 
 .close:hover,
 .close:focus {
-  color: #000;
+  color: #fff;
   text-decoration: none;
   cursor: pointer;
 }
@@ -354,12 +364,22 @@ input:focus {
   justify-content: space-between;
   color: #ffffff;
 }
-
+.modal-title {
+  font-family: 'Monument Grotesk';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 27px;
+  display: flex;
+  align-items: center;
+  padding: 0 5px;
+  color: #ffffff;
+}
 .modal-body {
   padding-top: 20px;
 }
 .input-search {
-  width: 100%;
+  width: 95%;
   height: 55px;
   padding: 0 20px;
   background: #111111;
@@ -461,16 +481,16 @@ input:focus {
   width: 100%;
 }
 .instruction {
-  font-family: 'Monument Grotesk Semi';
-
+  font-family: 'Monument Grotesk';
   width: 100%;
-
   padding: 20px 25px;
   background: #0d0d0d;
   border: 1px solid #1c1c1c;
   border-radius: 10px;
 }
+
 .instruction-title {
+  font-family: 'Monument Grotesk Semi';
   padding-bottom: 14px;
   font-style: normal;
   font-weight: normal;
@@ -535,8 +555,8 @@ input:focus {
 }
 .arrow {
   position: absolute;
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   background: #b5d4ff;
   border: 1px solid #ffffff;
   box-sizing: border-box;
@@ -546,7 +566,7 @@ input:focus {
   align-items: center;
 }
 .arrow img {
-  width: 20px;
+  width: 16px;
 }
 
 .pink-btn {
@@ -686,8 +706,14 @@ input:focus {
   }
 }
 @media screen and (min-width: 992px) and (max-width: 1200px) {
+  .wrap-box {
+    height: 269px;
+  }
 }
 @media screen and (min-width: 768px) and (max-width: 992px) {
+  .wrap-box {
+    height: 269px;
+  }
 }
 @media screen and (min-width: 576px) and (max-width: 768px) {
   .wrap-box {
@@ -708,10 +734,10 @@ input:focus {
 }
 @media screen and (min-width: 415px) and (max-width: 460px) {
   .bridge {
-    padding-bottom: 60px;
+    padding-bottom: 63px;
   }
   .wrap-box {
-    height: 200px;
+    height: 187px;
   }
   .bridge-box {
     height: 70px;
@@ -723,7 +749,7 @@ input:focus {
   }
   .bridge-amount {
     width: 70px;
-    height: 35px;
+    /* height: 35px; */
     font-size: 18px;
   }
   .bridge-max {
@@ -786,7 +812,7 @@ input:focus {
   }
   .bridge-amount {
     width: 70px;
-    height: 35px;
+    /* height: 35px; */
     font-size: 18px;
   }
   .bridge-max {

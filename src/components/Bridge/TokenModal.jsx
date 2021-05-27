@@ -23,8 +23,8 @@ const customStyles = {
     width: '95% ',
     background: '#242424',
     border: '1px solid #242424',
-    padding: '26px 20px',
-    overflow: 'unset'
+    padding: '26px 20px'
+    // overflow: 'unset'
   }
 }
 
@@ -86,9 +86,7 @@ const TokenModal = (props) => {
     >
       <div>
         <div className="modal-header">
-          <h5 className="modal-title" id="exampleModalLabel">
-            Select an asset
-          </h5>
+          <div className="modal-title">Select an asset</div>
 
           <span className="close" onClick={hide}>
             &times;
@@ -102,7 +100,7 @@ const TokenModal = (props) => {
               onChange={handleSearchModal}
             />
             <div className="filter">Filter</div>
-            <div className="bridge-checkbox">
+            <div className="bridge-checkbox ">
               {chains.map((chain, index) => (
                 <span key={index}>
                   <input
@@ -113,7 +111,9 @@ const TokenModal = (props) => {
                     onChange={handleFilter}
                     checked={checked[chain.name]}
                   />
-                  <label htmlFor={chain.name}>{chain.name}</label>
+                  <label htmlFor={chain.name} className="pointer">
+                    {chain.name}
+                  </label>
                 </span>
               ))}
             </div>
@@ -132,7 +132,7 @@ const TokenModal = (props) => {
                       key={index}
                       onClick={() => closeModal(token, chain.network)}
                     >
-                      <div className="token-list-item">
+                      <div className="token-list-item pointer">
                         <TokenBadge chain={chain.name} icon={token.icon} />
                         <span>{`${token.name} (${chain.name})`}</span>
                       </div>
