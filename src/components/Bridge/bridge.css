@@ -204,6 +204,11 @@ input:focus {
   top: -7px !important;
   right: -13px !important;
 }
+.token-item .badge {
+  position: absolute;
+  top: -8px !important;
+  right: -20px !important;
+}
 .notify .badge {
   position: absolute;
   top: -2px;
@@ -585,7 +590,7 @@ input:focus {
   margin-bottom: 5px;
   margin-top: 15px;
 }
-.wrong-network {
+.wrong-network-bridge {
   max-width: 530px;
   width: 70%;
   height: 55px;

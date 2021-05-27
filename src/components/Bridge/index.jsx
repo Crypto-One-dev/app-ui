@@ -245,7 +245,21 @@ const Bridge = () => {
     }
     if (account && !collapse.network.pending) checkApprove()
   }, [bridge.from, account]) // eslint-disable-line
-
+  React.useEffect(() => {
+    if (collapse.deposit.success && bridge.to.chainId === chainId)
+      setCollapse((prev) => {
+        return {
+          ...prev,
+          approve: { pending: false, success: true },
+          deposit: { pending: false, success: true },
+          network: {
+            pending: false,
+            success: true
+          },
+          bridge: { pending: true, success: false }
+        }
+      })
+  }, [chainId, bridge.to.chainId, collapse.deposit.success])
   const handleOpenModal = (data) => {
     setTarget(data)
     setOpen(true)
@@ -621,7 +635,9 @@ const Bridge = () => {
                 CLAIM TOKEN
               </div>
             )}
-            {wrongNetwork && <div className="wrong-network">Wrong Network</div>}
+            {wrongNetwork && (
+              <div className="wrong-network-bridge">Wrong Network</div>
+            )}
           </>
         ) : (
           <div className="pink-btn" onClick={handleConnectWallet}>

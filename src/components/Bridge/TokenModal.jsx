@@ -63,7 +63,7 @@ const TokenModal = (props) => {
     )
     setShowTokens(resultFilter)
   }, [chainToken, searchQuery])
-  console.log(chainToken)
+
   const closeModal = (token, network) => {
     changeToken(token, network)
     hide()
