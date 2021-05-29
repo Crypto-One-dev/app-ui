@@ -7,8 +7,6 @@ import MultiCallAbi from '../config/abi/Multicall.json'
 import { MULTICALL_NETWORKS } from '../constant/contracts'
 import { ChainMap } from '../constant/web3'
 import { getContractAddr } from '../utils/contracts'
-import MultiCallAbi from '../config/abi/Multicall.json'
-import { MULTICALL_NETWORKS } from '../constant/contracts'
 
 const getContract = (abi, address, web3) => {
   const _web3 = web3 ?? web3NoAccount

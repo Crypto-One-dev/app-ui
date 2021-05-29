@@ -784,6 +784,12 @@ input:focus {
   }
 }
 @media screen and (min-width: 415px) and (max-width: 460px) {
+  .ftm-logo {
+    top: 20%;
+  }
+  .bsc-logo {
+    top: 22%;
+  }
   .wrap-box {
     height: 187px;
   }
@@ -836,6 +842,12 @@ input:focus {
   }
 }
 @media screen and (max-width: 415px) {
+  .ftm-logo {
+    top: 22%;
+  }
+  .bsc-logo {
+    top: 23%;
+  }
   .token-list-item > span {
     font-size: 15px;
   }
