@@ -31,93 +31,6 @@ const BSCContract = '0xaBCddE8D2D4Bf6d4ef89C97340260cC87603d623'
 const ETHContract = '0x88f4aDc94064B5Ff570A9D8954Cf45E3a890707b'
 const FTMContract = '0x4B1F4Fd318680909ae45a55eAcAf8416Af71f88B'
 
-const tokens = [
-  {
-    name: 'DEUS',
-    tokenId: '1',
-    address: {
-      4: '0xb9B5FFC3e1404E3Bb7352e656316D6C5ce6940A1',
-      97: '0x4Ef4E0b448AC75b7285c334e215d384E7227A2E6',
-      4002: '0x91E32eE7799F20e6b89A36CdaA7fa12d5f482781'
-    },
-    icon: 'DEUS.svg'
-  },
-  {
-    name: 'DEA',
-    tokenId: '2',
-    address: {
-      4: '0xb9B5FFC3e1404E3Bb7352e656316D6C5ce6940A1',
-      97: '0x4Ef4E0b448AC75b7285c334e215d384E7227A2E6',
-      4002: '0x91E32eE7799F20e6b89A36CdaA7fa12d5f482781'
-    },
-    icon: 'DEA.svg'
-  },
-  {
-    name: 'BPT',
-    tokenId: '3',
-    address: {
-      4: '0xb9B5FFC3e1404E3Bb7352e656316D6C5ce6940A1',
-      97: '0x4Ef4E0b448AC75b7285c334e215d384E7227A2E6',
-      4002: '0x91E32eE7799F20e6b89A36CdaA7fa12d5f482781'
-    },
-    icon: 'BPT.svg'
-  },
-  {
-    name: 'sDEA',
-    tokenId: '4',
-    address: {
-      4: '0xb9B5FFC3e1404E3Bb7352e656316D6C5ce6940A1',
-      97: '0x4Ef4E0b448AC75b7285c334e215d384E7227A2E6',
-      4002: '0x91E32eE7799F20e6b89A36CdaA7fa12d5f482781'
-    },
-    icon: 'sDEA.svg'
-  },
-  {
-    name: 'sDEUS',
-    tokenId: '5',
-    address: {
-      4: '0xb9B5FFC3e1404E3Bb7352e656316D6C5ce6940A1',
-      97: '0x4Ef4E0b448AC75b7285c334e215d384E7227A2E6',
-      4002: '0x91E32eE7799F20e6b89A36CdaA7fa12d5f482781'
-    },
-    icon: 'sDEUS.svg'
-  }
-]
-
-const chains = [
-  { name: 'BSC', network: 97, networkName: 'bsctest' },
-  { name: 'ETH', network: 4, networkName: 'rinkeby' },
-  { name: 'FTM', network: 4002, networkName: 'ftmtest' }
-]
-
-const instructions = [
-  {
-    name: 'approve',
-    title: '1 – Approve Spend',
-    desc: 'Approve the spend of the asset that you intend to bridge.'
-  },
-  {
-    name: 'deposit',
-    title: '2 – Deposit',
-    desc: 'Your asset will be deposited to the bridge before you can withdraw '
-  },
-  {
-    name: 'network',
-    title: '3 – Change Network',
-    desc: 'Either press the button in the bridge interface or click: Change Network'
-  },
-  {
-    name: 'bridge',
-    title: '4 – Initiate Bridging',
-    desc: 'Initiate bridging to the new network by pressing the button in the interface.'
-  },
-  {
-    name: 'claim',
-    title: '5 – Claim on destination Network',
-    desc: 'Claim your bridged token.'
-  }
-]
-
 const bscWeb3 = new Web3(
   new Web3.providers.HttpProvider(
     'https://data-seed-prebsc-1-s1.binance.org:8545/'
@@ -137,6 +50,88 @@ const ftmWeb3 = new Web3(
 const ethContract = makeContract(ethWeb3, BridgeABI, ETHContract)
 const bscContract = makeContract(bscWeb3, BridgeABI, BSCContract)
 const ftmContract = makeContract(ftmWeb3, BridgeABI, FTMContract)
+
+const tokens = [
+  {
+    name: 'DEUS',
+    tokenId: '1',
+    address: {
+      4: '0xb9B5FFC3e1404E3Bb7352e656316D6C5ce6940A1',
+      97: '0x4Ef4E0b448AC75b7285c334e215d384E7227A2E6',
+      4002: '0x91E32eE7799F20e6b89A36CdaA7fa12d5f482781'
+    },
+    icon: 'DEUS.svg'
+  }
+  // {
+  //   name: 'DEA',
+  //   tokenId: '2',
+  //   address: {
+  //     4: '0xb9B5FFC3e1404E3Bb7352e656316D6C5ce6940A1',
+  //     97: '0x4Ef4E0b448AC75b7285c334e215d384E7227A2E6',
+  //     4002: '0x91E32eE7799F20e6b89A36CdaA7fa12d5f482781'
+  //   },
+  //   icon: 'DEA.svg'
+  // },
+  // {
+  //   name: 'BPT',
+  //   tokenId: '3',
+  //   address: {
+  //     4: '0xb9B5FFC3e1404E3Bb7352e656316D6C5ce6940A1',
+  //     97: '0x4Ef4E0b448AC75b7285c334e215d384E7227A2E6',
+  //     4002: '0x91E32eE7799F20e6b89A36CdaA7fa12d5f482781'
+  //   },
+  //   icon: 'BPT.svg'
+  // },
+  // {
+  //   name: 'sDEA',
+  //   tokenId: '4',
+  //   address: {
+  //     4: '0xb9B5FFC3e1404E3Bb7352e656316D6C5ce6940A1',
+  //     97: '0x4Ef4E0b448AC75b7285c334e215d384E7227A2E6',
+  //     4002: '0x91E32eE7799F20e6b89A36CdaA7fa12d5f482781'
+  //   },
+  //   icon: 'sDEA.svg'
+  // },
+  // {
+  //   name: 'sDEUS',
+  //   tokenId: '5',
+  //   address: {
+  //     4: '0xb9B5FFC3e1404E3Bb7352e656316D6C5ce6940A1',
+  //     97: '0x4Ef4E0b448AC75b7285c334e215d384E7227A2E6',
+  //     4002: '0x91E32eE7799F20e6b89A36CdaA7fa12d5f482781'
+  //   },
+  //   icon: 'sDEUS.svg'
+  // }
+]
+
+const chains = [
+  { name: 'BSC', network: 97, networkName: 'bsctest', web3: bscWeb3 },
+  { name: 'ETH', network: 4, networkName: 'rinkeby', web3: ethWeb3 }
+  // { name: 'FTM', network: 4002, networkName: 'ftmtest', web3: ftmWeb3 }
+]
+
+const instructions = [
+  {
+    name: 'approve',
+    title: '1 – Approve Spend',
+    desc: 'Approve the spend of the asset that you intend to bridge.'
+  },
+  {
+    name: 'deposit',
+    title: '2 – Deposit to Bridge',
+    desc: 'Your asset will be deposited to the bridge before you can withdraw '
+  },
+  {
+    name: 'network',
+    title: '3 – Change Network',
+    desc: 'Either press the button in the bridge interface or click: Change Network'
+  },
+  {
+    name: 'claim',
+    title: '4 – Claim Token',
+    desc: 'Claim your bridged token.'
+  }
+]
 
 export {
   ETHContract,

@@ -18,31 +18,24 @@ import {
   ftmContract,
   ethWeb3,
   bscWeb3,
-  ftmWeb3
+  ftmWeb3,
+  tokens
 } from './data'
 import { abi, BridgeABI } from '../../utils/StakingABI'
 import { sendTransaction, sendTransaction2 } from '../../utils/Stakefun'
 import useWeb3 from '../../helper/useWeb3'
-import { ethCallContract } from './utils'
-import Loading from './Loading'
+import useTokenBalances from './getBalances'
 
 const Bridge = () => {
   const { account, chainId } = useWeb3React()
   const web3React = useWeb3React()
   const { activate } = web3React
+  useTokenBalances(chains, tokens)
+
   const [open, setOpen] = React.useState(false)
   const [claims, setClaims] = React.useState([])
-  const [lock, setLock] = React.useState('')
-  const [currentTx, setCurrentTx] = React.useState('')
   const [wrongNetwork, setWrongNetwork] = React.useState(false)
-  const [loading, setLoading] = React.useState(false)
-  const [collapse, setCollapse] = React.useState({
-    approve: { pending: true, success: false },
-    deposit: { pending: false, success: false },
-    network: { pending: false, success: false },
-    bridge: { pending: false, success: false },
-    claim: { pending: false, success: false }
-  })
+  const [approve, setApprove] = React.useState('')
 
   const [target, setTarget] = React.useState()
   // TODO change chainId
@@ -226,40 +219,14 @@ const Bridge = () => {
         .call()
 
       if (approve !== '0') {
-        setCollapse({
-          approve: { pending: false, success: true },
-          deposit: { pending: true, success: false },
-          network: { pending: false, success: false },
-          bridge: { pending: false, success: false },
-          claim: { pending: false, success: false }
-        })
+        setApprove(true)
       } else {
-        setCollapse({
-          approve: { pending: true, success: false },
-          deposit: { pending: false, success: false },
-          network: { pending: false, success: false },
-          bridge: { pending: false, success: false },
-          claim: { pending: false, success: false }
-        })
+        setApprove(false)
       }
     }
-    if (account && !collapse.network.pending) checkApprove()
+    if (account) checkApprove()
   }, [bridge.from, account]) // eslint-disable-line
-  React.useEffect(() => {
-    if (collapse.deposit.success && bridge.to.chainId === chainId)
-      setCollapse((prev) => {
-        return {
-          ...prev,
-          approve: { pending: false, success: true },
-          deposit: { pending: false, success: true },
-          network: {
-            pending: false,
-            success: true
-          },
-          bridge: { pending: true, success: false }
-        }
-      })
-  }, [chainId, bridge.to.chainId, collapse.deposit.success])
+
   const handleOpenModal = (data) => {
     setTarget(data)
     setOpen(true)
@@ -280,7 +247,7 @@ const Bridge = () => {
   const handleApprove = async () => {
     try {
       if (!account) return
-      if (collapse.approve.success) return
+      if (approve) return
 
       if (chainId !== bridge.from.chainId) {
         setWrongNetwork(true)
@@ -312,16 +279,7 @@ const Bridge = () => {
         chainId,
         `Approved ${bridge.from.name}`
       ).then(() => {
-        setCollapse((prev) => {
-          return {
-            ...prev,
-            approve: {
-              pending: false,
-              success: true
-            },
-            deposit: { pending: true, success: false }
-          }
-        })
+        setApprove(true)
       })
     } catch (error) {
       console.log('error happend in Approve', error)
@@ -329,7 +287,7 @@ const Bridge = () => {
   }
   const handleDeposit = () => {
     try {
-      if (!collapse.approve.success) return
+      if (!approve) return
       if (!account) {
         return
       }
@@ -369,271 +327,91 @@ const Bridge = () => {
         `Deposite ${amount} ${bridge.from.name}`,
         originWeb3
       ).then(() => {
-        setCollapse((prev) => {
-          return {
-            ...prev,
-            approve: { pending: false, success: true },
-            deposit: {
-              pending: false,
-              success: true
-            },
-            network: { pending: true, success: false }
-          }
-        })
+        setAmount('0')
       })
     } catch (error) {
       console.log('error happend in Deposit', error)
     }
   }
-  const handleChangeNetwork = () => {
-    if (chainId !== bridge.to.chainId) {
-      setWrongNetwork(true)
-      return
-    }
-    setCollapse((prev) => {
-      return {
-        ...prev,
-        network: {
-          pending: false,
-          success: true
-        },
-        bridge: { pending: true, success: false }
-      }
-    })
-  }
-  const handleBridge = async () => {
-    if (chainId !== bridge.to.chainId) {
-      setWrongNetwork(true)
-      return
-    }
-    setLoading(true)
-    let destContract = ''
-    let originContract = ''
-    let originContractAddress = ''
 
-    switch (bridge.to.chainId) {
-      case 4:
-        destContract = ethContract
-        break
-      case 97:
-        destContract = bscContract
-        break
-      case 4002:
-        destContract = ftmContract
-        break
-      default:
-        break
-    }
-    switch (bridge.from.chainId) {
-      case 4:
-        originContract = ethContract
-        originContractAddress = ETHContract
-        break
-      case 97:
-        originContract = bscContract
-        originContractAddress = BSCContract
-        break
-      case 4002:
-        originContract = ftmContract
-        originContractAddress = FTMContract
-        break
-      default:
-        break
-    }
-    let userTxs = await originContract.methods
-      .getUserTxs(account, bridge.to.chainId)
-      .call()
-
-    let pendingTxs = await destContract.methods
-      .pendingTxs(bridge.from.chainId, userTxs)
-      .call()
-    let currentPending = pendingTxs[pendingTxs.length - 1]
-    if (!currentPending) {
-      let txId = userTxs[userTxs.length - 1]
-      let nodesSigResults = await ethCallContract(
-        originContractAddress,
-        'getTx',
-        [txId],
-        BridgeABI,
-        bridge.from.chainId
-      )
-      let sigs = nodesSigResults.result.signatures.map(
-        ({ signature }) => signature
-      )
-      setCurrentTx({ txId, sigs })
-    }
-
-    setLoading(false)
-    setCollapse((prev) => {
-      return {
-        ...prev,
-        bridge: {
-          pending: false,
-          success: true
-        },
-        claim: { pending: true, success: false }
-      }
-    })
-  }
-  const handleClaim = async () => {
-    if (chainId !== bridge.to.chainId) {
-      setWrongNetwork(true)
-      return
-    }
-    let Contract = ''
-    if (lock) {
-      return
-    }
-
-    switch (chainId) {
-      case 4:
-        Contract = activeEthContract
-        break
-      case 97:
-        Contract = activeBscContract
-        break
-      case 4002:
-        Contract = activeFtmContract
-        break
-      default:
-        break
-    }
-    let amountWie = web3.utils.toWei(amount)
-    setLock(true)
-    sendTransaction(
-      Contract,
-      `claim`,
-      [
-        account,
-        amountWie,
-        bridge.from.chainId,
-        bridge.to.chainId,
-        bridge.from.tokenId,
-        currentTx.txId,
-        currentTx.sigs
-      ],
-      account,
-      chainId,
-      `Claim ${amount} ${bridge.to.chain}`
-    ).then(() => {
-      setFetch(`${currentTx}-claim`)
-      setCollapse({
-        approve: { pending: false, success: true },
-        deposit: { pending: true, success: false },
-        network: { pending: false, success: false },
-        bridge: { pending: false, success: false },
-        claim: { pending: false, success: false }
-      })
-      setAmount('0')
-      setLock('')
-    })
-  }
   const handleConnectWallet = async () => {
     await activate(injected)
   }
   return (
     <div className="wrap-bridge">
       <div className="width-340">
-        <Instruction collapse={collapse} />
+        <Instruction />
       </div>
 
       <div className="container-bridge">
         <div className="bridge-title">
           <h1>DEUS Bridge</h1>
         </div>
-        <div className="bridge">
-          <img src="/img/bridge/bridge.svg" alt="bridge" />
-          <img
-            src="/img/bridge/bsc-logo 1.svg"
-            alt="bsc-logo"
-            className="bsc-logo"
+        <img src="/img/bridge/bridge.svg" alt="bridge" />
+        <img
+          src="/img/bridge/bsc-logo 1.svg"
+          alt="bsc-logo"
+          className="bsc-logo"
+        />
+        <img
+          src="/img/bridge/Ethereum-icon.svg"
+          alt="eth-logo"
+          className="eth-logo"
+        />
+        <img src="/img/bridge/image 1.svg" alt="logo" className="ftm-logo" />
+        <div className="wrapp-bridge-box">
+          <BridgeBox
+            title="from"
+            {...bridge.from}
+            balance={fromBalance}
+            amount={amount}
+            setAmount={(data) => setAmount(data)}
+            max={true}
+            handleOpenModal={() => handleOpenModal('from')}
           />
-          <img
-            src="/img/bridge/Ethereum-icon.svg"
-            alt="eth-logo"
-            className="eth-logo"
-          />
-          <img src="/img/bridge/image 1.svg" alt="logo" className="ftm-logo" />
-          <div className="wrap-box">
-            <div className="bridge-box-1">
-              <BridgeBox
-                title="from"
-                {...bridge.from}
-                balance={fromBalance}
-                amount={amount}
-                setAmount={(data) => setAmount(data)}
-                max={true}
-                handleOpenModal={() => handleOpenModal('from')}
-              />
-            </div>
-            <div className="arrow">
-              <img src="/img/swap/swap-arrow.svg" alt="arrow" />
-            </div>
-            <div className="bridge-box-2">
-              <BridgeBox
-                title="to"
-                {...bridge.to}
-                balance={toBalance}
-                amount={amount}
-                readonly={true}
-                handleOpenModal={() => handleOpenModal('to')}
-              />
-            </div>
+
+          <div className="arrow">
+            <img src="/img/swap/swap-arrow.svg" alt="arrow" />
           </div>
+          <BridgeBox
+            title="to"
+            {...bridge.to}
+            balance={toBalance}
+            amount={amount}
+            readonly={true}
+            handleOpenModal={() => handleOpenModal('to')}
+          />
         </div>
         {account ? (
           <>
-            {(collapse.approve.pending || collapse.deposit.pending) &&
-              !wrongNetwork && (
-                <>
-                  <div className="container-btn">
-                    <div
-                      className={
-                        collapse.approve.success
-                          ? 'bridge-deposit'
-                          : 'bridge-approve pointer'
-                      }
-                      onClick={handleApprove}
-                    >
-                      Approve
-                    </div>
+            {!wrongNetwork && (
+              <>
+                <div className="container-btn">
+                  <div
+                    className={
+                      approve ? 'bridge-deposit' : 'bridge-approve pointer'
+                    }
+                    onClick={handleApprove}
+                  >
+                    {approve ? 'Approved' : 'Approve'}
+                  </div>
 
-                    <div
-                      className={
-                        collapse.approve.success
-                          ? 'bridge-approve pointer'
-                          : 'bridge-deposit'
-                      }
-                      onClick={handleDeposit}
-                    >
-                      Deposit
-                    </div>
+                  <div
+                    className={
+                      approve ? 'bridge-approve pointer' : 'bridge-deposit'
+                    }
+                    onClick={handleDeposit}
+                  >
+                    Deposit
                   </div>
-                  <div className="container-status-button">
-                    <div className="status-button">
-                      <div className="active">1</div>
-                      <div className={collapse.approve.success ? 'active' : ''}>
-                        2
-                      </div>
-                    </div>
+                </div>
+                <div className="container-status-button">
+                  <div className="status-button">
+                    <div className="active">1</div>
+                    <div className={approve ? 'active' : ''}>2</div>
                   </div>
-                </>
-              )}
-            {collapse.network.pending && !wrongNetwork && (
-              <div className="pink-btn pointer" onClick={handleChangeNetwork}>
-                CHANGE NETWORK
-              </div>
-            )}
-            {collapse.bridge.pending && !wrongNetwork && (
-              <div className="pink-btn pointer" onClick={handleBridge}>
-                INITIATE BRIDGING
-                {loading && <Loading />}
-              </div>
-            )}
-            {collapse.claim.pending && !wrongNetwork && (
-              <div className="pink-btn pointer" onClick={handleClaim}>
-                CLAIM TOKEN
-              </div>
+                </div>
+              </>
             )}
             {wrongNetwork && (
               <div className="wrong-network-bridge">Wrong Network</div>

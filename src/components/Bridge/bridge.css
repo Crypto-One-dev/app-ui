@@ -14,6 +14,12 @@
     format('woff');
 }
 
+.pink-color {
+  color: #e87ba5;
+}
+.market-nav-wrap {
+  display: none;
+}
 .flex-between {
   display: flex;
   justify-content: space-between;
@@ -56,6 +62,10 @@ input:focus {
   margin: 60px auto;
   justify-content: center;
   align-items: center;
+  position: relative;
+}
+.container-bridge > img {
+  width: 100%;
 }
 
 .bridge-title h1 {
@@ -74,15 +84,15 @@ input:focus {
 
 .bridge {
   position: relative;
-  padding-bottom: 85px;
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
 }
-.bridge img {
+/* .bridge img {
   width: 100%;
+} */
+.wrapp-bridge-box {
+  position: relative;
+  max-width: 530px;
+  width: 70%;
 }
-
 .bridge-box {
   height: 90px;
   padding: 15px;
@@ -114,6 +124,7 @@ input:focus {
   justify-content: center;
   align-items: center;
   margin: 0 3px;
+  text-transform: uppercase;
 }
 .bridge-deposit {
   display: flex;
@@ -130,6 +141,7 @@ input:focus {
   font-size: 25px;
   color: rgba(255, 255, 255, 0.5);
   margin: 0 3px;
+  text-transform: uppercase;
 }
 .bridge-from {
   height: 14.98px;
@@ -266,19 +278,20 @@ input:focus {
   padding: 0 5px;
   width: 18px;
 }
-.bridge-box-1 {
+/* .bridge-box-1 {
   /* position: absolute;
   bottom: 118px; */
-  flex-grow: 3;
+/* flex-grow: 3;
   max-width: 530px;
   width: 70%;
 }
-.bridge-box-2 {
-  /* position: absolute;
+.bridge-box-2 { */
+/* position: absolute;
   bottom: -78px; */
-  max-width: 530px;
+/* max-width: 530px;
   width: 70%;
-}
+} */
+*/
 
 /* The Modal (background) */
 .show {
@@ -433,6 +446,22 @@ input:focus {
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
+.border-bottom-claim {
+  border-bottom: 1px solid #1c1c1c;
+}
+.desc-claim {
+  font-family: 'Monument Grotesk';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 20px;
+  text-align: center;
+  opacity: 0.5;
+  margin-top: 30px;
+}
+.desc-claim > span {
+  padding-right: 5px;
+}
 .token-name {
   padding-top: 37px;
   font-style: normal;
@@ -492,6 +521,11 @@ input:focus {
   background: #0d0d0d;
   border: 1px solid #1c1c1c;
   border-radius: 10px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 20px;
+  color: #ffffff;
 }
 
 .instruction-title {
@@ -560,8 +594,10 @@ input:focus {
 }
 .arrow {
   position: absolute;
-  width: 30px;
-  height: 30px;
+  top: 42%;
+  left: 50%;
+  width: 28px;
+  height: 28px;
   background: #b5d4ff;
   border: 1px solid #ffffff;
   box-sizing: border-box;
@@ -657,16 +693,10 @@ input:focus {
   color: rgba(255, 255, 255, 0.75);
 }
 .container-claim-btn {
-  display: flex;
-  align-items: center;
-  flex-basis: 43%;
-  justify-content: flex-end;
-}
-.claim-btn {
-  max-width: 80px;
+  margin: 15px 0 20px;
+  max-width: 297px;
   width: 100%;
   height: 24px;
-  background: linear-gradient(90deg, #e26ba2 0%, #fdb9af 100%);
   border-radius: 10px;
   font-style: normal;
   font-weight: normal;
@@ -676,26 +706,37 @@ input:focus {
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin: 0 3px;
-  color: #000000;
   padding: 0 3px;
+  font-family: 'Monument Grotesk Semi';
+  font-size: 12px;
+  line-height: 17px;
+}
+.claim-btn {
+  background: linear-gradient(90deg, #e26ba2 0%, #fdb9af 100%);
+  color: #000000;
+}
+.change-claim {
+  background: #1c1c1c;
+  border: 1px solid #000000;
+  color: rgba(255, 255, 255, 0.5);
 }
 .ftm-logo {
   width: 32px !important;
   position: absolute;
   left: 50%;
+  top: 15%;
 }
 .bsc-logo {
   width: 25px !important;
   position: absolute;
-  top: 10%;
+  top: 20%;
   left: 9%;
 }
 .eth-logo {
   width: 32px !important;
   position: absolute;
   right: 1.2%;
-  top: 30.5%;
+  top: 35%;
 }
 
 @media screen and (max-width: 1200px) {
@@ -738,9 +779,6 @@ input:focus {
   }
 }
 @media screen and (min-width: 415px) and (max-width: 460px) {
-  .bridge {
-    padding-bottom: 63px;
-  }
   .wrap-box {
     height: 187px;
   }
@@ -801,9 +839,7 @@ input:focus {
   .token-list-item img {
     width: 25px;
   }
-  .bridge {
-    padding-bottom: 60px;
-  }
+
   .wrap-box {
     height: 180px;
   }

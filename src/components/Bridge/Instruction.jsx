@@ -1,20 +1,22 @@
 import React from 'react'
-import Collapsible from 'react-collapsible'
+// import Collapsible from 'react-collapsible'
 import { instructions } from './data'
 
 const Instruction = (props) => {
-  const { collapse } = props
+  // const { collapse } = props
 
-  const handleTriggerClick = (e) => {}
+  // const handleTriggerClick = (e) => {}
 
   return (
     <div className="instruction">
-      <div className="instruction-title">STEP BY STEP INSTRUCTIONS</div>
+      <div className="instruction-title">Help</div>
       <div className="border-bottom mb-20" />
       {instructions.map((instruction, index) => {
         return (
           <div key={index}>
-            <Collapsible
+            {instruction.title}
+
+            {/* <Collapsible
               handleTriggerClick={handleTriggerClick}
               open={collapse[instruction.name].pending}
               trigger={
@@ -33,10 +35,21 @@ const Instruction = (props) => {
               }
             >
               <div className="content-collapse">{instruction.desc}</div>
-            </Collapsible>
+            </Collapsible> */}
           </div>
         )
       })}
+      <div className="instruction-title mt-20">
+        If you need more help visit the{' '}
+        <a href="#" className="pink-color">
+          wiki
+        </a>{' '}
+        or watch this step by step{' '}
+        <a href="#" className="pink-color">
+          explainer video
+        </a>
+        .
+      </div>
     </div>
   )
 }

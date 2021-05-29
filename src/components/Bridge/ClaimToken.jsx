@@ -58,7 +58,6 @@ const ClaimToken = (props) => {
     }
     let amount = web3.utils.fromWei(claim.amount, 'ether')
     let chain = chains.find((item) => item.network === Number(claim.toChain))
-    // const Contract = makeContract(web3, BridgeABI, bridgeContract)
     let nodesSigResults = await ethCallContract(
       originContractAddress,
       'getTx',
@@ -102,30 +101,36 @@ const ClaimToken = (props) => {
               (item) => item.network === Number(claim.toChain)
             )
             return (
-              <div className="flex-between mb-5" key={index}>
-                <div className="token-item">
-                  <TokenBadge chain={chain.name} icon={token.icon} />
-                  <span>{`${token.name} (${chain.name})`}</span>
+              <div key={index}>
+                <div className="flex-between mb-5">
+                  <div className="token-item">
+                    <TokenBadge chain={chain.name} icon={token.icon} />
+                    <span>{`${token.name} (${chain.name})`}</span>
+                  </div>
+                  <div className="claim-amount">{amount}</div>
                 </div>
-                <div className="claim-amount">{amount}</div>
-                <div className="container-claim-btn">
-                  {chain.network !== chainId && (
-                    <div className="claim-btn">Change Network</div>
-                  )}
+                {chain.network !== chainId ? (
+                  <div className=" container-claim-btn change-claim">
+                    CHANGE NETWORK TO CLAIM
+                  </div>
+                ) : (
                   <div
-                    className={
-                      chain.network !== chainId
-                        ? 'claim-btn'
-                        : 'claim-btn pointer'
-                    }
+                    className="container-claim-btn claim-btn pointer"
                     onClick={() => handleClaim(claim, chain.network)}
                   >
                     CLAIM
                   </div>
-                </div>
+                )}
+                <div className="border-bottom-claim mb-20" />
               </div>
             )
           })}
+          <div className="desc-claim">
+            <span className="pink-color">
+              Change to the destination Network
+            </span>
+            to claim your token on respective networks.
+          </div>
         </div>
       )}
     </>
