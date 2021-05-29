@@ -39,7 +39,7 @@ const BridgeBox = (props) => {
         <div className="bridge-token ">
           {max && (
             <div
-              onClick={() => setAmount(balance)}
+              onClick={() => setAmount(String(balance))}
               className="bridge-max pointer"
             >
               Max
