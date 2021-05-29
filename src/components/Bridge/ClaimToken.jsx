@@ -16,78 +16,82 @@ const ClaimToken = (props) => {
   const activeFtmContract = makeContract(web3, BridgeABI, FTMContract)
 
   const handleClaim = async (claim, network) => {
-    if (chainId !== network) {
-      return
-    }
-    if (
-      lock &&
-      lock.fromChain === claim.fromChain &&
-      lock.toChain === claim.toChain &&
-      lock.txId === claim.txId
-    ) {
-      return
-    }
-    let Contract = ''
+    try {
+      if (chainId !== network) {
+        return
+      }
+      if (
+        lock &&
+        lock.fromChain === claim.fromChain &&
+        lock.toChain === claim.toChain &&
+        lock.txId === claim.txId
+      ) {
+        return
+      }
+      let Contract = ''
 
-    switch (chainId) {
-      case 4:
-        Contract = activeEthContract
-        break
-      case 97:
-        Contract = activeBscContract
-        break
-      case 4002:
-        Contract = activeFtmContract
-        break
-      default:
-        break
-    }
-    let originContractAddress = ''
-    switch (Number(claim.fromChain)) {
-      case 4:
-        originContractAddress = ETHContract
-        break
-      case 97:
-        originContractAddress = BSCContract
-        break
-      case 4002:
-        originContractAddress = FTMContract
-        break
-      default:
-        break
-    }
-    let amount = web3.utils.fromWei(claim.amount, 'ether')
-    let chain = chains.find((item) => item.network === Number(claim.toChain))
-    let nodesSigResults = await ethCallContract(
-      originContractAddress,
-      'getTx',
-      [claim.txId],
-      BridgeABI,
-      Number(claim.fromChain)
-    )
-    let sigs = nodesSigResults.result.signatures.map(
-      ({ signature }) => signature
-    )
-    setLock(claim)
-    sendTransaction(
-      Contract,
-      `claim`,
-      [
+      switch (chainId) {
+        case 4:
+          Contract = activeEthContract
+          break
+        case 97:
+          Contract = activeBscContract
+          break
+        case 4002:
+          Contract = activeFtmContract
+          break
+        default:
+          break
+      }
+      let originContractAddress = ''
+      switch (Number(claim.fromChain)) {
+        case 4:
+          originContractAddress = ETHContract
+          break
+        case 97:
+          originContractAddress = BSCContract
+          break
+        case 4002:
+          originContractAddress = FTMContract
+          break
+        default:
+          break
+      }
+      let amount = web3.utils.fromWei(claim.amount, 'ether')
+      let chain = chains.find((item) => item.network === Number(claim.toChain))
+      let nodesSigResults = await ethCallContract(
+        originContractAddress,
+        'getTx',
+        [claim.txId],
+        BridgeABI,
+        Number(claim.fromChain)
+      )
+      let sigs = nodesSigResults.result.signatures.map(
+        ({ signature }) => signature
+      )
+      setLock(claim)
+      sendTransaction(
+        Contract,
+        `claim`,
+        [
+          account,
+          claim.amount,
+          Number(claim.fromChain),
+          Number(claim.toChain),
+          claim.tokenId,
+          claim.txId,
+          sigs
+        ],
         account,
-        claim.amount,
-        Number(claim.fromChain),
-        Number(claim.toChain),
-        claim.tokenId,
-        claim.txId,
-        sigs
-      ],
-      account,
-      chainId,
-      `Claim ${amount} ${chain.name}`
-    ).then(() => {
-      setFetch(claim)
-      setLock('')
-    })
+        chainId,
+        `Claim ${amount} ${chain.name}`
+      ).then(() => {
+        setFetch(claim)
+        setLock('')
+      })
+    } catch (error) {
+      console.log('error happend in Claim', error)
+    }
   }
   return (
     <>

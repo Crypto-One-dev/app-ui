@@ -3,10 +3,10 @@ import { useWeb3React } from '@web3-react/core'
 // import { isAddress } from '@ethersproject/address'
 import { abi } from '../../utils/StakingABI'
 
-// // import { getBalanceNumber } from '../../helper/formatBalance'
+import { getBalanceNumber } from '../../helper/formatBalance'
 import multicall from '../../helper/multicall'
 
-const useTokenBalances = (chains, tokens, validChainId) => {
+const useTokenBalances = (chains, tokens, fetchData) => {
   const [balances, setBalances] = useState(tokens)
   const { account, chainId } = useWeb3React()
   // const web3 = useWeb3()
@@ -21,27 +21,37 @@ const useTokenBalances = (chains, tokens, validChainId) => {
             params: [account]
           }
         })
-        console.log({ calls })
+
         const result = await multicall(chain.web3, abi, calls, chain.network)
-        console.log(result)
+
+        for (let i = 0; i < result.length; i++) {
+          const balance = result[i]
+          const address = calls[i].address
+          console.log(
+            balance,
+            address,
+            tokens[address],
+            getBalanceNumber(balance, tokens[address]?.decimals)
+          )
+          let token = tokens.find(
+            (token) => token.address[chain.network] === address
+          )
+          token.balances[chain.network] = getBalanceNumber(
+            balance,
+            tokens[address]?.decimals
+          )
+        }
+        console.log(tokens)
       })
 
-      // for (let i = 0; i < result.length; i++) {
-      //     const balance = result[i];
-      //     const address = calls[i].address
-      //     tokensMap[address].balance = getBalanceNumber(balance, tokensMap[address]?.decimals)
-
-      // }
-      // const ethBalance = await web3.eth.getBalance(account)
-      // tokensMap["0x"].balance = getBalanceNumber(ethBalance, tokensMap["0x"]?.decimals)
-      // setBalances(tokensMap)
+      setBalances(tokens)
     }
 
     if (account) {
       fetchBalances()
       console.log('useTokenBalances')
     }
-  }, [account, tokens, chainId, validChainId])
+  }, [account, tokens, chainId, fetchData, chains])
 
   return balances
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactModal from 'react-modal'
 import TokenBadge from './TokenBadge'
-import { tokens, chains } from './data'
+import { chains } from './data'
 if (typeof window !== 'undefined') {
   ReactModal.setAppElement('body')
 }
@@ -29,7 +29,7 @@ const customStyles = {
 }
 
 const TokenModal = (props) => {
-  const { open, hide, changeToken } = props
+  const { open, hide, changeToken, tokens } = props
   const [chainToken, setChainToken] = React.useState(chains)
   const [searchQuery, setSearchQuery] = React.useState('')
   const [showTokens, setShowTokens] = React.useState(tokens)
@@ -62,7 +62,7 @@ const TokenModal = (props) => {
       (item) => search.test(item.name) || search.test(item.chain)
     )
     setShowTokens(resultFilter)
-  }, [chainToken, searchQuery])
+  }, [chainToken, searchQuery, tokens])
 
   const closeModal = (token, network) => {
     changeToken(token, network)
@@ -120,7 +120,7 @@ const TokenModal = (props) => {
             <div className="border-bottom"></div>
             <div className="flex-between token-name">
               <div>Token name</div>
-              <div>Balance</div>
+              <div className="pr-25">Balance</div>
             </div>
             <div className="border-bottom mb-5"></div>
             <div className="container-token">
@@ -136,7 +136,7 @@ const TokenModal = (props) => {
                         <TokenBadge chain={chain.name} icon={token.icon} />
                         <span>{`${token.name} (${chain.name})`}</span>
                       </div>
-                      <div>{token.balance}</div>
+                      <div>{token.balances[chain.network]}</div>
                     </div>
                   )
                 })

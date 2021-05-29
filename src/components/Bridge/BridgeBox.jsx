@@ -30,6 +30,7 @@ const BridgeBox = (props) => {
               type="text"
               className="input-transparent bridge-amount"
               value={amount}
+              placeholder="0"
               onChange={(e) => setAmount(e.target.value)}
             />
           )}

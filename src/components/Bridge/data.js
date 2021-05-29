@@ -54,60 +54,90 @@ const ftmContract = makeContract(ftmWeb3, BridgeABI, FTMContract)
 const tokens = [
   {
     name: 'DEUS',
+    decimals: 18,
     tokenId: '1',
+    balances: {
+      4: '0',
+      97: '0',
+      4002: '0'
+    },
     address: {
       4: '0xb9B5FFC3e1404E3Bb7352e656316D6C5ce6940A1',
       97: '0x4Ef4E0b448AC75b7285c334e215d384E7227A2E6',
       4002: '0x91E32eE7799F20e6b89A36CdaA7fa12d5f482781'
     },
     icon: 'DEUS.svg'
+  },
+  {
+    name: 'DEA',
+    tokenId: '2',
+    decimals: 18,
+    balances: {
+      4: '0',
+      97: '0',
+      4002: '0'
+    },
+    address: {
+      4: '0xb9B5FFC3e1404E3Bb7352e656316D6C5ce6940A1',
+      97: '0x4Ef4E0b448AC75b7285c334e215d384E7227A2E6',
+      4002: '0x91E32eE7799F20e6b89A36CdaA7fa12d5f482781'
+    },
+    icon: 'DEA.svg'
+  },
+  {
+    name: 'BPT',
+    tokenId: '3',
+    decimals: 18,
+    balances: {
+      4: '0',
+      97: '0',
+      4002: '0'
+    },
+    address: {
+      4: '0xb9B5FFC3e1404E3Bb7352e656316D6C5ce6940A1',
+      97: '0x4Ef4E0b448AC75b7285c334e215d384E7227A2E6',
+      4002: '0x91E32eE7799F20e6b89A36CdaA7fa12d5f482781'
+    },
+    icon: 'BPT.svg'
+  },
+  {
+    name: 'sDEA',
+    tokenId: '4',
+    decimals: 18,
+    balances: {
+      4: '0',
+      97: '0',
+      4002: '0'
+    },
+    address: {
+      4: '0xb9B5FFC3e1404E3Bb7352e656316D6C5ce6940A1',
+      97: '0x4Ef4E0b448AC75b7285c334e215d384E7227A2E6',
+      4002: '0x91E32eE7799F20e6b89A36CdaA7fa12d5f482781'
+    },
+    icon: 'sDEA.svg'
+  },
+  {
+    name: 'sDEUS',
+    tokenId: '5',
+    decimals: 18,
+    balances: {
+      4: '0',
+      97: '0',
+      4002: '0'
+    },
+    address: {
+      4: '0xb9B5FFC3e1404E3Bb7352e656316D6C5ce6940A1',
+      97: '0x4Ef4E0b448AC75b7285c334e215d384E7227A2E6',
+      4002: '0x91E32eE7799F20e6b89A36CdaA7fa12d5f482781'
+    },
+    icon: 'sDEUS.svg'
   }
-  // {
-  //   name: 'DEA',
-  //   tokenId: '2',
-  //   address: {
-  //     4: '0xb9B5FFC3e1404E3Bb7352e656316D6C5ce6940A1',
-  //     97: '0x4Ef4E0b448AC75b7285c334e215d384E7227A2E6',
-  //     4002: '0x91E32eE7799F20e6b89A36CdaA7fa12d5f482781'
-  //   },
-  //   icon: 'DEA.svg'
-  // },
-  // {
-  //   name: 'BPT',
-  //   tokenId: '3',
-  //   address: {
-  //     4: '0xb9B5FFC3e1404E3Bb7352e656316D6C5ce6940A1',
-  //     97: '0x4Ef4E0b448AC75b7285c334e215d384E7227A2E6',
-  //     4002: '0x91E32eE7799F20e6b89A36CdaA7fa12d5f482781'
-  //   },
-  //   icon: 'BPT.svg'
-  // },
-  // {
-  //   name: 'sDEA',
-  //   tokenId: '4',
-  //   address: {
-  //     4: '0xb9B5FFC3e1404E3Bb7352e656316D6C5ce6940A1',
-  //     97: '0x4Ef4E0b448AC75b7285c334e215d384E7227A2E6',
-  //     4002: '0x91E32eE7799F20e6b89A36CdaA7fa12d5f482781'
-  //   },
-  //   icon: 'sDEA.svg'
-  // },
-  // {
-  //   name: 'sDEUS',
-  //   tokenId: '5',
-  //   address: {
-  //     4: '0xb9B5FFC3e1404E3Bb7352e656316D6C5ce6940A1',
-  //     97: '0x4Ef4E0b448AC75b7285c334e215d384E7227A2E6',
-  //     4002: '0x91E32eE7799F20e6b89A36CdaA7fa12d5f482781'
-  //   },
-  //   icon: 'sDEUS.svg'
-  // }
 ]
 
 const chains = [
   { name: 'BSC', network: 97, networkName: 'bsctest', web3: bscWeb3 },
-  { name: 'ETH', network: 4, networkName: 'rinkeby', web3: ethWeb3 }
-  // { name: 'FTM', network: 4002, networkName: 'ftmtest', web3: ftmWeb3 }
+  { name: 'ETH', network: 4, networkName: 'rinkeby', web3: ethWeb3 },
+  { name: 'FTM', network: 4002, networkName: 'ftmtest', web3: ftmWeb3 }
 ]
 
 const instructions = [

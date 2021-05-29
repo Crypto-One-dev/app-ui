@@ -30,7 +30,9 @@ const Bridge = () => {
   const { account, chainId } = useWeb3React()
   const web3React = useWeb3React()
   const { activate } = web3React
-  useTokenBalances(chains, tokens)
+  const [fetch, setFetch] = React.useState('')
+
+  const tokensBalance = useTokenBalances(chains, tokens, fetch)
 
   const [open, setOpen] = React.useState(false)
   const [claims, setClaims] = React.useState([])
@@ -41,26 +43,21 @@ const Bridge = () => {
   // TODO change chainId
   const [bridge, setBridge] = React.useState({
     from: {
+      ...tokensBalance[0],
       chain: 'ETH',
-      icon: 'DEUS.svg',
-      name: 'DEUS',
       chainId: 4,
-      tokenId: '1',
-      address: '0xb9B5FFC3e1404E3Bb7352e656316D6C5ce6940A1'
+      address: tokensBalance[0].address[4]
     },
     to: {
+      ...tokensBalance[0],
       chain: 'BSC',
-      icon: 'DEUS.svg',
-      name: 'DEUS',
       chainId: 97,
-      tokenId: '1',
-      address: '0x4Ef4E0b448AC75b7285c334e215d384E7227A2E6'
+      address: tokensBalance[0].address[97]
     }
   })
-  const [fromBalance, setFromBalance] = React.useState(0)
-  const [toBalance, setToBalance] = React.useState(0)
-  const [amount, setAmount] = React.useState('0')
-  const [fetch, setFetch] = React.useState('')
+  // const [fromBalance, setFromBalance] = React.useState(0)
+  // const [toBalance, setToBalance] = React.useState(0)
+  const [amount, setAmount] = React.useState('')
   const web3 = useWeb3()
 
   const activeEthContract = makeContract(web3, BridgeABI, ETHContract)
@@ -138,54 +135,54 @@ const Bridge = () => {
 
       setClaims(claims)
     }
-    const getBalance = async () => {
-      let bridgeWeb3 = ''
-      let bridgeToWeb3 = ''
+    // const getBalance = async () => {
+    //   let bridgeWeb3 = ''
+    //   let bridgeToWeb3 = ''
 
-      switch (bridge.from.chainId) {
-        case 4:
-          bridgeWeb3 = ethWeb3
-          break
-        case 97:
-          bridgeWeb3 = bscWeb3
-          break
-        case 4002:
-          bridgeWeb3 = ftmWeb3
-          break
-        default:
-          break
-      }
-      switch (bridge.to.chainId) {
-        case 4:
-          bridgeToWeb3 = ethWeb3
-          break
-        case 97:
-          bridgeToWeb3 = bscWeb3
-          break
-        case 4002:
-          bridgeToWeb3 = ftmWeb3
-          break
-        default:
-          break
-      }
+    //   switch (bridge.from.chainId) {
+    //     case 4:
+    //       bridgeWeb3 = ethWeb3
+    //       break
+    //     case 97:
+    //       bridgeWeb3 = bscWeb3
+    //       break
+    //     case 4002:
+    //       bridgeWeb3 = ftmWeb3
+    //       break
+    //     default:
+    //       break
+    //   }
+    //   switch (bridge.to.chainId) {
+    //     case 4:
+    //       bridgeToWeb3 = ethWeb3
+    //       break
+    //     case 97:
+    //       bridgeToWeb3 = bscWeb3
+    //       break
+    //     case 4002:
+    //       bridgeToWeb3 = ftmWeb3
+    //       break
+    //     default:
+    //       break
+    //   }
 
-      const fromContract = makeContract(bridgeWeb3, abi, bridge.from.address)
-      let fromBalance = await fromContract.methods.balanceOf(account).call()
-      fromBalance = web3.utils.fromWei(fromBalance, 'ether')
-      setFromBalance(fromBalance)
-      const toContract = makeContract(bridgeToWeb3, abi, bridge.to.address)
-      let toBalance = await toContract.methods.balanceOf(account).call()
-      toBalance = web3.utils.fromWei(toBalance, 'ether')
-      setToBalance(toBalance)
-    }
+    //   const fromContract = makeContract(bridgeWeb3, abi, bridge.from.address)
+    //   let fromBalance = await fromContract.methods.balanceOf(account).call()
+    //   fromBalance = web3.utils.fromWei(fromBalance, 'ether')
+    //   setFromBalance(fromBalance)
+    //   const toContract = makeContract(bridgeToWeb3, abi, bridge.to.address)
+    //   let toBalance = await toContract.methods.balanceOf(account).call()
+    //   toBalance = web3.utils.fromWei(toBalance, 'ether')
+    //   setToBalance(toBalance)
+    // }
     if (account && validNetworks.includes(chainId)) {
-      getBalance()
+      // getBalance()
       findClaim()
     }
 
     const interval = setInterval(() => {
       if (account && validNetworks.includes(chainId)) {
-        getBalance()
+        // getBalance()
         findClaim()
       }
     }, 15000)
@@ -327,7 +324,8 @@ const Bridge = () => {
         `Deposite ${amount} ${bridge.from.name}`,
         originWeb3
       ).then(() => {
-        setAmount('0')
+        setAmount('')
+        setFetch(new Date().getTime())
       })
     } catch (error) {
       console.log('error happend in Deposit', error)
@@ -363,7 +361,7 @@ const Bridge = () => {
           <BridgeBox
             title="from"
             {...bridge.from}
-            balance={fromBalance}
+            balance={bridge.from.balances[bridge.from.chainId]}
             amount={amount}
             setAmount={(data) => setAmount(data)}
             max={true}
@@ -376,7 +374,7 @@ const Bridge = () => {
           <BridgeBox
             title="to"
             {...bridge.to}
-            balance={toBalance}
+            balance={bridge.to.balances[bridge.to.chainId]}
             amount={amount}
             readonly={true}
             handleOpenModal={() => handleOpenModal('to')}
@@ -424,6 +422,7 @@ const Bridge = () => {
         )}
 
         <TokenModal
+          tokens={tokensBalance}
           open={open}
           hide={() => setOpen(!open)}
           changeToken={(token, chainId) => changeToken(token, chainId)}
