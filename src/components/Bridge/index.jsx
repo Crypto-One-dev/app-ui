@@ -359,7 +359,6 @@ const Bridge = () => {
     await activate(injected)
   }
   const handleSwap = () => {
-    alert('hi')
     let swap = bridge
     console.log(swap, { from: { ...bridge.to }, to: { ...swap.from } })
     setBridge({
