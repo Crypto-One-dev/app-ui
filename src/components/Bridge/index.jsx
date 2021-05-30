@@ -358,6 +358,15 @@ const Bridge = () => {
   const handleConnectWallet = async () => {
     await activate(injected)
   }
+  const handleSwap = () => {
+    alert('hi')
+    let swap = bridge
+    console.log(swap, { from: { ...bridge.to }, to: { ...swap.from } })
+    setBridge({
+      from: { ...bridge.to },
+      to: { ...swap.from }
+    })
+  }
   return (
     <div className="wrap-bridge">
       <div className="width-340">
@@ -391,7 +400,7 @@ const Bridge = () => {
             handleOpenModal={() => handleOpenModal('from')}
           />
 
-          <div className="arrow">
+          <div className="arrow pointer" onClick={handleSwap}>
             <img src="/img/swap/swap-arrow.svg" alt="arrow" />
           </div>
           <BridgeBox
