@@ -10,7 +10,6 @@ const multicall = async (web3, abi, calls, chainId) => {
     call.address.toLowerCase(),
     itf.encodeFunctionData(call.name, call.params)
   ])
-  console.log({ calldata, multi })
   const { returnData } = await multi.methods.aggregate(calldata).call()
   const res = returnData.map((call, i) =>
     itf.decodeFunctionResult(calls[i].name, call)

@@ -734,7 +734,7 @@ input:focus {
 .bsc-logo {
   width: 25px !important;
   position: absolute;
-  top: 20%;
+  top: 21%;
   left: 10%;
 }
 .eth-logo {
@@ -788,7 +788,7 @@ input:focus {
     top: 20%;
   }
   .bsc-logo {
-    top: 22%;
+    top: 23%;
   }
   .wrap-box {
     height: 187px;
@@ -846,7 +846,7 @@ input:focus {
     top: 22%;
   }
   .bsc-logo {
-    top: 23%;
+    top: 24%;
   }
   .token-list-item > span {
     font-size: 15px;

@@ -27,12 +27,7 @@ const useTokenBalances = (chains, tokens, fetchData) => {
         for (let i = 0; i < result.length; i++) {
           const balance = result[i]
           const address = calls[i].address
-          console.log(
-            balance,
-            address,
-            tokens[address],
-            getBalanceNumber(balance, tokens[address]?.decimals)
-          )
+
           let token = tokens.find(
             (token) => token.address[chain.network] === address
           )
@@ -41,7 +36,6 @@ const useTokenBalances = (chains, tokens, fetchData) => {
             tokens[address]?.decimals
           )
         }
-        console.log(tokens)
       })
 
       setBalances(tokens)
@@ -49,7 +43,6 @@ const useTokenBalances = (chains, tokens, fetchData) => {
 
     if (account) {
       fetchBalances()
-      console.log('useTokenBalances')
     }
   }, [account, tokens, chainId, fetchData, chains])
 

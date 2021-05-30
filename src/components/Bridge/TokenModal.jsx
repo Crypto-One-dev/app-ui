@@ -29,7 +29,7 @@ const customStyles = {
 }
 
 const TokenModal = (props) => {
-  const { open, hide, changeToken, tokens } = props
+  const { open, hide, changeToken, tokens, tokenId, selectedChain } = props
   const [chainToken, setChainToken] = React.useState(chains)
   const [searchQuery, setSearchQuery] = React.useState('')
   const [showTokens, setShowTokens] = React.useState(tokens)
@@ -38,6 +38,18 @@ const TokenModal = (props) => {
     ETH: true,
     BSC: true
   })
+
+  React.useEffect(() => {
+    if (tokenId) {
+      let result = showTokens.filter((token) => token.tokenId === tokenId)
+      let filterChains = chains.filter((item) => item.network !== selectedChain)
+      setShowTokens(result)
+      setChainToken(filterChains)
+    } else {
+      setShowTokens(tokens)
+      setChainToken(chains)
+    }
+  }, [tokenId, selectedChain]) // eslint-disable-line
 
   const handleSearchModal = (e) => {
     let search = e.target.value
@@ -58,11 +70,28 @@ const TokenModal = (props) => {
   }
   React.useEffect(() => {
     const search = new RegExp([searchQuery].join(''), 'i')
-    const resultFilter = tokens.filter(
+    let resultFilter = tokens.filter(
       (item) => search.test(item.name) || search.test(item.chain)
     )
+    if (tokenId) {
+      resultFilter = resultFilter.filter((token) => token.tokenId === tokenId)
+    }
+    let sortChains = chainToken.sort((a, b) => {
+      let nameA = a.name.toUpperCase() // ignore upper and lowercase
+      let nameB = b.name.toUpperCase() // ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1
+      }
+      if (nameA > nameB) {
+        return 1
+      }
+
+      // names must be equal
+      return 0
+    })
+    setChainToken(sortChains)
     setShowTokens(resultFilter)
-  }, [chainToken, searchQuery, tokens])
+  }, [chainToken, searchQuery, tokens]) // eslint-disable-line
 
   const closeModal = (token, network) => {
     changeToken(token, network)
@@ -76,6 +105,7 @@ const TokenModal = (props) => {
     setSearchQuery('')
     setChainToken(chains)
   }
+
   return (
     <ReactModal
       isOpen={open}
@@ -110,6 +140,7 @@ const TokenModal = (props) => {
                     defaultValue={chain.name}
                     onChange={handleFilter}
                     checked={checked[chain.name]}
+                    disabled={chain.network === selectedChain}
                   />
                   <label htmlFor={chain.name} className="pointer">
                     {chain.name}

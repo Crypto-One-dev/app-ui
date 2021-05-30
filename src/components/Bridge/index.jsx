@@ -38,6 +38,7 @@ const Bridge = () => {
   const [claims, setClaims] = React.useState([])
   const [wrongNetwork, setWrongNetwork] = React.useState(false)
   const [approve, setApprove] = React.useState('')
+  const [tokenId, setTokenId] = React.useState('')
 
   const [target, setTarget] = React.useState()
   // TODO change chainId
@@ -55,9 +56,27 @@ const Bridge = () => {
       address: tokensBalance[0].address[97]
     }
   })
+  React.useEffect(() => {
+    let result = tokensBalance.find(
+      (token) => token.tokenId === bridge.from.tokenId
+    )
+    let validChain = chains.filter(
+      (chain) => chain.network !== bridge.from.chainId
+    )
+    setBridge((prev) => ({
+      ...prev,
+      to: {
+        ...result,
+        chain: validChain[0].name,
+        chainId: validChain[0].network,
+        address: result.address[validChain[0].network]
+      }
+    }))
+  }, [bridge.from, tokensBalance])
   // const [fromBalance, setFromBalance] = React.useState(0)
   // const [toBalance, setToBalance] = React.useState(0)
   const [amount, setAmount] = React.useState('')
+  const [selectedChain, setSelectedChain] = React.useState('')
   const web3 = useWeb3()
 
   const activeEthContract = makeContract(web3, BridgeABI, ETHContract)
@@ -224,8 +243,12 @@ const Bridge = () => {
     if (account) checkApprove()
   }, [bridge.from, account]) // eslint-disable-line
 
-  const handleOpenModal = (data) => {
+  const handleOpenModal = (data, tokenId) => {
     setTarget(data)
+    if (tokenId) {
+      setTokenId(tokenId)
+      setSelectedChain(bridge.from.chainId)
+    }
     setOpen(true)
   }
   const changeToken = (token, chainId) => {
@@ -377,7 +400,7 @@ const Bridge = () => {
             balance={bridge.to.balances[bridge.to.chainId]}
             amount={amount}
             readonly={true}
-            handleOpenModal={() => handleOpenModal('to')}
+            handleOpenModal={() => handleOpenModal('to', bridge.from.tokenId)}
           />
         </div>
         {account ? (
@@ -424,7 +447,13 @@ const Bridge = () => {
         <TokenModal
           tokens={tokensBalance}
           open={open}
-          hide={() => setOpen(!open)}
+          tokenId={tokenId}
+          selectedChain={selectedChain}
+          hide={() => {
+            setOpen(!open)
+            setTokenId('')
+            setSelectedChain('')
+          }}
           changeToken={(token, chainId) => changeToken(token, chainId)}
         />
       </div>
