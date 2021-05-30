@@ -2055,6 +2055,7 @@ export const BridgeABI = [
       { internalType: 'uint256', name: 'toChain', type: 'uint256' },
       { internalType: 'uint256', name: 'tokenId', type: 'uint256' },
       { internalType: 'uint256', name: 'txId', type: 'uint256' },
+      { internalType: 'bytes', name: '_reqId', type: 'bytes' },
       { internalType: 'bytes[]', name: 'sigs', type: 'bytes[]' }
     ],
     name: 'claim',

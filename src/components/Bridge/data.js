@@ -1,5 +1,5 @@
 // Deploy muon
-// 1. ownerAddSigner(muon_node_1/2/3)
+// 1. ownerAddSigner(muon_node_1/2/3/...)
 
 // Deploy bridge
 // step 1. ownerAddToken
@@ -23,13 +23,13 @@ const validNetworks = [4, 97, 4002]
 // 0x27a58c0e7688F90B415afA8a1BfA64D48A835DF7
 // 0x11C57ECa88e4A40b7B041EF48a66B9a0EF36b830
 
-// const BSCMuon = '0xC3694DAD0C4fdBB75CcAC2a845Bf5687d724457B'
-// const ETHMuon ='0x6340c77fE7d62446808CC10CdBdFC6e85AcBd70A'
-// const FTMMuon = '0xB238F0FD49EAebc946d8e505F7c8547B09819B08'
+// const BSCMuon = '0xda2D1567Dfca43Dc2Bc9f8D072D746d0bfbF3E1a'
+// const ETHMuon = '0x8ed35887C77Ee1BB533f05f85661fcDeF1FEda1E'
+// const FTMMuon = '0x5D91EA00E414BB113C8ECe6674F84C906BD8b5D4'
 
-const BSCContract = '0xaBCddE8D2D4Bf6d4ef89C97340260cC87603d623'
-const ETHContract = '0x88f4aDc94064B5Ff570A9D8954Cf45E3a890707b'
-const FTMContract = '0x4B1F4Fd318680909ae45a55eAcAf8416Af71f88B'
+const BSCContract = '0x11B650B8D2bbc60CdC434bd300F1b643ac77BAdA'
+const ETHContract = '0xdAa80B54725147169614EF40C4a8EdeeA0F34D03'
+const FTMContract = '0x05dFC221471F7Ea525c794Cfd3b5eC58D0d6B115'
 
 const bscWeb3 = new Web3(
   new Web3.providers.HttpProvider(

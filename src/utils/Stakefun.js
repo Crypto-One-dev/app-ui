@@ -33,7 +33,6 @@ const sendTransaction = (
           })
         })
         .once('receipt', ({ transactionHash }) => {
-          console.log({ transactionHash })
           CustomTranaction(TransactionState.SUCCESS, {
             hash: transactionHash,
             chainId,

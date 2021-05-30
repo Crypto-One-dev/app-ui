@@ -285,7 +285,6 @@ export function ApproveTranaction(type, payload) {
 
 //to do
 export function CustomTranaction(type, payload) {
-  console.log({ type, payload })
   toast.dismiss()
 
   switch (type) {

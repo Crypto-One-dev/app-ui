@@ -66,9 +66,22 @@ const ClaimToken = (props) => {
         BridgeABI,
         Number(claim.fromChain)
       )
+      let _reqId = `0x${nodesSigResults.result.cid.substr(1)}`
+      console.log({ nodesSigResults, _reqId })
+
       let sigs = nodesSigResults.result.signatures.map(
         ({ signature }) => signature
       )
+      console.log({
+        account,
+        amount: claim.amount,
+        from: Number(claim.fromChain),
+        to: Number(claim.toChain),
+        tokenId: claim.tokenId,
+        txId: claim.txId,
+        _reqId,
+        sigs
+      })
       setLock(claim)
       sendTransaction(
         Contract,
@@ -80,6 +93,7 @@ const ClaimToken = (props) => {
           Number(claim.toChain),
           claim.tokenId,
           claim.txId,
+          _reqId,
           sigs
         ],
         account,
