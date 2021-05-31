@@ -27,7 +27,7 @@ const BridgeBox = (props) => {
             <div className="bridge-amount">{amount}</div>
           ) : (
             <input
-              type="text"
+              type="number"
               className="input-transparent bridge-amount"
               value={amount}
               placeholder="0"

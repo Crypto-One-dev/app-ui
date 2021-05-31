@@ -744,6 +744,18 @@ input:focus {
   top: 33%;
 }
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
 @media screen and (max-width: 1200px) {
   .wrap-bridge {
     display: flex;
