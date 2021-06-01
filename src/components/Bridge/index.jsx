@@ -361,11 +361,13 @@ const Bridge = () => {
     await activate(injected)
   }
   const handleSwap = () => {
-    let swap = bridge
-    setBridge({
-      from: { ...bridge.to },
-      to: { ...swap.from }
-    })
+    if (bridge.to.chain) {
+      let swap = bridge
+      setBridge({
+        from: { ...bridge.to },
+        to: { ...swap.from }
+      })
+    }
   }
   return (
     <div className="wrap-bridge">
