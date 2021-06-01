@@ -50,29 +50,29 @@ const Bridge = () => {
       address: tokensBalance[0].address[4]
     },
     to: {
-      ...tokensBalance[0],
-      chain: 'BSC',
-      chainId: 97,
-      address: tokensBalance[0].address[97]
+      // ...tokensBalance[0],
+      // chain: 'BSC',
+      // chainId: 97,
+      // address: tokensBalance[0].address[97]
     }
   })
-  React.useEffect(() => {
-    let result = tokensBalance.find(
-      (token) => token.tokenId === bridge.from.tokenId
-    )
-    let validChain = chains.filter(
-      (chain) => chain.network !== bridge.from.chainId
-    )
-    setBridge((prev) => ({
-      ...prev,
-      to: {
-        ...result,
-        chain: validChain[0].name,
-        chainId: validChain[0].network,
-        address: result.address[validChain[0].network]
-      }
-    }))
-  }, [bridge.from, tokensBalance])
+  // React.useEffect(() => {
+  //   let result = tokensBalance.find(
+  //     (token) => token.tokenId === bridge.from.tokenId
+  //   )
+  //   let validChain = chains.filter(
+  //     (chain) => chain.network !== bridge.from.chainId
+  //   )
+  //   setBridge((prev) => ({
+  //     ...prev,
+  //     to: {
+  //       ...result,
+  //       chain: validChain[0].name,
+  //       chainId: validChain[0].network,
+  //       address: result.address[validChain[0].network]
+  //     }
+  //   }))
+  // }, [bridge.from, tokensBalance])
   // const [fromBalance, setFromBalance] = React.useState(0)
   // const [toBalance, setToBalance] = React.useState(0)
   const [amount, setAmount] = React.useState('')
@@ -114,9 +114,9 @@ const Bridge = () => {
             break
         }
         let dest = chains.filter((item) => item.network !== chain.network)
-
         for (let index = 0; index < dest.length; index++) {
           const item = dest[index]
+
           let destContract = ''
           switch (item.network) {
             case 4:
@@ -131,23 +131,25 @@ const Bridge = () => {
             default:
               break
           }
-          let userTxs = await originContract.methods
-            .getUserTxs(account, item.network)
-            .call()
-
-          let pendingTxs = await destContract.methods
-            .pendingTxs(chain.network, userTxs)
-            .call()
-          const pendingIndex = pendingTxs.reduce(
-            (out, bool, index) => (bool ? out : out.concat(index)),
-            []
-          )
-          for (let index = 0; index < pendingIndex.length; index++) {
-            let claim = await originContract.methods
-              .txs(userTxs[pendingIndex[index]])
+          try {
+            let userTxs = await originContract.methods
+              .getUserTxs(account, item.network)
               .call()
-
-            claims.push(claim)
+            let pendingTxs = await destContract.methods
+              .pendingTxs(chain.network, userTxs)
+              .call()
+            const pendingIndex = pendingTxs.reduce(
+              (out, bool, index) => (bool ? out : out.concat(index)),
+              []
+            )
+            for (let index = 0; index < pendingIndex.length; index++) {
+              let claim = await originContract.methods
+                .txs(userTxs[pendingIndex[index]])
+                .call()
+              claims.push(claim)
+            }
+          } catch (error) {
+            console.log('error happend in find Claim')
           }
         }
       }
@@ -360,7 +362,6 @@ const Bridge = () => {
   }
   const handleSwap = () => {
     let swap = bridge
-    console.log(swap, { from: { ...bridge.to }, to: { ...swap.from } })
     setBridge({
       from: { ...bridge.to },
       to: { ...swap.from }
@@ -389,68 +390,72 @@ const Bridge = () => {
         />
         <img src="/img/bridge/image 1.svg" alt="logo" className="ftm-logo" />
         <div className="wrapp-bridge-box">
-          <BridgeBox
-            title="from"
-            {...bridge.from}
-            balance={bridge.from.balances[bridge.from.chainId]}
-            amount={amount}
-            setAmount={(data) => setAmount(data)}
-            max={true}
-            handleOpenModal={() => handleOpenModal('from')}
-          />
+          <div className="relative">
+            <BridgeBox
+              title="from"
+              {...bridge.from}
+              balance={bridge.from.balances[bridge.from.chainId]}
+              amount={amount}
+              setAmount={(data) => setAmount(data)}
+              max={true}
+              handleOpenModal={() => handleOpenModal('from')}
+            />
 
-          <div className="arrow pointer" onClick={handleSwap}>
-            <img src="/img/swap/swap-arrow.svg" alt="arrow" />
+            <div className="arrow pointer" onClick={handleSwap}>
+              <img src="/img/swap/swap-arrow.svg" alt="arrow" />
+            </div>
+            <BridgeBox
+              title="to"
+              {...bridge.to}
+              balance={
+                bridge.to.balances ? bridge.to.balances[bridge.to.chainId] : ''
+              }
+              amount={amount}
+              readonly={true}
+              handleOpenModal={() => handleOpenModal('to', bridge.from.tokenId)}
+            />
           </div>
-          <BridgeBox
-            title="to"
-            {...bridge.to}
-            balance={bridge.to.balances[bridge.to.chainId]}
-            amount={amount}
-            readonly={true}
-            handleOpenModal={() => handleOpenModal('to', bridge.from.tokenId)}
-          />
+          {account ? (
+            <>
+              {!wrongNetwork && (
+                <>
+                  <div className="container-btn">
+                    <div
+                      className={
+                        approve ? 'bridge-deposit' : 'bridge-approve pointer'
+                      }
+                      onClick={handleApprove}
+                    >
+                      {approve ? 'Approved' : 'Approve'}
+                    </div>
+
+                    <div
+                      className={
+                        approve ? 'bridge-approve pointer' : 'bridge-deposit'
+                      }
+                      onClick={handleDeposit}
+                    >
+                      Deposit
+                    </div>
+                  </div>
+                  <div className="container-status-button">
+                    <div className="status-button">
+                      <div className="active">1</div>
+                      <div className={approve ? 'active' : ''}>2</div>
+                    </div>
+                  </div>
+                </>
+              )}
+              {wrongNetwork && (
+                <div className="wrong-network-bridge">Wrong Network</div>
+              )}
+            </>
+          ) : (
+            <div className="pink-btn" onClick={handleConnectWallet}>
+              Connect Wallet
+            </div>
+          )}
         </div>
-        {account ? (
-          <>
-            {!wrongNetwork && (
-              <>
-                <div className="container-btn">
-                  <div
-                    className={
-                      approve ? 'bridge-deposit' : 'bridge-approve pointer'
-                    }
-                    onClick={handleApprove}
-                  >
-                    {approve ? 'Approved' : 'Approve'}
-                  </div>
-
-                  <div
-                    className={
-                      approve ? 'bridge-approve pointer' : 'bridge-deposit'
-                    }
-                    onClick={handleDeposit}
-                  >
-                    Deposit
-                  </div>
-                </div>
-                <div className="container-status-button">
-                  <div className="status-button">
-                    <div className="active">1</div>
-                    <div className={approve ? 'active' : ''}>2</div>
-                  </div>
-                </div>
-              </>
-            )}
-            {wrongNetwork && (
-              <div className="wrong-network-bridge">Wrong Network</div>
-            )}
-          </>
-        ) : (
-          <div className="pink-btn" onClick={handleConnectWallet}>
-            Connect Wallet
-          </div>
-        )}
 
         <TokenModal
           tokens={tokensBalance}

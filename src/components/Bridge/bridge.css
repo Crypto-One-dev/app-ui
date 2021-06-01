@@ -53,6 +53,7 @@ input:focus {
 .wrap-bridge {
   padding: 20px 5px;
   display: flex;
+  background: linear-gradient(360deg, #272727 62.11%, #000000 100%);
 }
 .container-bridge {
   font-family: 'Monument Grotesk Semi';
@@ -88,24 +89,34 @@ input:focus {
 /* .bridge img {
   width: 100%;
 } */
-.wrapp-bridge-box {
+
+.relative {
   position: relative;
-  max-width: 530px;
+}
+.wrapp-bridge-box {
   width: 70%;
+  max-width: 552px;
+  background: linear-gradient(90deg, #dff4fe 0%, #8eb5ff 100%);
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  border-radius: 15px;
+  padding: 11px;
 }
 .bridge-box {
   height: 90px;
   padding: 15px;
-  background: linear-gradient(90deg, #dff4fe 0%, #8eb5ff 100%);
-  border: 1px solid #ffffff;
+  background: rgba(255, 255, 255, 0.85);
+  /* border: 1px solid #ffffff; */
   box-sizing: border-box;
   border-radius: 10px;
+  color: #000000;
+  margin-bottom: 3px;
 }
 .container-btn {
   display: flex;
   justify-content: space-between;
   max-width: 530px;
-  width: 70%;
+  width: 100%;
   margin-top: 15px;
 }
 .bridge-approve {
@@ -116,15 +127,15 @@ input:focus {
   font-size: 25px;
   font-style: normal;
   font-weight: normal;
-  background: linear-gradient(90deg, #b35480 0%, #d99d94 100%),
-    linear-gradient(224.74deg, #c4eb89 0.19%, #5ec4d6 100.22%), #111111;
-  box-shadow: 0px 2px 4px rgba(100, 100, 100, 0.498039);
+  background: linear-gradient(90deg, #e26ba2 0%, #fdb9af 100%);
+  /* box-shadow: 0px 2px 4px rgba(100, 100, 100, 0.498039); */
   border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0 3px;
   text-transform: uppercase;
+  color: #000000;
 }
 .bridge-deposit {
   display: flex;
@@ -133,19 +144,19 @@ input:focus {
   max-width: 255px;
   width: 100%;
   height: 55px;
-  background: #1c1c1c;
-  border: 1px solid #000000;
+  background: rgba(173, 173, 173, 0.5);
+  /* border: 1px solid #000000; */
   border-radius: 10px;
   font-style: normal;
   font-weight: normal;
   font-size: 25px;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(0, 0, 0, 0.5);
   margin: 0 3px;
   text-transform: uppercase;
 }
 .bridge-from {
   height: 14.98px;
-
+  display: flex;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
@@ -174,25 +185,9 @@ input:focus {
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
-  /* line-height: 17px;
-  text-align: center; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
   text-transform: uppercase;
-  color: #ffffff;
-  width: 39px;
-  height: 22px;
-  margin-right: 5px;
-  background: linear-gradient(
-    135deg,
-    rgba(91, 204, 189, 0.14902) 0%,
-    rgba(97, 192, 191, 0.14902) 33.33%,
-    rgba(85, 188, 200, 0.14902) 74.49%,
-    rgba(105, 207, 184, 0.14902) 100%
-  );
-  border: 1px solid #61779b;
-  border-radius: 6px;
+  color: #e87ba5;
+  margin-left: 5px;
 }
 
 .bridge-token {
@@ -210,7 +205,7 @@ input:focus {
   position: relative;
   display: flex;
   justify-content: flex-start;
-  margin-right: 25px;
+  margin-right: 28px;
 }
 .bridge-token .badge {
   position: absolute;
@@ -270,7 +265,7 @@ input:focus {
   font-size: 25px;
   line-height: 35px;
   text-align: right;
-  color: #ffffff;
+  color: #000;
   display: flex;
   align-items: center;
 }
@@ -279,20 +274,6 @@ input:focus {
   padding: 0 5px;
   width: 18px;
 }
-/* .bridge-box-1 {
-  /* position: absolute;
-  bottom: 118px; */
-/* flex-grow: 3;
-  max-width: 530px;
-  width: 70%;
-}
-.bridge-box-2 { */
-/* position: absolute;
-  bottom: -78px; */
-/* max-width: 530px;
-  width: 70%;
-} */
-*/
 
 /* The Modal (background) */
 .show {
@@ -410,38 +391,97 @@ input:focus {
   display: flex;
   flex-direction: column;
 }
-.content-modal-bridge label {
+/* .content-modal-bridge label {
   font-style: normal;
   font-weight: normal;
   font-size: 15px;
   line-height: 21px;
-  /* identical to box height */
   color: rgba(255, 255, 255, 0.5);
   padding: 10px;
+} */
+
+/* input[type='checkbox'] {
+  width: 15px;
+  height: 15px;
+  display: block;
+  float: left;
+  position: relative;
+  cursor: pointer;
 }
+
+input[type='checkbox']:after {
+  content: '';
+  vertical-align: middle;
+  text-align: center;
+  line-height: 15px;
+  position: absolute;
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  left: 0;
+  top: 0;
+  border: 1px solid #ffffff;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 1px 1px #2b3a3c, 0 1px 0 #2b3a3c;
+  -moz-box-shadow: inset 0 1px 1px #2b3a3c, 0 1px 0 #2b3a3c;
+  box-shadow: inset 0 1px 1px #2b3a3c, 0 1px 0 #2b3a3c;
+  background: #2b3a3c;
+}
+
+input[type='checkbox']:checked:after {
+  background: #2b3a3c;
+  content: '\2713';
+  color: #fff;
+}
+
+.color-box {
+  color: white;
+  font-size: 20px;
+  display: block;
+  text-align: center;
+  position: relative;
+  border: 1px solid transparent;
+  width: 15px;
+  height: 15px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(91, 204, 189, 0.14902) 0%,
+    rgba(97, 192, 191, 0.14902) 33.33%,
+    rgba(85, 188, 200, 0.14902) 74.49%,
+    rgba(105, 207, 184, 0.14902) 100%
+  );
+  border: 1px solid #ffffff;
+  border-radius: 2px;
+  transform: matrix(1, 0, 0, -1, 0, 0);
+} */
+
 .filter {
-  padding: 15px 0;
+  padding: 11px 0 5px;
   width: 56px;
-  height: 21px;
   font-style: normal;
   font-weight: normal;
   font-size: 15px;
   line-height: 21px;
   color: rgba(255, 255, 255, 0.5);
+  font-family: 'Monument Grotesk';
 }
 .bridge-checkbox {
-  padding-top: 5px;
+  padding: 5px 0 24px;
   display: flex;
   align-items: center;
-}
-.bridge-checkbox > label {
   color: #ffffff;
   font-style: normal;
   font-weight: normal;
   font-size: 15px;
   line-height: 21px;
-  padding: 10px;
+  font-family: 'Monument Grotesk';
 }
+/* .bridge-checkbox > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
 
 .border-bottom {
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
@@ -457,14 +497,14 @@ input:focus {
   font-size: 15px;
   line-height: 20px;
   text-align: center;
-  opacity: 0.5;
+
   margin-top: 30px;
 }
 .desc-claim > span {
   padding-right: 5px;
 }
 .token-name {
-  padding-top: 37px;
+  padding: 37px 0 5px;
   font-style: normal;
   font-weight: normal;
   font-size: 15px;
@@ -481,13 +521,13 @@ input:focus {
 .token-list {
   display: flex;
   justify-content: space-between;
-  padding: 0 15px 15px 0;
+  padding: 0 2px 15px 0;
 }
 .pt-20 {
   padding-top: 20px;
 }
-.pr-25 {
-  padding-right: 25px;
+.pr-13 {
+  padding-right: 13px;
 }
 
 .token-list-item {
@@ -513,6 +553,9 @@ input:focus {
 }
 .opacity-5 {
   opacity: 0.5;
+}
+.opacity-1 {
+  opacity: 1;
 }
 .width-340 {
   max-width: 340px;
@@ -567,17 +610,14 @@ input:focus {
   display: flex;
   justify-content: space-between;
   border-top: 2px solid;
-
-  border-image-source: linear-gradient(247.41deg, #a2fbb0 16.32%, #5ec4d6 87.6%),
-    linear-gradient(90deg, #fdcad5 0%, #d99d94 100%);
-
+  border-image-source: linear-gradient(0deg, #fdcad5, #fdcad5);
   border-image-slice: 5;
   padding-top: 24px;
   margin-top: 22px;
 }
 
 .status-button div {
-  background-color: #1c1c1c;
+  background-color: #adadad;
   font-weight: normal;
   margin-top: -35px;
   width: 20px;
@@ -590,7 +630,7 @@ input:focus {
   align-items: center;
 }
 .status-button .active {
-  background: linear-gradient(90deg, #e26ba2 0%, #fdb9af 100%);
+  background: #fdb8af;
   color: #000000;
 }
 .green-color {
@@ -616,7 +656,7 @@ input:focus {
 }
 
 .pink-btn {
-  width: 70%;
+  width: 100%;
   height: 55px;
   background: linear-gradient(90deg, #e26ba2 0%, #fdb9af 100%);
   border-radius: 10px;
@@ -633,7 +673,7 @@ input:focus {
 }
 .wrong-network-bridge {
   max-width: 530px;
-  width: 70%;
+  width: 100%;
   height: 55px;
   background: #1c1c1c;
   border: 1px solid #000000;
@@ -742,6 +782,99 @@ input:focus {
   position: absolute;
   right: 1%;
   top: 33%;
+}
+.container-checkbox {
+  position: relative;
+  padding-left: 27px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-family: 'Monument Grotesk';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 15px;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin-right: 25px;
+}
+
+/* Hide the browser's default checkbox */
+.container-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 15px;
+  height: 15px;
+  background: linear-gradient(
+    135deg,
+    rgba(91, 204, 189, 0.14902) 0%,
+    rgba(97, 192, 191, 0.14902) 33.33%,
+    rgba(85, 188, 200, 0.14902) 74.49%,
+    rgba(105, 207, 184, 0.14902) 100%
+  );
+  border: 1px solid #ffffff;
+  border-radius: 2px;
+}
+
+/* On mouse-over, add a grey background color */
+.container-checkbox:hover input ~ .checkmark {
+  background: linear-gradient(
+    135deg,
+    rgba(91, 204, 189, 0.14902) 0%,
+    rgba(97, 192, 191, 0.14902) 33.33%,
+    rgba(85, 188, 200, 0.14902) 74.49%,
+    rgba(105, 207, 184, 0.14902) 100%
+  );
+  border: 1px solid #ffffff;
+  border-radius: 2px;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container-checkbox input:checked ~ .checkmark {
+  background: linear-gradient(
+    135deg,
+    rgba(91, 204, 189, 0.14902) 0%,
+    rgba(97, 192, 191, 0.14902) 33.33%,
+    rgba(85, 188, 200, 0.14902) 74.49%,
+    rgba(105, 207, 184, 0.14902) 100%
+  );
+  border: 1px solid #ffffff;
+  border-radius: 2px;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container-checkbox input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container-checkbox .checkmark:after {
+  left: 4px;
+  top: 1px;
+  width: 4px;
+  height: 7px;
+  border: solid white;
+  border-width: 0px 1px 1px 0;
+  transform: rotate(45deg);
 }
 
 /* Chrome, Safari, Edge, Opera */

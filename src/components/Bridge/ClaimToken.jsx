@@ -144,10 +144,12 @@ const ClaimToken = (props) => {
             )
           })}
           <div className="desc-claim">
-            <span className="pink-color">
+            <span className="pink-color opacity-1">
               Change to the destination Network
             </span>
-            to claim your token on respective networks.
+            <span className="opacity-5">
+              to claim your token on respective networks.
+            </span>
           </div>
         </div>
       )}

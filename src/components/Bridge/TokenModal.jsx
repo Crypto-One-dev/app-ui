@@ -18,11 +18,11 @@ const customStyles = {
     transform: 'translate(-50%, -50%)',
     display: 'flex',
     flexDirection: 'column',
-    maxHeight: '95%',
     maxWidth: '560px',
     width: '95% ',
     background: '#242424',
     border: '1px solid #242424',
+    borderRadius: '10px',
     padding: '26px 20px'
     // overflow: 'unset'
   }
@@ -117,10 +117,7 @@ const TokenModal = (props) => {
       <div>
         <div className="modal-header">
           <div className="modal-title">Select an asset</div>
-
-          <span className="close" onClick={hide}>
-            &times;
-          </span>
+          <img src="/img/bridge/close.svg" alt="close" onClick={hide} />
         </div>
         <div className="modal-body">
           <div className="content-modal-bridge">
@@ -132,7 +129,7 @@ const TokenModal = (props) => {
             <div className="filter">Filter</div>
             <div className="bridge-checkbox ">
               {chains.map((chain, index) => (
-                <span key={index}>
+                <label className="container-checkbox" key={index}>
                   <input
                     type="checkbox"
                     id={chain.name}
@@ -142,16 +139,29 @@ const TokenModal = (props) => {
                     checked={checked[chain.name]}
                     disabled={chain.network === selectedChain}
                   />
-                  <label htmlFor={chain.name} className="pointer">
-                    {chain.name}
-                  </label>
-                </span>
+                  <span class="checkmark"></span>
+                  {chain.name}
+                </label>
+                //   {/* <input
+                //     type="checkbox"
+                //     className="filter-checkbox"
+                //     id={chain.name}
+                //     name={chain.name}
+                //     defaultValue={chain.name}
+                //     onChange={handleFilter}
+                //     checked={checked[chain.name]}
+                //     disabled={chain.network === selectedChain}
+                //   />
+                //   <label htmlFor={chain.name} className="pointer">
+
+                //   </label> */}
+                // // </span>
               ))}
             </div>
             <div className="border-bottom"></div>
             <div className="flex-between token-name">
               <div>Token name</div>
-              <div className="pr-25">Balance</div>
+              <div className="pr-13">Balance</div>
             </div>
             <div className="border-bottom mb-5"></div>
             <div className="container-token">

@@ -18,13 +18,23 @@ const BridgeBox = (props) => {
   return (
     <div className="bridge-box">
       <div className="flex-between">
-        <div className="bridge-from">{title}</div>
-        <div className="bridge-from">{`Balance: ${balance}`}</div>
+        <div className="bridge-from">{`${title} ${chain ? chain : ''}`}</div>
+        <div className="bridge-from">
+          {balance && `Balance: ${balance}`}
+          {max && (
+            <div
+              onClick={() => setAmount(String(balance))}
+              className="bridge-max pointer"
+            >
+              (Max)
+            </div>
+          )}
+        </div>
       </div>
       <div className="flex-between pt-13">
         <div>
           {readonly ? (
-            <div className="bridge-amount">{amount}</div>
+            <div className="bridge-amount">{amount ? amount : '0.0'}</div>
           ) : (
             <input
               type="number"
@@ -37,17 +47,10 @@ const BridgeBox = (props) => {
         </div>
 
         <div className="bridge-token ">
-          {max && (
-            <div
-              onClick={() => setAmount(String(balance))}
-              className="bridge-max pointer"
-            >
-              Max
-            </div>
-          )}
-          <TokenBadge chain={chain} icon={icon} />
+          {chain && <TokenBadge chain={chain} icon={icon} />}
           <div className="bridge-assets pointer" onClick={handleOpenModal}>
-            {name} <img src="/img/arrow-nav.svg" alt="arrow" />
+            {name ? name : 'Select a Token'}
+            <img src="/img/arrow-nav-black.svg" alt="arrow" />
           </div>
         </div>
       </div>
