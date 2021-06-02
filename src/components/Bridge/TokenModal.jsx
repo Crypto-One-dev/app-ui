@@ -115,7 +115,9 @@ const TokenModal = (props) => {
       <div>
         <div className="modal-header">
           <div className="modal-title">Select an asset</div>
-          <img src="/img/bridge/close.svg" alt="close" onClick={closeModal} />
+          <span onClick={closeModal} className="close">
+            &times;
+          </span>
         </div>
         <div className="modal-body">
           <div className="content-modal-bridge">
@@ -142,7 +144,6 @@ const TokenModal = (props) => {
                 </label>
               ))}
             </div>
-            <div className="border-bottom"></div>
             <div className="flex-between token-name">
               <div>Token name</div>
               <div className="pr-13">Balance</div>

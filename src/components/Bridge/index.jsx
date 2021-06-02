@@ -455,7 +455,7 @@ const Bridge = () => {
               )}
             </>
           ) : (
-            <div className="pink-btn" onClick={handleConnectWallet}>
+            <div className="pink-btn pointer" onClick={handleConnectWallet}>
               Connect Wallet
             </div>
           )}

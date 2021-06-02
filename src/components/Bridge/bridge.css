@@ -341,16 +341,14 @@ input:focus {
 /* The Close Button */
 .close {
   color: white;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+  font-size: 45px;
 }
 
 .close:hover,
 .close:focus {
   color: #fff;
-  text-decoration: none;
   cursor: pointer;
+  opacity: 0.5;
 }
 
 .modal-header {
@@ -467,7 +465,7 @@ input[type='checkbox']:checked:after {
   font-family: 'Monument Grotesk';
 }
 .bridge-checkbox {
-  padding: 5px 0 24px;
+  padding: 5px 0 0;
   display: flex;
   align-items: center;
   color: #ffffff;
@@ -671,6 +669,11 @@ input[type='checkbox']:checked:after {
   margin-bottom: 5px;
   margin-top: 15px;
 }
+
+.pink-btn:hover {
+  opacity: 0.75;
+}
+
 .wrong-network-bridge {
   max-width: 530px;
   width: 100%;
