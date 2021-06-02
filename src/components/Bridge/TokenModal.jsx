@@ -93,8 +93,7 @@ const TokenModal = (props) => {
     setShowTokens(resultFilter)
   }, [chainToken, searchQuery, tokens]) // eslint-disable-line
 
-  const closeModal = (token, network) => {
-    changeToken(token, network)
+  const closeModal = () => {
     hide()
     setShowTokens(tokens)
     setChecked({
@@ -110,14 +109,13 @@ const TokenModal = (props) => {
     <ReactModal
       isOpen={open}
       style={customStyles}
-      closeTimeoutMS={200}
-      onRequestClose={hide}
+      onRequestClose={closeModal}
       shouldCloseOnOverlayClick={true}
     >
       <div>
         <div className="modal-header">
           <div className="modal-title">Select an asset</div>
-          <img src="/img/bridge/close.svg" alt="close" onClick={hide} />
+          <img src="/img/bridge/close.svg" alt="close" onClick={closeModal} />
         </div>
         <div className="modal-body">
           <div className="content-modal-bridge">
@@ -139,23 +137,9 @@ const TokenModal = (props) => {
                     checked={checked[chain.name]}
                     disabled={chain.network === selectedChain}
                   />
-                  <span class="checkmark"></span>
+                  <span className="checkmark"></span>
                   {chain.name}
                 </label>
-                //   {/* <input
-                //     type="checkbox"
-                //     className="filter-checkbox"
-                //     id={chain.name}
-                //     name={chain.name}
-                //     defaultValue={chain.name}
-                //     onChange={handleFilter}
-                //     checked={checked[chain.name]}
-                //     disabled={chain.network === selectedChain}
-                //   />
-                //   <label htmlFor={chain.name} className="pointer">
-
-                //   </label> */}
-                // // </span>
               ))}
             </div>
             <div className="border-bottom"></div>
@@ -171,7 +155,10 @@ const TokenModal = (props) => {
                     <div
                       className="token-list"
                       key={index}
-                      onClick={() => closeModal(token, chain.network)}
+                      onClick={() => {
+                        changeToken(token, chain.network)
+                        closeModal()
+                      }}
                     >
                       <div className="token-list-item pointer">
                         <TokenBadge chain={chain.name} icon={token.icon} />

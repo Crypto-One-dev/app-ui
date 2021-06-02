@@ -56,23 +56,25 @@ const Bridge = () => {
       // address: tokensBalance[0].address[97]
     }
   })
-  // React.useEffect(() => {
-  //   let result = tokensBalance.find(
-  //     (token) => token.tokenId === bridge.from.tokenId
-  //   )
-  //   let validChain = chains.filter(
-  //     (chain) => chain.network !== bridge.from.chainId
-  //   )
-  //   setBridge((prev) => ({
-  //     ...prev,
-  //     to: {
-  //       ...result,
-  //       chain: validChain[0].name,
-  //       chainId: validChain[0].network,
-  //       address: result.address[validChain[0].network]
-  //     }
-  //   }))
-  // }, [bridge.from, tokensBalance])
+  React.useEffect(() => {
+    if (bridge.to.chain) {
+      let result = tokensBalance.find(
+        (token) => token.tokenId === bridge.from.tokenId
+      )
+      let validChain = chains.filter(
+        (chain) => chain.network !== bridge.from.chainId
+      )
+      setBridge((prev) => ({
+        ...prev,
+        to: {
+          ...result,
+          chain: validChain[0].name,
+          chainId: validChain[0].network,
+          address: result.address[validChain[0].network]
+        }
+      }))
+    }
+  }, [bridge.from, tokensBalance]) // eslint-disable-line
   // const [fromBalance, setFromBalance] = React.useState(0)
   // const [toBalance, setToBalance] = React.useState(0)
   const [amount, setAmount] = React.useState('')
