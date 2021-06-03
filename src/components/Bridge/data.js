@@ -6,6 +6,16 @@
 // setp 2. mint token
 // setp 3. ownerSetSideContract (address other contract)
 
+// 1- BSC: deploy DEAToken
+
+// 2- grantRole(both roles) to DEUS Bridge
+
+// 3- BSC: add token to deus bridge
+
+// 4- set mintable=True on Deugs bridge
+
+// 5- update token address on UI
+
 import { makeContract } from '../../utils/Stakefun'
 import { BridgeABI } from '../../utils/StakingABI'
 import Web3 from 'web3'
@@ -26,6 +36,9 @@ const validNetworks = [4, 97, 4002]
 // const BSCMuon = '0xda2D1567Dfca43Dc2Bc9f8D072D746d0bfbF3E1a'
 // const ETHMuon = '0x8ed35887C77Ee1BB533f05f85661fcDeF1FEda1E'
 // const FTMMuon = '0x5D91EA00E414BB113C8ECe6674F84C906BD8b5D4'
+
+// const BSCDEAToken='0xf93aAFF20124C9fbEDEA364Ea17B33dfEC09b34D'
+// const FTMDEAToken='0xb79201Cb9f758dAb0cacEd4bFADC02D9465b5Cab'
 
 const BSCContract = '0x11B650B8D2bbc60CdC434bd300F1b643ac77BAdA'
 const ETHContract = '0xdAa80B54725147169614EF40C4a8EdeeA0F34D03'
@@ -63,8 +76,8 @@ const tokens = [
     },
     address: {
       4: '0xb9B5FFC3e1404E3Bb7352e656316D6C5ce6940A1',
-      97: '0x4Ef4E0b448AC75b7285c334e215d384E7227A2E6',
-      4002: '0x91E32eE7799F20e6b89A36CdaA7fa12d5f482781'
+      97: '0xf93aAFF20124C9fbEDEA364Ea17B33dfEC09b34D',
+      4002: '0xb79201Cb9f758dAb0cacEd4bFADC02D9465b5Cab'
     },
     icon: 'DEUS.svg'
   },
@@ -79,8 +92,8 @@ const tokens = [
     },
     address: {
       4: '0xb9B5FFC3e1404E3Bb7352e656316D6C5ce6940A1',
-      97: '0x4Ef4E0b448AC75b7285c334e215d384E7227A2E6',
-      4002: '0x91E32eE7799F20e6b89A36CdaA7fa12d5f482781'
+      97: '0xf93aAFF20124C9fbEDEA364Ea17B33dfEC09b34D',
+      4002: '0xb79201Cb9f758dAb0cacEd4bFADC02D9465b5Cab'
     },
     icon: 'DEA.svg'
   },
@@ -95,8 +108,8 @@ const tokens = [
     },
     address: {
       4: '0xb9B5FFC3e1404E3Bb7352e656316D6C5ce6940A1',
-      97: '0x4Ef4E0b448AC75b7285c334e215d384E7227A2E6',
-      4002: '0x91E32eE7799F20e6b89A36CdaA7fa12d5f482781'
+      97: '0xf93aAFF20124C9fbEDEA364Ea17B33dfEC09b34D',
+      4002: '0xb79201Cb9f758dAb0cacEd4bFADC02D9465b5Cab'
     },
     icon: 'BPT.svg'
   },
@@ -111,8 +124,8 @@ const tokens = [
     },
     address: {
       4: '0xb9B5FFC3e1404E3Bb7352e656316D6C5ce6940A1',
-      97: '0x4Ef4E0b448AC75b7285c334e215d384E7227A2E6',
-      4002: '0x91E32eE7799F20e6b89A36CdaA7fa12d5f482781'
+      97: '0xf93aAFF20124C9fbEDEA364Ea17B33dfEC09b34D',
+      4002: '0xb79201Cb9f758dAb0cacEd4bFADC02D9465b5Cab'
     },
     icon: 'sDEA.svg'
   },
@@ -127,8 +140,8 @@ const tokens = [
     },
     address: {
       4: '0xb9B5FFC3e1404E3Bb7352e656316D6C5ce6940A1',
-      97: '0x4Ef4E0b448AC75b7285c334e215d384E7227A2E6',
-      4002: '0x91E32eE7799F20e6b89A36CdaA7fa12d5f482781'
+      97: '0xf93aAFF20124C9fbEDEA364Ea17B33dfEC09b34D',
+      4002: '0xb79201Cb9f758dAb0cacEd4bFADC02D9465b5Cab'
     },
     icon: 'sDEUS.svg'
   }
