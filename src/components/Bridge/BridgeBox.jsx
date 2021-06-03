@@ -49,8 +49,17 @@ const BridgeBox = (props) => {
         <div className="bridge-token ">
           {chain && <TokenBadge chain={chain} icon={icon} />}
           <div className="bridge-assets pointer" onClick={handleOpenModal}>
-            {name ? name : 'Select a Token'}
-            <img src="/img/arrow-nav-black.svg" alt="arrow" />
+            {name ? (
+              <div className="select-token">
+                {name}
+                <img src="/img/arrow-nav-black.svg" alt="arrow" />
+              </div>
+            ) : (
+              <div className="select-token-btn">
+                Select a Token
+                <img src="/img/arrow-nav-black.svg" alt="arrow" />
+              </div>
+            )}
           </div>
         </div>
       </div>

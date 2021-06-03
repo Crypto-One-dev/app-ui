@@ -14,7 +14,7 @@ const Deus = React.lazy(() => import('./components/Deus'))
 // const SyncBSCTest = React.lazy(() => import('./pages/SyncBscTest'));
 const dbETH = React.lazy(() => import('./pages/dbETH'))
 const SyncBSC = React.lazy(() => import('./pages/SyncBsc'))
-const Sync2 = React.lazy(() => import('./pages/Sync2'))
+// const Sync2 = React.lazy(() => import('./pages/Sync2'))
 const SyncHeco = React.lazy(() => import('./pages/SyncHeco'))
 const StakeAndYield = React.lazy(() => import('./pages/StakeAndYield'))
 const Swap2 = React.lazy(() => import('./pages/Swap2'))
