@@ -135,7 +135,7 @@ const TokenModal = (props) => {
           <div className="filter">Select Chain</div>
           <ul className="bridge-radio">
             {chains.map((chain, index) => (
-              <li key={index}>
+              <li key={index} className="pointer">
                 <input
                   type="radio"
                   id={chain.name}
@@ -143,7 +143,7 @@ const TokenModal = (props) => {
                   onChange={() => setChain(chain)}
                   disabled={chain.network === selectedChain}
                 />
-                <label htmlFor={chain.name} className={chain.name}>
+                <label htmlFor={chain.name} className={`${chain.name} pointer`}>
                   {chain.name}
                 </label>
               </li>
