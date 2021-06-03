@@ -35,7 +35,7 @@ function App() {
             <div id="blur-pop"></div>
             <Announcements />
             <div className="app-body">
-              <ToastContainer style={{ width: '450px' }} />
+              <ToastContainer style={{ maxWidth: '450px' }} />
               <Switch>
                 <Route exact path="/not-found" component={NotFound} />
                 <Route

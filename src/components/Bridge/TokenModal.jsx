@@ -135,7 +135,7 @@ const TokenModal = (props) => {
           <div className="filter">Select Chain</div>
           <ul className="bridge-radio">
             {chains.map((chain, index) => (
-              <li>
+              <li key={index}>
                 <input
                   type="radio"
                   id={chain.name}

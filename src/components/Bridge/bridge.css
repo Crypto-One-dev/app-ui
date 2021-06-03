@@ -1017,6 +1017,9 @@ input[type='number'] {
   }
 }
 @media screen and (min-width: 415px) and (max-width: 576px) {
+  ul.bridge-radio li label {
+    width: 100px;
+  }
   .wrap-box {
     height: 240px;
   }
@@ -1087,6 +1090,14 @@ input[type='number'] {
   }
 }
 @media screen and (max-width: 415px) {
+  ul.bridge-radio li label {
+    width: 70px;
+  }
+  .select-token-btn {
+    max-width: 150px;
+    font-size: 12px;
+    padding: 0 10px;
+  }
   .ftm-logo {
     top: 22%;
   }
