@@ -3,26 +3,21 @@ import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
 import { FrameConnector } from '@web3-react/frame-connector'
 import { WalletLinkConnector } from '@web3-react/walletlink-connector'
 import { FortmaticConnector } from '@web3-react/fortmatic-connector'
+import { ChainMap } from './constant/web3'
 
-const supportedChainIds = [
-  1, // Mainet
-  3, // Ropsten
-  4, // Rinkeby
-  42, // Kovan
-  0x64, // xDAI
-  0x38, // BSC
-  0x61, // BSC TEST
-  250, // Fantom
-  4002 // Fantom TEST
-]
+const supportedChainIds = Object.values(ChainMap)
+const INFURA_KEY = process.env.REACT_APP_INFURA_KEY
+const FORTMATIC_KEY = process.env.REACT_APP_FORTMATIC_KEY
 
 const RPC_URLS = {
-  1: 'https://mainnet.infura.io/v3/cf6ea736e00b4ee4bc43dfdb68f51093',
-  4: 'https://rinkeby.infura.io/v3/cf6ea736e00b4ee4bc43dfdb68f51093',
+  1: 'https://mainnet.infura.io/v3/' + INFURA_KEY,
+  4: 'https://rinkeby.infura.io/v3/' + INFURA_KEY,
   56: 'https://bsc-dataseed1.binance.org',
   97: 'https://data-seed-prebsc-1-s1.binance.org:8545',
   100: 'https://rpc.xdaichain.com',
   4002: 'https://rpc.testnet.fantom.network/',
+  128: 'https://http-mainnet-node.huobichain.com',
+  256: 'https://http-testnet.hecochain.com',
   250: 'https://rpcapi.fantom.network'
 }
 
@@ -46,7 +41,7 @@ export const walletlink = new WalletLinkConnector({
 })
 
 export const fortmatic = new FortmaticConnector({
-  apiKey: 'pk_live_643EBE31BE0118DA',
+  apiKey: FORTMATIC_KEY,
   chainId: 1
 })
 
@@ -70,5 +65,4 @@ export const connectorsByName = {
   [ConnectorNames.WalletLink]: walletlink,
   [ConnectorNames.Frame]: frame,
   [ConnectorNames.Fortmatic]: fortmatic
-  // [ConnectorNames.Network]: network,
 }

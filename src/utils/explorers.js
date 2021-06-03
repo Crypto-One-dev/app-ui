@@ -14,13 +14,13 @@ const EXPLORER_PREFIXES = {
   4: 'rinkeby.',
   56: '',
   100: 'mainnet',
-  97: 'testnet.'
+  97: 'testnet.',
+  128: '',
+  256: 'testnet.',
 }
 
 function getEtherscanLink(chainId, data, type) {
-  const prefix = `https://${
-    EXPLORER_PREFIXES[chainId] || EXPLORER_PREFIXES[1]
-  }etherscan.io`
+  const prefix = `https://${EXPLORER_PREFIXES[chainId] || EXPLORER_PREFIXES[1]}etherscan.io`
 
   switch (type) {
     case 'transaction': {
@@ -36,9 +36,8 @@ function getEtherscanLink(chainId, data, type) {
 }
 
 function getBlockscoutLink(chainId, data, type) {
-  const prefix = `https://blockscout.com/xdai/${
-    EXPLORER_PREFIXES[chainId] || EXPLORER_PREFIXES[100]
-  }`
+  const prefix = `https://blockscout.com/xdai/${EXPLORER_PREFIXES[chainId] || EXPLORER_PREFIXES[100]
+    }`
 
   switch (type) {
     case 'transaction': {
@@ -54,9 +53,24 @@ function getBlockscoutLink(chainId, data, type) {
 }
 
 function getBscscanLink(chainId, data, type) {
-  const prefix = `https://${
-    EXPLORER_PREFIXES[chainId] || EXPLORER_PREFIXES[56]
-  }bscscan.com`
+  const prefix = `https://${EXPLORER_PREFIXES[chainId] || EXPLORER_PREFIXES[56]
+    }bscscan.com`
+
+  switch (type) {
+    case 'transaction': {
+      return `${prefix}/tx/${data}`
+    }
+    case 'token': {
+      return `${prefix}/token/${data}`
+    }
+    default: {
+      return `${prefix}/address/${data}`
+    }
+  }
+}
+function getHechoInfo(chainId, data, type) {
+  const prefix = `https://${EXPLORER_PREFIXES[chainId] || EXPLORER_PREFIXES[128]
+    }hecoinfo.com`
 
   switch (type) {
     case 'transaction': {
@@ -85,13 +99,18 @@ export function getTransactionLink(chainId, data, type) {
     case 100: {
       return getBlockscoutLink(chainId, data, type)
     }
+
+    case 256:
+    case 128: {
+      return getHechoInfo(chainId, data, type)
+    }
     default: {
       return getEtherscanLink(chainId, data, type)
     }
   }
 }
 
-export function ToastTransaction(type, title, data = '') {
+export function ToastTransaction(type, title, data = '', option = {}) {
   switch (type) {
     case 'success':
       toast.success(
@@ -102,7 +121,8 @@ export function ToastTransaction(type, title, data = '') {
         {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: false,
-          closeOnClick: false
+          closeOnClick: false,
+          ...option
         }
       )
       break
@@ -116,7 +136,8 @@ export function ToastTransaction(type, title, data = '') {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: false,
           draggable: false,
-          closeOnClick: false
+          closeOnClick: false,
+          ...option
         }
       )
       break
@@ -131,7 +152,8 @@ export function ToastTransaction(type, title, data = '') {
         {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: false,
-          closeOnClick: false
+          closeOnClick: false,
+          ...option
         }
       )
   }

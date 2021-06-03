@@ -1,13 +1,14 @@
-import { injected } from '../connectors'
-import { toast } from 'react-toastify'
+import { ToastTransaction } from '../utils/explorers'
 
 export const addRPC = (account, activate, chainId = 100) => {
   console.log(account, chainId)
   if (chainId === 1) {
-    toast.info('Please switch your network to Mainnet manually.', {
-      position: toast.POSITION.BOTTOM_RIGHT,
-      autoClose: false
-    })
+    ToastTransaction(
+      'info',
+      'Switch Network',
+      'Please switch your network to ETH chains manually.',
+      { autoClose: true }
+    )
     return
   }
   if (account && window.ethereum) {
@@ -18,13 +19,6 @@ export const addRPC = (account, activate, chainId = 100) => {
       })
       .then((result) => {
         console.log('success')
-        setTimeout(() => {
-          try {
-            activate(injected)
-          } catch (error) {
-            console.log('error ', error)
-          }
-        }, 500)
       })
       .catch((error) => {
         console.log('We can encrypt anything without the key.')
@@ -102,5 +96,27 @@ const NetworksData = {
     rpcUrls: ['https://rpc.testnet.fantom.network/'],
     blockExplorerUrls: ['https://testnet.ftmscan.com/'],
     iconUrls: []
+  },
+  128: {
+    chainId: '0x80',
+    chainName: 'Huobi ECO Chain Mainnet',
+    nativeCurrency: {
+      name: 'HT',
+      symbol: 'HT',
+      decimals: 18
+    },
+    rpcUrls: ['https://http-mainnet.hecochain.com'],
+    blockExplorerUrls: ['https://hecoinfo.com']
+  },
+  256: {
+    chainId: '0x100',
+    chainName: 'Huobi ECO Chain Testnet',
+    nativeCurrency: {
+      name: 'htt',
+      symbol: 'htt',
+      decimals: 18
+    },
+    rpcUrls: ['https://http-testnet.hecochain.com'],
+    blockExplorerUrls: ['https://testnet.hecoinfo.com']
   }
 }
