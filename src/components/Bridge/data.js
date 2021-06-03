@@ -135,8 +135,8 @@ const tokens = [
 ]
 
 const chains = [
-  { name: 'BSC', network: 97, networkName: 'bsctest', web3: bscWeb3 },
   { name: 'ETH', network: 4, networkName: 'rinkeby', web3: ethWeb3 },
+  { name: 'BSC', network: 97, networkName: 'bsctest', web3: bscWeb3 },
   { name: 'FTM', network: 4002, networkName: 'ftmtest', web3: ftmWeb3 }
 ]
 
