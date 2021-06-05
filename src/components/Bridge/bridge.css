@@ -14,7 +14,7 @@
     format('woff');
 }
 
-.pink-color {
+.wrap-bridge .pink-color {
   color: #e87ba5;
 }
 .market-nav-wrap {
@@ -46,7 +46,7 @@
 input:focus {
   outline: none;
 }
-.input-transparent {
+.wrap-bridge .input-transparent {
   background: transparent;
   border: transparent;
 }
@@ -55,7 +55,7 @@ input:focus {
   display: flex;
   background: linear-gradient(360deg, #272727 62.11%, #000000 100%);
 }
-.container-bridge {
+.wrap-bridge .container-bridge {
   font-family: 'Monument Grotesk Semi';
   max-width: 646.79px;
   display: flex;
@@ -65,11 +65,11 @@ input:focus {
   align-items: center;
   position: relative;
 }
-.container-bridge > img {
+.wrap-bridge .container-bridge > img {
   width: 100%;
 }
 
-.bridge-title h1 {
+.wrap-bridge .bridge-title h1 {
   height: 82px;
   font-style: normal;
   font-weight: normal;
@@ -83,7 +83,7 @@ input:focus {
   margin-bottom: 32px;
 }
 
-.bridge {
+.wrap-bridge .bridge {
   position: relative;
 }
 /* .bridge img {
@@ -93,7 +93,7 @@ input:focus {
 .relative {
   position: relative;
 }
-.wrapp-bridge-box {
+.wrap-bridge .wrapp-bridge-box {
   width: 70%;
   max-width: 552px;
   background: linear-gradient(90deg, #dff4fe 0%, #8eb5ff 100%);
@@ -102,7 +102,7 @@ input:focus {
   border-radius: 15px;
   padding: 11px;
 }
-.bridge-box {
+.wrap-bridge .bridge-box {
   height: 90px;
   padding: 15px;
   background: rgba(255, 255, 255, 0.85);
@@ -112,7 +112,7 @@ input:focus {
   color: #000000;
   margin-bottom: 3px;
 }
-.container-btn {
+.wrap-bridge .container-btn {
   display: flex;
   justify-content: space-between;
   max-width: 530px;
@@ -120,7 +120,7 @@ input:focus {
   margin-top: 15px;
 }
 
-.select-token-btn {
+.wrap-bridge .select-token-btn {
   font-family: 'Monument Grotesk Semi';
   max-width: 170px;
   width: 100%;
@@ -136,12 +136,12 @@ input:focus {
   justify-content: center;
   align-items: center;
 }
-.select-token {
+.wrap-bridge .select-token {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.bridge-approve {
+.wrap-bridge .bridge-approve {
   max-width: 255px;
   width: 100%;
   height: 55px;
@@ -159,7 +159,7 @@ input:focus {
   text-transform: uppercase;
   color: #000000;
 }
-.bridge-deposit {
+.wrap-bridge .bridge-deposit {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -176,7 +176,7 @@ input:focus {
   margin: 0 3px;
   text-transform: uppercase;
 }
-.bridge-from {
+.wrap-bridge .bridge-from {
   height: 14.98px;
   display: flex;
   font-style: normal;
@@ -186,12 +186,7 @@ input:focus {
 
   color: rgba(0, 0, 0, 0.5);
 }
-
-.font-weight-600 {
-  font-weight: 600;
-}
-
-.bridge-amount {
+.wrap-bridge .bridge-amount {
   width: 100%;
   height: 29px;
   font-family: 'Monument Grotesk';
@@ -203,7 +198,7 @@ input:focus {
   padding-right: 15px;
 }
 
-.bridge-max {
+.wrap-bridge .bridge-max {
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
@@ -212,17 +207,17 @@ input:focus {
   margin-left: 5px;
 }
 
-.bridge-token {
+.wrap-bridge .bridge-token {
   line-height: 42px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.bridge-token img {
+.wrap-bridge .bridge-token img {
   height: 22px;
 }
 
-.notify {
+.notify-bridge {
   position: relative;
   position: relative;
   display: flex;
@@ -239,7 +234,8 @@ input:focus {
   top: -8px !important;
   right: -20px !important;
 }
-.notify .badge {
+
+.notify-bridge .badge {
   position: absolute;
   top: -2px;
   right: -16px;
@@ -263,12 +259,11 @@ input:focus {
   background: #335cff;
   color: #ffffff;
 }
-
 .badge-FTM {
   background: #286cf6;
   color: #ffffff;
 }
-.wrap-box {
+.wrap-bridge .wrap-box {
   position: absolute;
   position: absolute;
   width: 100%;
@@ -279,7 +274,7 @@ input:focus {
   height: 246px;
   align-items: center;
 }
-.bridge-assets {
+.wrap-bridge .bridge-assets {
   /* width: 85px; */
   height: 35px;
   font-style: normal;
@@ -292,7 +287,7 @@ input:focus {
   align-items: center;
 }
 
-.bridge-assets img {
+.wrap-bridge .bridge-assets img {
   padding: 0 5px;
   width: 18px;
 }
@@ -355,7 +350,6 @@ input:focus {
     opacity: 1;
   }
 }
-
 .ReactModal__Body--open {
   overflow-y: hidden;
 }
@@ -365,7 +359,6 @@ input:focus {
   color: white;
   font-size: 45px;
 }
-
 .close:hover,
 .close:focus {
   color: #fff;
@@ -397,7 +390,7 @@ input:focus {
   color: #ffffff;
 }
 
-.input-search {
+/* .input-search {
   width: 95%;
   height: 55px;
   padding: 0 20px;
@@ -405,7 +398,7 @@ input:focus {
   border: 1px solid #010101;
   border-radius: 10px;
   color: #ffffff;
-}
+} */
 .content-modal-bridge {
   display: flex;
   flex-direction: column;
@@ -505,10 +498,10 @@ input[type='checkbox']:checked:after {
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.border-bottom-claim {
+.wrap-bridge .border-bottom-claim {
   border-bottom: 1px solid #1c1c1c;
 }
-.desc-claim {
+.wrap-bridge .desc-claim {
   font-family: 'Monument Grotesk';
   font-style: normal;
   font-weight: normal;
@@ -518,10 +511,10 @@ input[type='checkbox']:checked:after {
 
   margin-top: 30px;
 }
-.desc-claim > span {
+.wrap-bridge .desc-claim > span {
   padding-right: 5px;
 }
-.token-name {
+.content-modal-bridge .token-name {
   padding: 37px 0 5px;
   font-style: normal;
   font-weight: normal;
@@ -530,13 +523,13 @@ input[type='checkbox']:checked:after {
 
   color: rgba(255, 255, 255, 0.5);
 }
-.container-token {
+.content-modal-bridge .container-token {
   overflow-y: auto;
   height: calc(50vh - 100px);
   box-sizing: border-box;
   padding: 20px 0;
 }
-.token-list {
+.content-modal-bridge .token-list {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -549,12 +542,12 @@ input[type='checkbox']:checked:after {
   padding-right: 13px;
 }
 
-.token-list-item {
+.content-modal-bridge .token-list-item {
   display: flex;
   align-items: center;
 }
 
-.token-list-item img {
+.content-modal-bridge .token-list-item img {
   width: 40px;
 }
 .token-list-item span {
@@ -565,7 +558,6 @@ input[type='checkbox']:checked:after {
   color: rgba(255, 255, 255, 0.75);
   margin-left: 5px;
 }
-
 .flex-center {
   display: flex;
   justify-content: center;
@@ -580,7 +572,7 @@ input[type='checkbox']:checked:after {
   max-width: 340px;
   width: 100%;
 }
-.instruction {
+.wrap-bridge .instruction {
   font-family: 'Monument Grotesk';
   width: 100%;
   padding: 20px 25px;
@@ -594,7 +586,7 @@ input[type='checkbox']:checked:after {
   color: #ffffff;
 }
 
-.instruction-title {
+.wrap-bridge .instruction-title {
   font-family: 'Monument Grotesk Semi';
   padding-bottom: 14px;
   font-style: normal;
@@ -606,25 +598,25 @@ input[type='checkbox']:checked:after {
   color: rgba(255, 255, 255, 0.5);
 }
 
-.border-bottom-instruction {
+.wrap-bridge .border-bottom-instruction {
   border-bottom: 1px solid #1c1c1c;
 }
 
-.ptb-6 {
+.wrap-bridge .ptb-6 {
   padding: 6px 0;
 }
-.content-collapse {
+.wrap-bridge .content-collapse {
   padding: 10px 2px;
 }
 
-.container-status-button {
+.wrap-bridge .container-status-button {
   display: flex;
   justify-content: center;
   align-items: center;
   max-width: 530px;
   width: 100%;
 }
-.status-button {
+.wrap-bridge .status-button {
   width: 50%;
   display: flex;
   justify-content: space-between;
@@ -635,7 +627,7 @@ input[type='checkbox']:checked:after {
   margin-top: 22px;
 }
 
-.status-button div {
+.wrap-bridge .status-button div {
   background-color: #adadad;
   font-weight: normal;
   margin-top: -35px;
@@ -648,14 +640,14 @@ input[type='checkbox']:checked:after {
   justify-content: center;
   align-items: center;
 }
-.status-button .active {
+.wrap-bridge .status-button .active {
   background: #fdb8af;
   color: #000000;
 }
-.green-color {
+.wrap-bridge .green-color {
   color: #00d16c;
 }
-.arrow {
+.wrap-bridge .arrow {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -670,11 +662,11 @@ input[type='checkbox']:checked:after {
   align-items: center;
   transform: translate(-50%, -50%);
 }
-.arrow img {
+.wrap-bridge .arrow img {
   width: 16px;
 }
 
-.pink-btn {
+.wrap-bridge .pink-btn {
   width: 100%;
   height: 55px;
   background: linear-gradient(90deg, #e26ba2 0%, #fdb9af 100%);
@@ -691,11 +683,11 @@ input[type='checkbox']:checked:after {
   margin-top: 15px;
 }
 
-.pink-btn:hover {
+.wrap-bridge .pink-btn:hover {
   opacity: 0.75;
 }
 
-.wrong-network-bridge {
+.wrap-bridge .wrong-network-bridge {
   max-width: 530px;
   width: 100%;
   height: 55px;
@@ -712,7 +704,7 @@ input[type='checkbox']:checked:after {
   margin-top: 15px;
 }
 
-.claim-token {
+.wrap-bridge .claim-token {
   max-width: 350px;
   width: 100%;
   background: #242424;
@@ -720,7 +712,7 @@ input[type='checkbox']:checked:after {
   border-radius: 10px;
   padding: 20px;
 }
-.claim-token-title {
+.wrap-bridge .claim-token-title {
   font-style: normal;
   font-weight: normal;
   font-size: 11.5px;
@@ -732,15 +724,15 @@ input[type='checkbox']:checked:after {
   margin-bottom: 15px;
 }
 
-.token-item {
+.wrap-bridge .token-item {
   display: flex;
   align-items: center;
 }
 
-.token-item img {
+.wrap-bridge .token-item img {
   width: 25px;
 }
-.token-item span {
+.wrap-bridge .token-item span {
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
@@ -750,7 +742,7 @@ input[type='checkbox']:checked:after {
 
   color: rgba(255, 255, 255, 0.75);
 }
-.claim-amount {
+.wrap-bridge .claim-amount {
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
@@ -761,7 +753,7 @@ input[type='checkbox']:checked:after {
 
   color: rgba(255, 255, 255, 0.75);
 }
-.container-claim-btn {
+.wrap-bridge .container-claim-btn {
   margin: 15px 0 20px;
   max-width: 297px;
   width: 100%;
@@ -780,34 +772,34 @@ input[type='checkbox']:checked:after {
   font-size: 12px;
   line-height: 17px;
 }
-.claim-btn {
+.wrap-bridge .claim-btn {
   background: linear-gradient(90deg, #e26ba2 0%, #fdb9af 100%);
   color: #000000;
 }
-.change-claim {
+.wrap-bridge .change-claim {
   background: #1c1c1c;
   border: 1px solid #000000;
   color: rgba(255, 255, 255, 0.5);
 }
-.ftm-logo {
+.wrap-bridge .ftm-logo {
   width: 32px !important;
   position: absolute;
   left: 50%;
   top: 17%;
 }
-.bsc-logo {
+.wrap-bridge .bsc-logo {
   width: 25px !important;
   position: absolute;
   top: 21%;
   left: 10%;
 }
-.eth-logo {
+.wrap-bridge .eth-logo {
   width: 32px !important;
   position: absolute;
   right: 1%;
   top: 33%;
 }
-.container-checkbox {
+/* .container-checkbox {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -833,7 +825,6 @@ input[type='checkbox']:checked:after {
   margin-right: 25px;
 }
 
-/* Hide the browser's default checkbox */
 .container-checkbox input {
   position: absolute;
   opacity: 0;
@@ -842,7 +833,6 @@ input[type='checkbox']:checked:after {
   width: 0;
 }
 
-/* Create a custom checkbox */
 .checkmark {
   position: absolute;
   top: 0;
@@ -860,7 +850,6 @@ input[type='checkbox']:checked:after {
   border-radius: 2px;
 }
 
-/* On mouse-over, add a grey background color */
 .container-checkbox:hover input ~ .checkmark {
   background: linear-gradient(
     135deg,
@@ -873,7 +862,6 @@ input[type='checkbox']:checked:after {
   border-radius: 2px;
 }
 
-/* When the checkbox is checked, add a blue background */
 .container-checkbox input:checked ~ .checkmark {
   background: linear-gradient(
     135deg,
@@ -886,19 +874,16 @@ input[type='checkbox']:checked:after {
   border-radius: 2px;
 }
 
-/* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
   content: '';
   position: absolute;
   display: none;
 }
 
-/* Show the checkmark when checked */
 .container-checkbox input:checked {
   display: block;
 }
 
-/* Style the checkmark/indicator */
 .container-checkbox .checkmark:after {
   left: 4px;
   top: 1px;
@@ -907,7 +892,7 @@ input[type='checkbox']:checked:after {
   border: solid white;
   border-width: 0px 1px 1px 0;
   transform: rotate(45deg);
-}
+} */
 
 ul.bridge-radio {
   list-style-type: none;
@@ -952,7 +937,6 @@ ul.bridge-radio li input[type='radio']:checked ~ label.BSC {
   color: #000000;
   border: transparent;
 }
-
 ul.bridge-radio li input[type='radio']:checked ~ label.FTM {
   background: #286cf6;
   color: #ffffff;
@@ -997,22 +981,22 @@ input[type='number'] {
     align-items: center;
   }
 
-  .wrap-box {
+  .wrap-bridge .wrap-box {
     height: 285px;
   }
 }
 @media screen and (min-width: 992px) and (max-width: 1200px) {
-  .wrap-box {
+  .wrap-bridge .wrap-box {
     height: 269px;
   }
 }
 @media screen and (min-width: 768px) and (max-width: 992px) {
-  .wrap-box {
+  .wrap-bridge .wrap-box {
     height: 269px;
   }
 }
 @media screen and (min-width: 576px) and (max-width: 768px) {
-  .wrap-box {
+  .wrap-bridge .wrap-box {
     height: 254px;
   }
 }
@@ -1020,72 +1004,72 @@ input[type='number'] {
   ul.bridge-radio li label {
     width: 100px;
   }
-  .wrap-box {
+  .wrap-bridge .wrap-box {
     height: 240px;
   }
-  .arrow {
+  .wrap-bridge .arrow {
     width: 25px;
     height: 25px;
   }
-  .arrow img {
+  .wrap-bridge .arrow img {
     width: 11px;
   }
 }
 @media screen and (min-width: 415px) and (max-width: 460px) {
-  .ftm-logo {
+  .wrap-bridge .ftm-logo {
     top: 20%;
   }
-  .bsc-logo {
+  .wrap-bridge .bsc-logo {
     top: 23%;
   }
-  .wrap-box {
+  .wrap-bridge .wrap-box {
     height: 187px;
   }
-  .bridge-box {
+  .wrap-bridge .bridge-box {
     height: 70px;
     padding: 10px;
   }
-  .bridge-from {
+  .wrap-bridge .bridge-from {
     font-size: 10px;
     height: 8px;
   }
-  .bridge-amount {
+  .wrap-bridge .bridge-amount {
     font-size: 18px;
   }
-  .bridge-max {
+  .wrap-bridge .bridge-max {
     font-size: 9px;
     height: 18px;
     line-height: 15px;
   }
-  .bridge-assets {
+  .wrap-bridge .bridge-assets {
     font-size: 16px;
   }
-  .bridge-token img {
+  .wrap-bridge .bridge-token img {
     width: 15px;
   }
-  .notify .badge {
+  .notify-bridge .badge {
     width: 25px;
     font-size: 8px;
   }
-  .bridge-approve {
+  .wrap-bridge .bridge-approve {
     height: 43px;
     font-size: 16px;
   }
-  .bridge-deposit {
+  .wrap-bridge .bridge-deposit {
     height: 45px;
     font-size: 16px;
   }
-  .arrow {
+  .wrap-bridge .arrow {
     width: 17px;
     height: 17px;
   }
-  .arrow img {
+  .wrap-bridge .arrow img {
     width: 11px;
   }
-  .wrong-network {
+  .wrap-bridge .wrong-network {
     font-size: 18px;
   }
-  .pink-btn {
+  .wrap-bridge .pink-btn {
     font-size: 18px;
   }
 }
@@ -1093,72 +1077,72 @@ input[type='number'] {
   ul.bridge-radio li label {
     width: 70px;
   }
-  .select-token-btn {
+  .wrap-bridge .select-token-btn {
     max-width: 150px;
     font-size: 12px;
     padding: 0 10px;
   }
-  .ftm-logo {
+  .wrap-bridge .ftm-logo {
     top: 22%;
   }
-  .bsc-logo {
+  .wrap-bridge .bsc-logo {
     top: 24%;
   }
   .token-list-item > span {
     font-size: 15px;
   }
-  .token-list-item img {
+  .content-modal-bridge .token-list-item img {
     width: 25px;
   }
 
-  .wrap-box {
+  .wrap-bridge .wrap-box {
     height: 180px;
   }
-  .bridge-box {
+  .wrap-bridge .bridge-box {
     height: 70px;
     padding: 10px;
   }
-  .bridge-from {
+  .wrap-bridge .bridge-from {
     font-size: 10px;
     height: 8px;
   }
-  .bridge-amount {
+  .wrap-bridge .bridge-amount {
     font-size: 18px;
   }
-  .bridge-max {
+  .wrap-bridge .bridge-max {
     font-size: 9px;
     height: 18px;
     line-height: 15px;
   }
-  .bridge-assets {
+  .wrap-bridge .bridge-assets {
     font-size: 16px;
   }
-  .bridge-token img {
+  .wrap-bridge .bridge-token img {
     width: 15px;
   }
-  .notify .badge {
+  .notify-bridge .badge {
     width: 25px;
     font-size: 8px;
   }
-  .bridge-approve {
+  .wrap-bridge .bridge-approve {
     height: 43px;
-    font-size: 16px;
+    font-size: 13px;
   }
-  .bridge-deposit {
+  .wrap-bridge .bridge-deposit {
     height: 45px;
-    font-size: 16px;
+    font-size: 13px;
   }
-  .arrow {
+  .wrap-bridge .arrow {
     width: 17px;
     height: 17px;
   }
-  .arrow img {
+  .wrap-bridge .arrow img {
     width: 11px;
   }
-  .wrong-network {
+  .wrap-bridge .wrong-network {
     font-size: 18px;
   }
-  .pink-btn {
+  .wrap-bridge .pink-btn {
     font-size: 18px;
   }
 }
