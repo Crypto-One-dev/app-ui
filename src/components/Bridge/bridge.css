@@ -251,6 +251,24 @@ input:focus {
   align-items: center;
   justify-content: center;
 }
+.content-modal-bridge .bridge-container-badge-modal {
+  display: flex;
+  align-items: center;
+  font-size: 21px;
+  margin-left: 5px;
+}
+.content-modal-bridge .modal-badge {
+  width: 34px;
+  height: 15px;
+  border-radius: 3px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 3px 1px 1px;
+}
 .badge-BSC {
   background: #fbc856;
   color: #000000 !important;
@@ -288,8 +306,8 @@ input:focus {
 }
 
 .wrap-bridge .bridge-assets img {
-  padding: 0 5px;
-  width: 18px;
+  padding-left: 5px;
+  width: 15px;
 }
 
 /* The Modal (background) */
@@ -550,7 +568,9 @@ input[type='checkbox']:checked:after {
 .content-modal-bridge .token-list-item img {
   width: 40px;
 }
-.token-list-item span {
+.token-list-item div {
+  display: flex;
+  align-items: center;
   font-style: normal;
   font-weight: normal;
   font-size: 25px;

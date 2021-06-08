@@ -56,8 +56,8 @@ const BridgeBox = (props) => {
               </div>
             ) : (
               <div className="select-token-btn">
-                Select a Token
-                <img src="/img/arrow-nav-black.svg" alt="arrow" />
+                <span>Select a Token</span>
+                <img src="/img/bridge/arrow-nav-black.svg" alt="arrow" />
               </div>
             )}
           </div>

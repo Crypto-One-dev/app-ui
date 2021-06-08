@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactModal from 'react-modal'
-import TokenBadge from './TokenBadge'
 import { chains } from './data'
 if (typeof window !== 'undefined') {
   ReactModal.setAppElement('body')
@@ -168,8 +167,21 @@ const TokenModal = (props) => {
                     }}
                   >
                     <div className="token-list-item pointer">
-                      <TokenBadge chain={chain.name} icon={token.icon} />
-                      <span>{`${token.name} (${chain.name})`}</span>
+                      <img src={`/img/bridge/${token.icon}`} alt={token.icon} />
+
+                      {/* <TokenBadge chain={chain.name} icon={token.icon} /> */}
+                      <div>
+                        {token.name}
+                        <span className="bridge-container-badge-modal">
+                          (
+                          <span
+                            className={`modal-badge badge badge-${chain.name}`}
+                          >
+                            {chain.name}
+                          </span>
+                          )
+                        </span>
+                      </div>
                     </div>
                     <div>{token.balances[chain.network]}</div>
                   </div>
