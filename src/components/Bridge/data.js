@@ -52,7 +52,7 @@ const bscWeb3 = new Web3(
 
 const ethWeb3 = new Web3(
   new Web3.providers.HttpProvider(
-    'https://rinkeby.infura.io/v3/4e955a81217a477e88e3793856deb18b'
+    'https://rinkeby.infura.io/v3/cf6ea736e00b4ee4bc43dfdb68f51093'
   )
 )
 

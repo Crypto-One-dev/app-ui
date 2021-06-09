@@ -269,6 +269,27 @@ input:focus {
   justify-content: center;
   margin: 3px 1px 1px;
 }
+.content-modal-bridge .container-token::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+.content-modal-bridge .container-token::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+
+/* Handle */
+.content-modal-bridge .container-token::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 .badge-BSC {
   background: #fbc856;
   color: #000000 !important;

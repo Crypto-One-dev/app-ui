@@ -158,19 +158,18 @@ const TokenModal = (props) => {
               // chainToken.map((chain) =>
               showTokens.map((token, index) => {
                 return (
-                  <div
-                    className="token-list"
-                    key={index}
-                    onClick={() => {
-                      changeToken(token, chain.network)
-                      closeModal()
-                    }}
-                  >
-                    <div className="token-list-item pointer">
+                  <div className="token-list" key={index}>
+                    <div className="token-list-item ">
                       <img src={`/img/bridge/${token.icon}`} alt={token.icon} />
 
                       {/* <TokenBadge chain={chain.name} icon={token.icon} /> */}
-                      <div>
+                      <div
+                        className="pointer"
+                        onClick={() => {
+                          changeToken(token, chain.network)
+                          closeModal()
+                        }}
+                      >
                         {token.name}
                         <span className="bridge-container-badge-modal">
                           (
