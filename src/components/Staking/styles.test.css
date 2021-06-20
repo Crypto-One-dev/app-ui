@@ -1,0 +1,66 @@
+.action-btn {
+  border-radius: 6px;
+  color: #ffffff;
+  display: inline-block;
+  padding: 1px;
+  text-decoration: none;
+  margin: 0 3px 5px;
+  border: none;
+}
+
+.action-btn span {
+  background: #0d0d0d;
+  display: block;
+  padding-top: 2px;
+  border-radius: 6px;
+  width: 150px;
+  height: 35px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+  .action-btn {
+    margin: 0 3px 3px;
+  }
+  .action-btn span {
+    font-size: 10.5px;
+    width: 100px;
+    height: 30px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+.action-btn {
+    margin: 0 3px 3px;
+  }
+  .action-btn span {
+    font-size: 9px;
+    width: 85px;
+    height: 28px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+.action-btn {
+    margin: 0 1px 3px;
+  }
+  .action-btn span {
+    font-size: 9px;
+    width: 85px;
+    height: 28px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+.action-btn span {
+    font-size: 10px;
+    width: 100px;
+    height: 28px;
+  }
+}
