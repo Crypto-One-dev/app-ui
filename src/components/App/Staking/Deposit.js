@@ -83,8 +83,6 @@ const OnBtnSpan = styled.span`
   opacity: ${({ exitBtn }) => !!!exitBtn && 0.25};
 `
 
-const emptyDiv = syled.div``
-
 const BalanceWalletP = styled.p`
   font-style: normal;
   font-weight: normal;
@@ -227,7 +225,7 @@ const ContainerStatusButtonDiv = styled.div`
   }
 `
 
-const activeDiv = styled.div`
+const ActiveDiv = styled.div`
   background: linear-gradient(90deg, #08a4f5 -0.01%, #2bede3 93.42%), linear-gradient(247.41deg, #a2fbb0 16.32%, #5ec4d6 87.6%);
   color: #000000;
 `
@@ -365,7 +363,6 @@ const Deposit = (props) => {
       if (stakeAmount === '0' || stakeAmount === '') return
       if (approve || approveClick) {
         let amount = web3.utils.toWei(stakeAmount)
-        // let type = selectedStakeType === '0' ? '1' : selectedStakeType
         let type = '3'
         sendTransaction(
           StakeAndYieldContract,
@@ -391,7 +388,123 @@ const Deposit = (props) => {
   console.log(selectedStakeType);
   return (
     <>
-      
+      <BackBtnDiv>Back</BackBtnDiv>
+      <DepositContainerDiv>
+        <ToggleButtons
+        // TODO: use SC method instead
+          classes="width-unset"
+          data={[
+            {
+              title: 'STAKE & YIELD',
+              value: '3',
+              tooltip: 'Earn double rewards with Yearn Finance ',
+              disabled: yieldable ? false : true
+            },
+          ]}
+          handleSelectedButton={chooseTypeStake}
+          name={`Stake-Yield-${title}`}
+          defaultChecked={'3'}
+          lockStakeType={lockStakeType}
+        />
+        {exitable && (
+          <VaultExitDiv>
+            <VaultExitTitleDiv>Vault Exit</VaultExitTitleDiv>
+            <VaultExitBtn>
+              <OffBtnSpan onClick={() => handleVaultExit(false)}> OFF </OffBtnSpan>
+              <OnBtnSpan
+                onClick={() => {if (lockStakeType) {return} setOpen(true) }}>ON
+              </OnBtnSpan>
+            </VaultExitBtn>
+          </VaultExitDiv>
+        )}
+
+        <div>
+          <BalanceWalletP>
+            {`${title} Balance: ${balanceWallet}`}
+          </BalanceWalletP>
+        </div>
+
+        <GrayBoxDiv>
+          <InputTransparentInput
+            type="number"
+            value={stakeAmount}
+            placeholder={`0 ${title}`}
+            onChange={(e) => setStakeAmount(e.target.value)}
+          />
+          <PointerSpan onClick={() => setStakeAmount(balanceWallet)}>
+            MAX
+          </PointerSpan>
+        </GrayBoxDiv>
+        <ContractBoxDiv>
+          <ShowContractA
+            href={getTransactionLink(chainId, stakingContract)}
+            target="_blink"
+          >
+            Show me the contract
+          </ShowContractA>
+        </ContractBoxDiv>
+
+        {owner ? (
+          validChains.includes(chainId) ? (
+            <>
+              <Div1>
+                {approve === 0 ? (
+                  <Div2 onClick={handleApprove}>
+                    Approve
+                  </Div2>
+                ) : (
+                  approveClick && (
+                    <Div2 onClick={handleApprove}>
+                      Approve
+                    </Div2>
+                  )
+                )}
+                <Div3 onClick={handleStake}>
+                  stake
+                </Div3>
+              </Div1>
+              {approve === 0 ? (
+                <FlexCenterDiv>
+                  <ContainerStatusButtonDiv>
+                    <ActiveDiv>1</ActiveDiv>
+                    { approveClick ? (<ActiveDiv>2</ActiveDiv>) : (<div>2</div>)}
+                  </ContainerStatusButtonDiv>
+                </FlexCenterDiv>
+              ) : (
+                approveClick && (
+                  <FlexCenterDiv>
+                    <ContainerStatusButtonDiv>
+                      <ActiveDiv>1</ActiveDiv>
+                      { approveClick ? (<ActiveDiv>2</ActiveDiv>) : (<div>2</div>)}
+                    </ContainerStatusButtonDiv>
+                  </FlexCenterDiv>
+                )
+              )}
+            </>
+          ) : (
+            <WrongNetworkSpan>
+              <span>Wrong Network</span>
+            </WrongNetworkSpan>
+          )
+        ) : (
+          <WrapBoxGradientComplete onClick={handleConnect}>
+            <div>connect wallet</div>
+          </WrapBoxGradientComplete>
+        )}
+        <ExitModal
+          open={open}
+          hide={() => setOpen(!open)}
+          handleOn={() => {
+            setExitBtn(true)
+            setOpen(!open)
+          }}
+          handleOff={() => {
+            setExitBtn(false)
+            setOpen(!open)
+          }}
+        />
+
+      </DepositContainerDiv>
     </>
   )
 }
