@@ -6,7 +6,7 @@ const CollapseTriggerDiv = styled.div`
   display: flex;
   justify-content: space-between;
 
-  & {flex-basis: 33.33%;}
+  & > * {flex-basis: 33.33%;}
 
   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
     position: relative;
@@ -253,8 +253,3 @@ const CollapseTrigger = (props) => {
 }
 
 export default CollapseTrigger
-
-// upToExtraSmall: 500,
-// upToSmall: 720,
-// upToMedium: 960,
-// upToLarge: 1280
