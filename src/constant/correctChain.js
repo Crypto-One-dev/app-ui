@@ -12,6 +12,10 @@ export const correctChains = [
         chains: [ChainMap.XDAI],
     },
     {
+        url: "/test",
+        chains: [ChainMap.XDAI],
+    },
+    {
         url: "/crosschain/bsc",
         chains: [ChainMap.BSC, ChainMap.BSC_TESTNET],
     },

@@ -10,6 +10,7 @@ import useGoogleAnalytics from './helper/useGoogleAnalytics'
 
 import 'react-toastify/dist/ReactToastify.css'
 import './assets/styles/base.scss'
+import Test from './pages/Test'
 
 const Deus = React.lazy(() => import('./components/Deus'))
 const StakeAndYield = React.lazy(() => import('./pages/StakeAndYield'))
@@ -59,6 +60,11 @@ function App() {
                   exact
                   path="/crosschain/heco/synchronizer"
                   component={SyncHeco}
+                />
+                <Route
+                  exact
+                  path="/test"
+                  component={Test}
                 />
                 {/* <Route
                   exact
