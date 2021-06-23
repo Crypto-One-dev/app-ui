@@ -1,5 +1,5 @@
 import React from 'react';
-import { getStayledNumber } from '../../utils/utils';
+import { getStayedNumber } from '../../utils/utils';
 import { TokenType } from '../../config';
 import { useTranslation } from 'react-i18next'
 import './styles/stock-box.scss';
@@ -30,8 +30,8 @@ const StockBox = (props) => {
                 <p>{t(type) + estimated}</p>
                 <div className="balance">
                     <span>{t("balance")}:</span>
-                    {/* <span>{getStayledNumber(token.balance)}</span> */}
-                    <span> {getStayledNumber(getBalance())}</span>
+                    {/* <span>{getStayedNumber(token.balance)}</span> */}
+                    <span> {getStayedNumber(getBalance())}</span>
                 </div>
             </div>
             <div className="bottom">

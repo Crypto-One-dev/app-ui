@@ -6,7 +6,7 @@ import Title from '../../components/Swap/Title';
 import SwapButton from '../../components/Swap/SwapButton';
 import { ToastContainer } from 'react-toastify';
 import { BuyDeaService } from '../../services/BuyDeaService';
-import { getStayledNumber, notify, formatBalance, checkLimit, setBackground } from '../../utils/utils';
+import { getStayedNumber, notify, formatBalance, checkLimit, setBackground } from '../../utils/utils';
 import Risk from '../../components/Swap/Popups/Risk';
 
 import '../../components/Swap/mainSwap.scss';
@@ -201,7 +201,7 @@ class DeaStatic extends Component {
 
         try {
             const data = searchBoxType === "from" ? await web3.getAmountsOut(swap.from.name, swap.to.name, amount) : ""
-            swap[vstype].amount = getStayledNumber(data, 9)
+            swap[vstype].amount = getStayedNumber(data, 9)
             this.setState({
                 swap,
                 fromAmount: swap.from.amount,

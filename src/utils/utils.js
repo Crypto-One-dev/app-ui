@@ -31,7 +31,7 @@ export const formatBalance3 = (balance = null, fixed = 5) => {
     return bigBalance.toPrecision(fixed, BigNumber.ROUND_DOWN).replace(/\.?0+$/, "")
 }
 
-export const getStayledNumber = (number, space = 9, flag = true) => {
+export const getStayedNumber = (number, space = 9, flag = true) => {
     if (!number && flag) return "0"
     if (number < 0) return ""
     const strNumber = number.toString()

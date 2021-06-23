@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactModal from 'react-modal'
+
 if (typeof window !== 'undefined') {
   ReactModal.setAppElement('body')
 }

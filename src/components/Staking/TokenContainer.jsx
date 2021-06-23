@@ -40,7 +40,7 @@ const TokenContainer = (props) => {
   } = props
   const web3 = useWeb3()
   const [collapseContent, setCollapseContent] = React.useState('default')
-  const [unfreezStake, setUnfreezStake] = React.useState('')
+  const [unfreezStake, setUnfreezeStake] = React.useState('')
   const [showFluid, setShowFluid] = React.useState(false)
   const [userInfo, setUserInfo] = React.useState({
     stakedTokenAddress: '',
@@ -453,7 +453,7 @@ const TokenContainer = (props) => {
         chainId,
         `Withdraw`
       ).then(() => {
-        setUnfreezStake('0')
+        setUnfreezeStake('0')
       })
     } catch (error) {
       console.log('error happend in withDraw Stake', error)
@@ -531,10 +531,10 @@ const TokenContainer = (props) => {
                     className="input-transparent"
                     placeholder="0"
                     value={unfreezStake}
-                    onChange={(e) => setUnfreezStake(e.target.value)}
+                    onChange={(e) => setUnfreezeStake(e.target.value)}
                   />
                   <div
-                    onClick={() => setUnfreezStake(userInfo.balance)}
+                    onClick={() => setUnfreezeStake(userInfo.balance)}
                     className="opacity-75 pointer"
                   >
                     Max

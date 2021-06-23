@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getStayledNumber } from '../../utils/utils';
+import { getStayedNumber } from '../../utils/utils';
 import { TokenType } from '../../config';
 
 import './styles/token-market.scss';
@@ -17,9 +17,9 @@ const TokenMarket = ({ handleSwich, isLong = true, swap, longPrice, toAmount, fr
         const calcPerPerice = () => {
             if (toAmount === "" || fromAmount === "" || toAmount === "0" || fromAmount === "0") return ""
             if (fromPerTo) {
-                return getStayledNumber(parseFloat(fromAmount) / parseFloat(toAmount))
+                return getStayedNumber(parseFloat(fromAmount) / parseFloat(toAmount))
             }
-            return getStayledNumber(parseFloat(toAmount) / parseFloat(fromAmount))
+            return getStayedNumber(parseFloat(toAmount) / parseFloat(fromAmount))
         }
         if (fromPerTo !== perTo) {
             setPerTo(fromPerTo)
@@ -31,7 +31,7 @@ const TokenMarket = ({ handleSwich, isLong = true, swap, longPrice, toAmount, fr
     return (<div className="token-market-wrap" >
         <div className="token-market" style={{ display: isStock ? "block" : "flex" }}>
 
-            {isStock ? <p >{t("marketPrice")} {getStayledNumber(longPrice) !== "0" ? " @ " + getStayledNumber(longPrice) : ""}</p> : <p>{t("price")}</p>}
+            {isStock ? <p >{t("marketPrice")} {getStayedNumber(longPrice) !== "0" ? " @ " + getStayedNumber(longPrice) : ""}</p> : <p>{t("price")}</p>}
             <div className="per-wrap">
                 {!isLong && <div className="short-price-info">
                     <a className="icon-info" href="https://wiki.deus.finance/docs/shortpremium" rel="noopener noreferrer" target="_blank" >i</a>

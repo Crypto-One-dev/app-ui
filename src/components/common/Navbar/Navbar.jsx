@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { NavLink, useLocation } from 'react-router-dom';
 import navbarItems from "./navs"
 import SubNavbar from './SubNavbar';
-import { formatAddress, getStayledNumber, notify, isDesktop } from '../../../utils/utils';
+import { formatAddress, getStayedNumber, notify, isDesktop } from '../../../utils/utils';
 import { SwapService } from '../../../services/SwapService';
 import Wallets from './Wallets';
 import { addRPC } from '../../../services/addRPC';
@@ -62,7 +62,7 @@ const Navbar = () => {
 
     const claimButton = parseFloat(claimAmount) > 0.000001 ? <li className="grad-wrap claimable-btn" onClick={handleClaim}>
         <div className={`grad `}>
-            <div> {getStayledNumber(claimAmount)} ETH</div>
+            <div> {getStayedNumber(claimAmount)} ETH</div>
             <div>{t("claim")}</div>
         </div>
     </li> : null

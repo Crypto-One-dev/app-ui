@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getStayledNumber } from '../../utils/utils';
+import { getStayedNumber } from '../../utils/utils';
 import { withTranslation } from 'react-i18next'
 
 
@@ -33,7 +33,7 @@ class TokenBox extends Component {
                     <p>{t(type) + estimated}</p>
                     <div className="balance">
                         <span>{t("balance")}: </span>
-                        <span>{getStayledNumber(token.balance)}</span>
+                        <span>{getStayedNumber(token.balance)}</span>
                     </div>
                 </div>
                 <div className="bottom">

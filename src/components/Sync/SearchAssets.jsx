@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { getStayledNumber } from '../../utils/utils';
+import { getStayedNumber } from '../../utils/utils';
 import { TokenType } from '../../config';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { formatEtherscanLink, EtherscanType } from '../../sdk/constant';
@@ -87,21 +87,21 @@ const SearchAssets = (props) => {
                                     </div>
                                     {token.type !== TokenType.Main ? token.conducted ? <div style={{ display: "flex", flexDirection: "column", direction: "rtl", justifyContent: "end", alignItems: "end" }}>
                                         <div className="balance-wrap">
-                                            <p> {balances && balances[token.short?.address] ? balances[token.short?.address] : getStayledNumber(token.short?.balance)}</p> <p style={{ marginLeft: "12px" }}>S</p>
+                                            <p> {balances && balances[token.short?.address] ? balances[token.short?.address] : getStayedNumber(token.short?.balance)}</p> <p style={{ marginLeft: "12px" }}>S</p>
                                             <CopyToClipboard text={getTransactionLink(chainId, token.short?.address, "token")}
                                                 onCopy={() => console.log("copied")}>
                                                 <img className="copy-icon" src={process.env.PUBLIC_URL + "/img/copy.svg"} alt="" />
                                             </CopyToClipboard>
                                         </div>
                                         <div className="balance-wrap">
-                                            <p>  {balances && balances[token.long?.address] ? balances[token.long?.address] : getStayledNumber(token.long?.balance)}</p> <p style={{ marginLeft: "12px" }}>L</p>
+                                            <p>  {balances && balances[token.long?.address] ? balances[token.long?.address] : getStayedNumber(token.long?.balance)}</p> <p style={{ marginLeft: "12px" }}>L</p>
                                             <CopyToClipboard text={getTransactionLink(chainId, token.long?.address, "token")}
                                                 onCopy={() => console.log("copied")}>
                                                 <img className="copy-icon" src={process.env.PUBLIC_URL + "/img/copy.svg"} alt="" />
                                             </CopyToClipboard>
                                         </div>
                                     </div> : <p>{t("notConducted")}</p> :
-                                        <p> {getStayledNumber(token?.balance)}</p>}
+                                        <p> {getStayedNumber(token?.balance)}</p>}
 
                                 </div>
                             })

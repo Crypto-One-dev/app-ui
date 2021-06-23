@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TopNotif from './TopNotif';
 import QStake from './Stake/QStake';
-import { getStayledNumber, notify, formatBalance } from '../../utils/utils';
+import { getStayedNumber, notify, formatBalance } from '../../utils/utils';
 import { StakeService } from '../../services/StakeService';
 import StakePopup from '../common/Popup/StakePopup';
 import { withRouter } from 'react-router-dom';
@@ -129,7 +129,7 @@ class StakingManager extends Component {
             try {
                 const data = await web3?.getNumberOfPendingRewardTokens(poolName)
                 let claim = stakingsMap[poolName].isClose ? data : parseFloat(data) * 100 / 3
-                stakingsMap[poolName].claimable_amount = getStayledNumber(claim)
+                stakingsMap[poolName].claimable_amount = getStayedNumber(claim)
                 this.setState({ stakingsMap })
             } catch (error) {
                 console.log(poolName, " error amount");
@@ -229,7 +229,7 @@ class StakingManager extends Component {
 
                 web3.getNumberOfPendingRewardTokens(stakedToken).then((amount) => {
                     let claim = stakingsMap[stakedToken].isClose ? amount : parseFloat(amount) * 100 / 3
-                    stakingsMap[stakedToken].claimable_amount = getStayledNumber(claim)
+                    stakingsMap[stakedToken].claimable_amount = getStayedNumber(claim)
                     this.setState({ stakingsMap })
 
                 })

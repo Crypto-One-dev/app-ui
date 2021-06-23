@@ -1,5 +1,5 @@
 import React from 'react';
-import { newFormatAmount, getStayledNumber } from '../../utils/utils';
+import { newFormatAmount, getStayedNumber } from '../../utils/utils';
 import { useTranslation } from 'react-i18next'
 
 
@@ -14,7 +14,7 @@ const InputBox = ({ token, amount, title, max, tokenTitle, svg, handleChange, di
             </p>
         </div>
         <div className="input-bottom">
-            <input type="number" placeholder="0.0" value={getStayledNumber(amount, 11, false)} onChange={(e) => handleChange(e.currentTarget.value)} disabled={disabled} />
+            <input type="number" placeholder="0.0" value={getStayedNumber(amount, 11, false)} onChange={(e) => handleChange(e.currentTarget.value)} disabled={disabled} />
             {max && <div className="max-btn" onClick={() => handleChange(newFormatAmount(token.balance, 12))}>{t("max")}</div>}
             {svg}
             <div className="token-name">{token.title}</div>

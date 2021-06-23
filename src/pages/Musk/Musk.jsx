@@ -6,7 +6,7 @@ import Title from '../../components/Swap/Title';
 import SwapButton from '../../components/Swap/SwapButton';
 import { ToastContainer } from 'react-toastify';
 import { MuskService } from '../../services/MuskService';
-import { getStayledNumber, notify, formatBalance, checkLimit, setBackground } from '../../utils/utils';
+import { getStayedNumber, notify, formatBalance, checkLimit, setBackground } from '../../utils/utils';
 import Routes from '../../components/Swap/Routes';
 import Risk from '../../components/Swap/Popups/Risk';
 
@@ -204,7 +204,7 @@ class Musk extends Component {
 
         try {
             const data = searchBoxType === "from" ? await web3.getAmountsOut(swap.from.name, swap.to.name, amount) : await web3.getAmountsIn(swap.from.name, swap.to.name, amount)
-            swap[vstype].amount = getStayledNumber(data, 9)
+            swap[vstype].amount = getStayedNumber(data, 9)
             this.setState({
                 swap,
                 fromAmount: swap.from.amount,

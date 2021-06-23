@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ToastContainer } from 'react-toastify';
-import { getStayledNumber, notify, formatBalance, checkLimit } from '../../utils/utils';
+import { getStayedNumber, notify, formatBalance, checkLimit } from '../../utils/utils';
 import TokenBox from '../../components/Swap/TokenBox';
 import SearchBox from '../../components/Swap/SearchBox';
 import TokenMarket from '../../components/Swap/TokenMarket';
@@ -222,7 +222,7 @@ class MainSwap extends Component {
 
         try {
             const data = searchBoxType === "from" ? await web3.getAmountsOut(swap.from.name, swap.to.name, amount) : await web3.getAmountsIn(swap.from.name, swap.to.name, amount)
-            swap[vstype].amount = getStayledNumber(data, 9)
+            swap[vstype].amount = getStayedNumber(data, 9)
             this.setState({
                 swap,
                 fromAmount: swap.from.amount,

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getStayledNumber } from '../../utils/utils';
+import { getStayedNumber } from '../../utils/utils';
 import { withTranslation } from 'react-i18next'
 
 class SearchBox extends Component {
@@ -33,7 +33,7 @@ class SearchBox extends Component {
                                             <p style={{ textTransform: "uppercase" }}>{token.name}</p>
                                             {token.isFutures && <img className="futures" src={process.env.PUBLIC_URL + "/img/futures.svg"} alt="futures" />}
                                         </div>
-                                        <p >{getStayledNumber(token.balance)}</p>
+                                        <p >{getStayedNumber(token.balance)}</p>
                                     </div>
                                 })
                             }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { getStayledNumber } from '../../../utils/utils';
+import { getStayedNumber } from '../../../utils/utils';
 import { WaveLoading, RotateCircleLoading } from 'react-loadingg';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next'
@@ -16,7 +16,7 @@ const QStake = ({ staking, deposited, handleStakePopup, dollarPool, handleClaim,
     let stakeClasses = "single-wrap " + closedClass + balanceClass
     const onlyMainClasses = staking && staking.onlyMain ? "only-main" : ""
     const { t } = useTranslation()
-    const claimAmount = claimable_amount ? getStayledNumber(claimable_amount) + " " + (claimable_unit ? claimable_unit : "") + t("deaClaimable") : null
+    const claimAmount = claimable_amount ? getStayedNumber(claimable_amount) + " " + (claimable_unit ? claimable_unit : "") + t("deaClaimable") : null
 
     return (staking && <div className={`${onlyMainClasses} ${stakeClasses}   ${canStakeClass}`}>
         {staking && staking.onlyMain && <img className="img-only-main" src={process.env.PUBLIC_URL + "/img/only-main.svg"} alt="" />}
@@ -71,7 +71,7 @@ const QStake = ({ staking, deposited, handleStakePopup, dollarPool, handleClaim,
                     </div>
                     <div className="btns-wrap">
                         <div className="btns">
-                            <div className="left-single disabled">{getStayledNumber(deposited)} {t("deposited")}</div>
+                            <div className="left-single disabled">{getStayedNumber(deposited)} {t("deposited")}</div>
                             <div className="right-single" onClick={() => handleWithdrawPopup(staking.name)}>
                                 <span>{t("withdraw_and_claim")}</span>
                             </div>

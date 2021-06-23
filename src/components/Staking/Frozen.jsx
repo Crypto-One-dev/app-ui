@@ -20,7 +20,7 @@ const Frozen = (props) => {
     showFluid
   } = props
 
-  const [unfreez, setUnfreez] = React.useState('')
+  const [unfreez, setUnfreeze] = React.useState('')
   const [show, setShow] = React.useState(null)
   const currtimestamp = Math.floor(Date.now() / 1000)
   const web3 = useWeb3()
@@ -44,7 +44,7 @@ const Frozen = (props) => {
         chainId,
         `Unfreeze ${unfreez} ${title}`
       ).then(() => {
-        setUnfreez('0')
+        setUnfreeze('0')
       })
     } catch (error) {
       console.log('error happend in un freez', error)
@@ -113,10 +113,10 @@ const Frozen = (props) => {
                   className="input-transparent"
                   placeholder="0"
                   value={unfreez}
-                  onChange={(e) => setUnfreez(e.target.value)}
+                  onChange={(e) => setUnfreeze(e.target.value)}
                 />
                 <span
-                  onClick={() => setUnfreez(balance)}
+                  onClick={() => setUnfreeze(balance)}
                   className="opacity-75 pointer flex-align-center"
                 >
                   MAX
@@ -137,7 +137,7 @@ const Frozen = (props) => {
                   withDrawableExit={withDrawableExit}
                   title={title}
                   titleExit={titleExit}
-                  width="width-300"
+                  width="300px"
                 />
 
                 <div className="wrap-box-fluid" >

@@ -1,5 +1,5 @@
 import { Token } from '../sdk/tokens';
-import { getStayledNumber } from '../utils/utils';
+import { getStayedNumber } from '../utils/utils';
 import { TokenType } from '../config';
 // import { BigNumber } from 'ethers';
 
@@ -109,7 +109,7 @@ export const handleCalcPairPrice = async (swap, searchBoxType, amount, isLong, p
         const data = searchBoxType === "from" ?
             handleGetAmountsOut(swap.from, swap.to, amount, isLong, priceStocks, setLongPrice) :
             handleGetAmountsIn(swap.from, swap.to, amount, isLong, priceStocks, setLongPrice)
-        swap[vstype].amount = getStayledNumber(data, 9)
+        swap[vstype].amount = getStayedNumber(data, 9)
         return swap
 
     } catch (error) {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { sendTransaction } from '../../utils/Stakefun'
-import { getStayledNumber } from '../../utils/utils'
+import { getStayedNumber } from '../../utils/utils'
 import { ExternalLink } from '../App/Link'
 
 const Fluid = (props) => {
@@ -60,8 +60,8 @@ const Fluid = (props) => {
             width="width-402 border-radius-6"
           /> */}
             <div className="wrap-box-gray-complete">
-              <div>{`${getStayledNumber(withDrawableExit)} ${titleExit}`}</div>
-              <div>{`${(getStayledNumber(withDrawable))} ${title}`}</div>
+              <div>{`${getStayedNumber(withDrawableExit)} ${titleExit}`}</div>
+              <div>{`${(getStayedNumber(withDrawable))} ${title}`}</div>
             </div>
           </div>
           <div className="fluid-footer-container">
