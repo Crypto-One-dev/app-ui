@@ -71,7 +71,7 @@ const Fluid = (props) => {
             </div>
             <div className="wrap-box float-right">
               <div
-                className={`wrap-box-gradient-complete ${withdrawIsActive ? "pointer" : " default opacity-25"}  `}
+                className={`wrap-box-gradient-complete ${withdrawIsActive ? "pointer" : "default opacity-25"} `}
                 onClick={withdrawIsActive ? handleWithDraw : undefined}
               >
                 <div className="fluid-box-content">

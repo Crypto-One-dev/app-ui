@@ -1,5 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
+import { sendTransaction } from '../../utils/Stakefun'
+import { getStayedNumber } from '../../utils/utils'
+import { ExternalLink } from '../App/Link'
 
 const UserInfoContainerDiv = styled.div`
   padding: 30px 0 30px 20px;
@@ -115,7 +118,7 @@ const FluidFooterDiv = styled.div`
 `
 
 const WrapBoxFRDiv = styled(WrapBoxDiv)`
-    float: right;
+  float: right;
 `
 
 const WrapBoxGradientComplete = styled.div`
@@ -123,7 +126,6 @@ const WrapBoxGradientComplete = styled.div`
   padding: 8px 10px;
   max-width: 571px;
   width: 100%;
-  /* height: 35px; */
   text-align: center;
 
   &::before{
@@ -144,7 +146,102 @@ const WrapBoxGradientComplete = styled.div`
   ${({ theme }) => theme.mediaWidth.upToMedium`
     max-width: 100% !important;
   `}
-
-  // cont.
-
+  
+  cursor: ${({ withdrawIsActive }) => withdrawIsActive ? "pointer" : "default" };
+  opacity: ${({ withdrawIsActive }) => withdrawIsActive ? "1" : "0.25" };
 `
+
+const FluidBoxContentDiv = styled.div`
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  text-align: center;
+  color: #ffffff;
+`
+
+const SubDescriptionDiv = styled.div`
+  font-weight: 400;
+  font-size: 10px;
+  text-align: right;
+  opacity: 0.5;
+  margin-top: -8px;
+  margin-bottom: 20px;
+  margin-top: 4px;
+`
+
+const Fluid = (props) => {
+  const {
+    withDrawable,
+    withDrawableExit,
+    owner,
+    title,
+    titleExit,
+    StakeAndYieldContract,
+    chainId,
+    showFluid,
+    withDrawTime,
+    nextEpochTime,
+  } = props
+
+  const currtimestamp = Math.floor(Date.now() / 1000)
+  const withdrawIsActive = withDrawTime !== "" && nextEpochTime !== "" ? currtimestamp > nextEpochTime : false
+
+  const handleWithDraw = () => {
+    try {
+      sendTransaction(
+        StakeAndYieldContract,
+        `withdrawUnfreezed`,
+        [],
+        owner,
+        chainId,
+        `WITHDRAW + REDEEM`
+      ).then(() => {
+        showFluid()
+      })
+    } catch (error) {
+      console.log('error happened in Withdraw', error)
+    }
+  }
+  return (
+    <UserInfoContainerDiv>
+      <FlexBetweenDiv>
+        <div>
+          <FrozenDescDiv>
+            <p>Withdrawable tokens </p>
+            <OpacityFiveP>
+              Unstaked, claimable & redeemable tokens that are available to withdraw.
+            </OpacityFiveP>
+          </FrozenDescDiv>
+        </div>
+        <div>
+          <WrapBoxDiv>
+            <WrapBoxGrayComplete>
+              <div>{`${getStayedNumber(withDrawableExit)} ${titleExit}`}</div>
+              <div>{`${(getStayedNumber(withDrawable))} ${title}`}</div>
+            </WrapBoxGrayComplete>
+          </WrapBoxDiv>
+          <FluidFooterContainerDiv>
+            <FluidFooterDiv>
+              <div>estimated redeemable Vault tokens.</div>
+              <div>currently  withdrawable Staked tokens.</div>
+            </FluidFooterDiv>
+            <WrapBoxFRDiv>
+              <WrapBoxGradientComplete onClick={withdrawIsActive ? handleWithDraw : undefined}>
+                <FluidBoxContentDiv>
+                  WITHDRAW + REDEEM
+                </FluidBoxContentDiv>
+              </WrapBoxGradientComplete>
+            </WrapBoxFRDiv>
+            <SubDescriptionDiv>
+              <ExternalLink active={true} href={"http://wiki.deus.finance/docs/stake-and-yield"}>after yearn harvest. ↗</ExternalLink>
+            </SubDescriptionDiv>
+          </FluidFooterContainerDiv>
+        </div>
+      </FlexBetweenDiv>
+    </UserInfoContainerDiv>
+  )
+}
+
+export default Fluid
+
