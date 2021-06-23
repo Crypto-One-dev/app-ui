@@ -336,7 +336,7 @@ const TokenContainer = (props) => {
           }
         })
       } catch (error) {
-        console.log('error Happend in Fetch data', error)
+        console.log('error happened in Fetch data', error)
       }
     }
 
@@ -456,7 +456,7 @@ const TokenContainer = (props) => {
         setUnfreezeStake('0')
       })
     } catch (error) {
-      console.log('error happend in withDraw Stake', error)
+      console.log('error happened in withDraw Stake', error)
     }
   }
   return (

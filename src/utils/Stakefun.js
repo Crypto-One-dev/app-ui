@@ -43,7 +43,7 @@ const sendTransaction = (
           resolve()
         })
         .once('error', (error) => {
-          console.log('error happend', error)
+          console.log('error happened', error)
           CustomTranaction(TransactionState.FAILED, {
             hash,
             chainId
@@ -51,7 +51,7 @@ const sendTransaction = (
           reject()
         })
     } catch (error) {
-      console.log('error happend in send Transaction', error)
+      console.log('error happened in send Transaction', error)
     }
   })
 }

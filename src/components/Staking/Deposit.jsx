@@ -72,7 +72,7 @@ const Deposit = (props) => {
         setApproveClick(true)
       })
     } catch (error) {
-      console.log('error happend in Approve', error)
+      console.log('error happened in Approve', error)
     }
   }
   const handleStake = () => {
@@ -97,7 +97,7 @@ const Deposit = (props) => {
         })
       }
     } catch (error) {
-      console.log('error happend in Stake', error)
+      console.log('error happened in Stake', error)
     }
   }
   const handleVaultExit = (data) => {

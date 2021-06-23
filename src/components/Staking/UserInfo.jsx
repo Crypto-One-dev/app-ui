@@ -37,7 +37,7 @@ const UserInfo = (props) => {
         `Claim ${claim} ${title}`
       )
     } catch (error) {
-      console.log('Error happend in Claim', error)
+      console.log('Error happened in Claim', error)
     }
   }
   const handleRedeem = async () => {
@@ -61,7 +61,7 @@ const UserInfo = (props) => {
         `Redeem ${exitBalance} ${title}`
       ).then(() => { })
     } catch (error) {
-      console.log('error happend in Redeem', error)
+      console.log('error happened in Redeem', error)
     }
   }
 
@@ -84,7 +84,7 @@ const UserInfo = (props) => {
         `${exit ? 'Stop Vault Exit' : 'Enable Vault Exit'}`
       )
     } catch (error) {
-      console.log('error happend in exit', error)
+      console.log('error happened in exit', error)
     }
   }
 

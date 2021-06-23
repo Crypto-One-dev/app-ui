@@ -314,7 +314,7 @@ const Bridge = () => {
         })
       })
     } catch (error) {
-      console.log('error happend in Approve', error)
+      console.log('error happened in Approve', error)
     }
   }
   const handleDeposit = () => {
@@ -370,7 +370,7 @@ const Bridge = () => {
         })
       })
     } catch (error) {
-      console.log('error happend in Deposit', error)
+      console.log('error happened in Deposit', error)
     }
   }
   const handleChangeNetwork = () => {

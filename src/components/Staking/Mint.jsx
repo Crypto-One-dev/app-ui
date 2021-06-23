@@ -68,7 +68,7 @@ const Mint = (props) => {
         })
       }
     } catch (error) {
-      console.log('error happend in GetSealedTime ', error)
+      console.log('error happened in GetSealedTime ', error)
     }
   }
 
@@ -100,7 +100,7 @@ const Mint = (props) => {
         setApproveClick(true)
       })
     } catch (error) {
-      console.log('error happend in Approve lock', error)
+      console.log('error happened in Approve lock', error)
     }
   }
   const handleMint = () => {
@@ -128,7 +128,7 @@ const Mint = (props) => {
         })
       }
     } catch (error) {
-      console.log('error happend in Mint', error)
+      console.log('error happened in Mint', error)
     }
   }
   return (

@@ -47,7 +47,7 @@ const Frozen = (props) => {
         setUnfreeze('0')
       })
     } catch (error) {
-      console.log('error happend in un freez', error)
+      console.log('error happened in un freez', error)
     }
   }
 
@@ -65,7 +65,7 @@ const Frozen = (props) => {
         setShow(false)
       })
     } catch (error) {
-      console.log('error happend in Withdraw', error)
+      console.log('error happened in Withdraw', error)
     }
   }
 

@@ -36,7 +36,7 @@ const Fluid = (props) => {
         showFluid()
       })
     } catch (error) {
-      console.log('error happend in Withdraw', error)
+      console.log('error happened in Withdraw', error)
     }
   }
   return (
