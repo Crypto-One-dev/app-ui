@@ -96,11 +96,6 @@ const ApyWrapDiv = styled.div`
   font-size: 18px;
   text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
 
-  display: inline-block;
-  border-bottom: 2px solid #ffffff;
-  margin-bottom: 4px;
-  padding-bottom: 4px;
-
   ${({ theme }) => theme.mediaWidth.upToSmall`
     position: absolute;
     font-size: 13px;

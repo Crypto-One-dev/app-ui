@@ -1,5 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
+import useWeb3 from '../../../helper/useWeb3'
+import ExitModal from '../../Staking/ExitModal'
+import { validChains } from '../../Staking/Data'
+import ToggleButtons from '../../Staking/ToggleButtons'
+import { injected } from '../../../connectors'
+import { useWeb3React } from '@web3-react/core'
+import { sendTransaction } from '../../../utils/Stakefun'
+import { getTransactionLink } from '../../../utils/explorers'
+import { FlexCenter } from '../Container';
 
 const BackBtnDiv = styled.div `
   font-style: normal;
@@ -91,6 +100,7 @@ const BalanceWalletP = styled.p`
   padding: 0 21px;
   color: rgba(255, 255, 255, 0.5);
 `
+
 const GrayBoxDiv = styled.div`
   border: 1px solid rgba(100, 100, 100, 0.498039);
   box-sizing: border-box;
@@ -146,7 +156,7 @@ const ShowContractA = styled.a`
 
 const Div1 = styled.div`
   display: flex;
-  justify-content: ${({ approve, approveClick }) => approve === 0 ? 'space-between' : approveClick ? 'space-between' : 'center'};
+  justify-content: ${({ approve, approveClick }) => approve === 0 ? 'space-between' : (approveClick ? 'space-between' : 'center')};
 `
 
 const Div2 = styled.div`
@@ -189,45 +199,6 @@ const Div3 = styled.div`
 
   color: ${({ approve }) => approve ? "#000000 !important" : "rgba(255, 255, 255, 0.5)" };
   background: ${({ approve }) => approve ? "linear-gradient(90deg, #08a4f5 -0.01%, #2bede3 93.42%), linear-gradient(247.41deg, #a2fbb0 16.32%, #5ec4d6 87.6%) !important" : "#1c1c1c"};
-`
-
-const FlexCenterDiv = styled.div`
-  display: flex;
-  justify-content: center;
-`
-
-const ContainerStatusButtonDiv = styled.div`
-  width: 50%;
-  display: flex;
-  justify-content: space-between;
-  border-top: 2px solid;
-
-  border-image-source: linear-gradient(90deg, #08a4f5 -0.01%, #2bede3 93.42%);
-  border-image-slice: 5;
-  padding-top: 24px;
-  margin-top: 22px;
-
-  background: linear-gradient(90deg, #08a4f5 -0.01%, #2bede3 93.42%), linear-gradient(247.41deg, #a2fbb0 16.32%, #5ec4d6 87.6%);
-  color: #000000;
-
-  &:div {
-    background-color: #1c1c1c;
-    font-weight: normal;
-    margin-top: -35px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    color: #ffffff;
-    font-size: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-`
-
-const ActiveDiv = styled.div`
-  background: linear-gradient(90deg, #08a4f5 -0.01%, #2bede3 93.42%), linear-gradient(247.41deg, #a2fbb0 16.32%, #5ec4d6 87.6%);
-  color: #000000;
 `
 
 const WrongNetworkSpan = styled.span`
@@ -287,6 +258,26 @@ const WrapBoxGradientComplete = styled.div`
   `}
 `
 
+const WrapStep = styled(FlexCenter)`
+  margin-top:10px;
+`
+
+const CycleNumber = styled(FlexCenter)`
+width:20px;
+height:20px;
+border-radius:20px;
+background: ${({ theme, active }) => active ? "linear-gradient(90deg, #08a4f5 -0.01%, #2bede3 93.42%)" : theme.border1};
+color: ${({ theme, active }) => active ? theme.text1_2 : theme.text1};
+z-index: 0;
+font-size:12px;
+margin:0 -1px;
+`
+
+const Line = styled.div`
+background: ${({ theme }) => "linear-gradient(90deg, #08a4f5 -0.01%, #2bede3 93.42%)"};
+height: 2px;
+width: 50%;
+`
 
 const Deposit = (props) => {
   const {
@@ -352,7 +343,7 @@ const Deposit = (props) => {
         setApproveClick(true)
       })
     } catch (error) {
-      console.log('error happend in Approve', error)
+      console.log('error happened in Approve', error)
     }
   }
   const handleStake = () => {
@@ -376,7 +367,7 @@ const Deposit = (props) => {
         })
       }
     } catch (error) {
-      console.log('error happend in Stake', error)
+      console.log('error happened in Stake', error)
     }
   }
   const handleVaultExit = (data) => {
@@ -410,8 +401,9 @@ const Deposit = (props) => {
           <VaultExitDiv>
             <VaultExitTitleDiv>Vault Exit</VaultExitTitleDiv>
             <VaultExitBtn>
-              <OffBtnSpan onClick={() => handleVaultExit(false)}> OFF </OffBtnSpan>
+              <OffBtnSpan exitBtn={exitBtn} onClick={() => handleVaultExit(false)}> OFF </OffBtnSpan>
               <OnBtnSpan
+                exitBtn={exitBtn}
                 onClick={() => {if (lockStakeType) {return} setOpen(true) }}>ON
               </OnBtnSpan>
             </VaultExitBtn>
@@ -447,37 +439,35 @@ const Deposit = (props) => {
         {owner ? (
           validChains.includes(chainId) ? (
             <>
-              <Div1>
+              <Div1 approve={approve} approveClick={approveClick}>
                 {approve === 0 ? (
-                  <Div2 onClick={handleApprove}>
+                  <Div2 approveClick={approveClick} onClick={handleApprove}>
                     Approve
                   </Div2>
                 ) : (
                   approveClick && (
-                    <Div2 onClick={handleApprove}>
+                    <Div2 approveClick={approveClick} onClick={handleApprove}>
                       Approve
                     </Div2>
                   )
                 )}
-                <Div3 onClick={handleStake}>
+                <Div3 approve={approve} onClick={handleStake}>
                   stake
                 </Div3>
               </Div1>
               {approve === 0 ? (
-                <FlexCenterDiv>
-                  <ContainerStatusButtonDiv>
-                    <ActiveDiv>1</ActiveDiv>
-                    { approveClick ? (<ActiveDiv>2</ActiveDiv>) : (<div>2</div>)}
-                  </ContainerStatusButtonDiv>
-                </FlexCenterDiv>
+                <WrapStep>
+                    <CycleNumber active={true}>1</CycleNumber>
+                    <Line></Line>
+                    <CycleNumber active={approveClick}>2</CycleNumber>
+                </WrapStep>
               ) : (
                 approveClick && (
-                  <FlexCenterDiv>
-                    <ContainerStatusButtonDiv>
-                      <ActiveDiv>1</ActiveDiv>
-                      { approveClick ? (<ActiveDiv>2</ActiveDiv>) : (<div>2</div>)}
-                    </ContainerStatusButtonDiv>
-                  </FlexCenterDiv>
+                  <WrapStep>
+                    <CycleNumber active={approveClick}>1</CycleNumber>
+                    <Line></Line>
+                    <CycleNumber active={true}>2</CycleNumber>
+                </WrapStep>
                 )
               )}
             </>

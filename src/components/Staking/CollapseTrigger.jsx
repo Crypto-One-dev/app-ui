@@ -1,5 +1,6 @@
 import React from 'react'
-import ActionButton from './ActionButton'
+// import ActionButton from './ActionButton'
+import ActionButton from '../App/Staking/ActionButton'
 
 const CollapseTrigger = ({
   open,

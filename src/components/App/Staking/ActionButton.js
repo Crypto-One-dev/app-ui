@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const Span1 = styled.span`
   border-radius: 6px;
-  color: #fff;
+  color: #ffffff;
   display: inline-block;
   padding: 1px;
   text-decoration: none;
@@ -11,7 +11,7 @@ const Span1 = styled.span`
   border: none;
   cursor: pointer;
   
-  background: ${({ type, onlyLocking }) => type === 'GET' ? (onlyLocking ? 'linear-gradient(90 deg, #08a4f5 -0.01%, #2bede3 93.42%)' : '"#ec357a"') : 'linear-gradient(247.41deg, #a2fbb0 16.32%, #5ec4d6 87.6%)'};
+  background: ${({ type, onlyLocking }) => type === 'GET' ? (onlyLocking ? '#ec357a' : 'linear-gradient(247.41deg, #a2fbb0 16.32%, #5ec4d6 87.6%)') : 'linear-gradient(90deg, #08a4f5 -0.01%, #2bede3 93.42%)'};
   opacity: ${({ title, type }) => title === 'BPT' && type === 'LOCK' && 0};
 
   ${({ theme }) => theme.mediaWidth.upToLarge`
@@ -58,16 +58,16 @@ const Span2 = styled.span`
 
   background: ${({ onlyLocking }) => onlyLocking && "#2d2f35 !important"};
   &:hover {
-    background: ${({ type, onlyLocking }) => type === 'GET' ? (onlyLocking ? 'linear-gradient(90deg, #08a4f5 -0.01%, #2bede3 93.42%), linear-gradient(247.41deg, #a2fbb0 16.32%, #5ec4d6 87.6%) !important' : '#ec357a !important') : 'linear-gradient(247.41deg, #a2fbb0 16.32%, #5ec4d6 87.6%) !important'};
-    color: ${({ type, onlyLocking }) => type === 'GET' ? (onlyLocking ? '#000' : '#fff') : '#000'};
+    background: ${({ type, onlyLocking }) => type === 'GET' ? (onlyLocking ? '#ec357a !important' : 'linear-gradient(247.41deg, #a2fbb0 16.32%, #5ec4d6 87.6%) !important') : 'linear-gradient(90deg, #08a4f5 -0.01%, #2bede3 93.42%), linear-gradient(247.41deg, #a2fbb0 16.32%, #5ec4d6 87.6%) !important'};
+    color: ${({ type, onlyLocking }) => type === 'GET' ? (onlyLocking ? '#fff' : '#000') : '#000'};
   }
 `
 
 const ActionButton = (props) => {
   const { type, title, onlyLocking, onClick } = props
   return (
-    <Span1 onClick={(e) => onClick(e)}>
-      <Span2>
+    <Span1 type={type} onlyLocking={onlyLocking} title={title} onClick={(e) => onClick(e)}>
+      <Span2 type={type} onlyLocking={onlyLocking}>
         {type === 'STAKE' && onlyLocking ? 'GET BPT' : `${type} ${title}`}
       </Span2>
     </Span1>
