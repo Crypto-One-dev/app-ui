@@ -11,6 +11,15 @@ const WrapBoxGrayDiv = styled.div`
   width: 421px;
   height: 35px;
   padding: 8px 24px;
+
+    ${({ theme }) => theme.mediaWidth.upToMedium`
+    width: 100% !important;
+  `}
+
+    @media screen and (min-width: 370px) and (max-width: 445px) {
+        padding: 8px 5px;
+    }
+    
   width: ${({ width }) => width && width};
 `
 
