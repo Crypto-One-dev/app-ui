@@ -1,25 +1,30 @@
-import { ChainMap } from '../constant/web3';
-import { ToastTransaction } from '../utils/explorers';
+import { ChainMap } from '../constant/web3'
+import { ToastTransaction } from '../utils/explorers'
 
 export const addRPC = (account, activate, chainId = 100) => {
-    console.log(account, chainId)
-    if (chainId === ChainMap.MAINNET || chainId === ChainMap.RINKEBY) {
-        ToastTransaction("info", "Switch Network", "Please switch your network to ETH chains manually.", { autoClose: true })
-        return
-    }
-    if (account && (window.ethereum)) {
-        window.ethereum
-            .request({
-                method: 'wallet_addEthereumChain',
-                params: [{ ...NetworksData[chainId] }],
-            })
-            .then((result) => {
-                console.log("success");
-            })
-            .catch((error) => {
-                console.log('We can encrypt anything without the key.');
-            });
-    }
+  console.log(account, chainId)
+  if (chainId === ChainMap.MAINNET || chainId === ChainMap.RINKEBY) {
+    ToastTransaction(
+      'info',
+      'Switch Network',
+      'Please switch your network to ETH chains manually.',
+      { autoClose: true }
+    )
+    return
+  }
+  if (account && window.ethereum) {
+    window.ethereum
+      .request({
+        method: 'wallet_addEthereumChain',
+        params: [{ ...NetworksData[chainId] }]
+      })
+      .then((result) => {
+        console.log('success')
+      })
+      .catch((error) => {
+        console.log('We can encrypt anything without the key.')
+      })
+  }
 }
 
 const NetworksData = {
@@ -66,41 +71,31 @@ const NetworksData = {
       symbol: 'BNB',
       decimals: 18
     },
-<<<<<<< HEAD
     137: {
-        chainId: "0x89",
-        chainName: "Matic Mainnet",
-        nativeCurrency: {
-            name: "Matic",
-            symbol: "MATIC",
-            decimals: 18,
-        },
-        rpcUrls: ["https://rpc-mainnet.matic.network", "wss://ws-mainnet.matic.network"],
-        blockExplorerUrls: ["https://explorer.matic.network/"],
-        iconUrls: []
+      chainId: '0x89',
+      chainName: 'Matic Mainnet',
+      nativeCurrency: {
+        name: 'Matic',
+        symbol: 'MATIC',
+        decimals: 18
+      },
+      rpcUrls: [
+        'https://rpc-mainnet.matic.network',
+        'wss://ws-mainnet.matic.network'
+      ],
+      blockExplorerUrls: ['https://explorer.matic.network/'],
+      iconUrls: []
     },
     56: {
-        chainId: "0x38",
-        chainName: "Binance Smart Chain Mainnet",
-        nativeCurrency: {
-            name: "BNB",
-            symbol: "BNB",
-            decimals: 18,
-        },
-        rpcUrls: ["https://bsc-dataseed1.binance.org"],
-        blockExplorerUrls: ["https://bscscan.com"],
-=======
-    rpcUrls: ['https://data-seed-prebsc-1-s1.binance.org:8545'],
-    blockExplorerUrls: ['https://testnet.bscscan.com']
-  },
-  250: {
-    chainId: '0xFA',
-    chainName: 'Fantom Opera',
-    nativeCurrency: {
-      name: 'Fantom',
-      symbol: 'FTM',
-      decimals: 18
->>>>>>> aec8465debd007a2c67b9288c56cd0c17b46cffc
+      chainId: '0x38',
+      chainName: 'Binance Smart Chain Mainnet',
+      nativeCurrency: {
+        name: 'BNB',
+        symbol: 'BNB',
+        decimals: 18
+      },
+      rpcUrls: ['https://bsc-dataseed1.binance.org'],
+      blockExplorerUrls: ['https://bscscan.com']
     },
     rpcUrls: ['https://rpcapi.fantom.network'],
     blockExplorerUrls: ['https://ftmscan.com/'],
