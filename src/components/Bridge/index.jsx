@@ -289,15 +289,7 @@ const Bridge = () => {
       console.log('error happend in Claim', error)
     }
   }
-  const handleSwap = () => {
-    if (bridge.to.chain) {
-      let swap = bridge
-      setBridge({
-        from: { ...bridge.to },
-        to: { ...swap.from }
-      })
-    }
-  }
+
   return (
     <div className="wrap-bridge">
       <div className="width-340">
