@@ -23,6 +23,7 @@ const customStyles = {
     border: '1px solid #242424',
     borderRadius: '10px',
     padding: '26px 20px'
+    // overflow: 'unset'
   }
 }
 
@@ -30,6 +31,11 @@ const TokenModal = (props) => {
   const { open, hide, changeToken, tokens, tokenId, selectedChain } = props
   const [chain, setChain] = React.useState('')
   const [showTokens, setShowTokens] = React.useState(tokens)
+  // const [checked, setChecked] = React.useState({
+  //   FTM: true,
+  //   ETH: true,
+  //   BSC: true
+  // })
 
   React.useEffect(() => {
     if (tokenId) {
@@ -53,6 +59,7 @@ const TokenModal = (props) => {
       shouldCloseOnOverlayClick={true}
     >
       <div>
+        {/* <> */}
         <div className="modal-header">
           <div className="modal-title">Select an asset</div>
           <span onClick={closeModal} className="close">
@@ -120,6 +127,7 @@ const TokenModal = (props) => {
             )}
           </div>
         </div>
+        {/* </div> */}
       </div>
     </ReactModal>
   )

@@ -66,7 +66,6 @@ const Bridge = () => {
       }))
     }
   }, [bridge.from, tokensBalance]) // eslint-disable-line
-
   const [amount, setAmount] = React.useState('')
   const [selectedChain, setSelectedChain] = React.useState('')
   const web3 = useWeb3()
@@ -288,6 +287,15 @@ const Bridge = () => {
       })
     } catch (error) {
       console.log('error happend in Claim', error)
+    }
+  }
+  const handleSwap = () => {
+    if (bridge.to.chain) {
+      let swap = bridge
+      setBridge({
+        from: { ...bridge.to },
+        to: { ...swap.from }
+      })
     }
   }
   return (

@@ -23,31 +23,50 @@ export const addRPC = (account, activate, chainId = 100) => {
 }
 
 const NetworksData = {
-    1: {
-        chainId: "0x1",
-        chainName: "Ethereum Mainnet",
-        nativeCurrency: {
-            name: "ETH",
-            symbol: "ETH",
-            decimals: 18,
-        },
-        rpcUrls: ["https://mainnet.infura.io/v3/undefined"],
-        blockExplorerUrls: ["https://etherscan.io/"],
-        iconUrls: []
-
+  1: {
+    chainId: '0x1',
+    chainName: 'Ethereum Mainnet',
+    nativeCurrency: {
+      name: 'ETH',
+      symbol: 'ETH',
+      decimals: 18
     },
-    100: {
-        chainId: "0x64",
-        chainName: "xDAI Chain",
-        nativeCurrency: {
-            name: "xDAI",
-            symbol: "xDAI",
-            decimals: 18,
-        },
-        rpcUrls: ["https://rpc.xdaichain.com/"],
-        blockExplorerUrls: ["https://blockscout.com/poa/xdai/"],
-        iconUrls: ["https://app.deus.finance/tokens/xdai.svg"]
+    rpcUrls: ['https://mainnet.infura.io/v3/undefined'],
+    blockExplorerUrls: ['https://etherscan.io/'],
+    iconUrls: []
+  },
+  100: {
+    chainId: '0x64',
+    chainName: 'xDAI Chain',
+    nativeCurrency: {
+      name: 'xDAI',
+      symbol: 'xDAI',
+      decimals: 18
     },
+    rpcUrls: ['https://rpc.xdaichain.com/'],
+    blockExplorerUrls: ['https://blockscout.com/poa/xdai/'],
+    iconUrls: ['https://app.deus.finance/tokens/xdai.svg']
+  },
+  56: {
+    chainId: '0x38',
+    chainName: 'Binance Smart Chain Mainnet',
+    nativeCurrency: {
+      name: 'BNB',
+      symbol: 'BNB',
+      decimals: 18
+    },
+    rpcUrls: ['https://bsc-dataseed1.binance.org'],
+    blockExplorerUrls: ['https://bscscan.com']
+  },
+  97: {
+    chainId: '0x61',
+    chainName: 'Binance Smart Chain Testnet',
+    nativeCurrency: {
+      name: 'BNB',
+      symbol: 'BNB',
+      decimals: 18
+    },
+<<<<<<< HEAD
     137: {
         chainId: "0x89",
         chainName: "Matic Mainnet",
@@ -70,38 +89,55 @@ const NetworksData = {
         },
         rpcUrls: ["https://bsc-dataseed1.binance.org"],
         blockExplorerUrls: ["https://bscscan.com"],
+=======
+    rpcUrls: ['https://data-seed-prebsc-1-s1.binance.org:8545'],
+    blockExplorerUrls: ['https://testnet.bscscan.com']
+  },
+  250: {
+    chainId: '0xFA',
+    chainName: 'Fantom Opera',
+    nativeCurrency: {
+      name: 'Fantom',
+      symbol: 'FTM',
+      decimals: 18
+>>>>>>> aec8465debd007a2c67b9288c56cd0c17b46cffc
     },
-    97: {
-        chainId: "0x61",
-        chainName: "Binance Smart Chain Testnet",
-        nativeCurrency: {
-            name: "BNB",
-            symbol: "BNB",
-            decimals: 18,
-        },
-        rpcUrls: ["https://data-seed-prebsc-1-s1.binance.org:8545"],
-        blockExplorerUrls: ["https://testnet.bscscan.com"],
+    rpcUrls: ['https://rpcapi.fantom.network'],
+    blockExplorerUrls: ['https://ftmscan.com/'],
+    iconUrls: []
+  },
+  4002: {
+    chainId: '0xFA',
+    chainName: 'Fantom testnet',
+    nativeCurrency: {
+      name: 'Fantom',
+      symbol: 'FTM',
+      decimals: 18
     },
-    128: {
-        chainId: "0x80",
-        chainName: "Huobi ECO Chain Mainnet",
-        nativeCurrency: {
-            name: "HT",
-            symbol: "HT",
-            decimals: 18,
-        },
-        rpcUrls: ["https://http-mainnet.hecochain.com"],
-        blockExplorerUrls: ["https://hecoinfo.com"],
+    rpcUrls: ['https://rpc.testnet.fantom.network/'],
+    blockExplorerUrls: ['https://testnet.ftmscan.com/'],
+    iconUrls: []
+  },
+  128: {
+    chainId: '0x80',
+    chainName: 'Huobi ECO Chain Mainnet',
+    nativeCurrency: {
+      name: 'HT',
+      symbol: 'HT',
+      decimals: 18
     },
-    256: {
-        chainId: "0x100",
-        chainName: "Huobi ECO Chain Testnet",
-        nativeCurrency: {
-            name: "htt",
-            symbol: "htt",
-            decimals: 18,
-        },
-        rpcUrls: ["https://http-testnet.hecochain.com"],
-        blockExplorerUrls: ["https://testnet.hecoinfo.com"],
+    rpcUrls: ['https://http-mainnet.hecochain.com'],
+    blockExplorerUrls: ['https://hecoinfo.com']
+  },
+  256: {
+    chainId: '0x100',
+    chainName: 'Huobi ECO Chain Testnet',
+    nativeCurrency: {
+      name: 'htt',
+      symbol: 'htt',
+      decimals: 18
     },
+    rpcUrls: ['https://http-testnet.hecochain.com'],
+    blockExplorerUrls: ['https://testnet.hecoinfo.com']
+  }
 }

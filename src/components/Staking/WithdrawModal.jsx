@@ -40,16 +40,20 @@ const WithdrawModal = (props) => {
         &times;
       </div>
       <div className="modal-content">
-        <div className="exit-modal-title">
-          Withdraw Old Balance First
-        </div>
+        <div className="exit-modal-title">Withdraw Old Balance First</div>
         <div className="exit-modal-content">
           <p>
-            You can currently withdraw your previous unstaking Balance, please withdraw your balance first before creating another unstaking period.
+            You can currently withdraw your previous unstaking Balance, please
+            withdraw your balance first before creating another unstaking
+            period.
           </p>
 
           <div className="flex-center">
-            <div className="btn-yes pointer" onClick={handleWidthraw} style={{ margin: "0 5px" }}>
+            <div
+              className="btn-yes pointer"
+              onClick={handleWidthraw}
+              style={{ margin: '0 5px' }}
+            >
               Withdraw Now
             </div>
           </div>

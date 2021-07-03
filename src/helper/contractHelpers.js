@@ -44,12 +44,6 @@ export const getERC20Contract = (address, web3) => {
 }
 
 export const getMultiCallContract = (web3, chainId = ChainMap.MAINNET) => {
-  console.log({
-    MultiCallAbi,
-    chian: MULTICALL_NETWORKS[chainId],
-    web3,
-    chainId
-  })
   return getContract(MultiCallAbi, MULTICALL_NETWORKS[chainId], web3)
 }
 
