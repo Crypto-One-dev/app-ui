@@ -3,11 +3,7 @@ import Collapsible from 'react-collapsible'
 import moment from 'moment'
 import CollapseTrigger from './CollapseTrigger'
 import { makeContract, sendTransaction } from '../../utils/Stakefun'
-import {
-  ERC20ABI,
-  StakeAndYieldABI,
-  ControllerABI
-} from '../../utils/StakingABI'
+import { abi, StakeAndYieldABI, ControllerABI } from '../../utils/StakingABI'
 import UserInfo from './UserInfo'
 import Frozen from './Frozen'
 import Fluid from './Fluid'
@@ -109,7 +105,7 @@ const TokenContainer = (props) => {
       try {
         const ContractToken = makeContract(
           web3,
-          ERC20ABI,
+          abi,
           addresses['token'][tokenName][chainId]
         )
         let balanceToken = await ContractToken.methods.balanceOf(owner).call()
@@ -135,9 +131,7 @@ const TokenContainer = (props) => {
         let result = await StakeAndYieldContract.methods.userInfo(owner).call()
         let users = await StakeAndYieldContract.methods.users(owner).call()
         // newContract.rewardPerToken(2) * user.balance
-        let rewardPerToken = Number(
-          web3.utils.fromWei(result.numbers[8], 'ether')
-        )
+        let rewardPerToken = Number(web3.utils.fromWei(result.numbers[8], 'ether'))
         if (Number(result.numbers[1]) === 0) {
           stillOld = true
           const StakeAndYieldOldContract = makeContract(
@@ -155,11 +149,7 @@ const TokenContainer = (props) => {
         let fullyUnlock = Number(exitStartTime) + EXIT_PERIOD
         fullyUnlock = moment(new Date(fullyUnlock * 1000)).format('DD.MM.YYYY')
 
-        const StakedTokenContract = makeContract(
-          web3,
-          ERC20ABI,
-          stakedTokenAddress
-        )
+        const StakedTokenContract = makeContract(web3, abi, stakedTokenAddress)
         let balanceWallet = await StakedTokenContract.methods
           .balanceOf(owner)
           .call()
@@ -201,7 +191,8 @@ const TokenContainer = (props) => {
           } else {
             exitBalance = String(balance * portion)
           }
-        } else {
+        }
+        else {
           exitBalance = web3.utils.fromWei(numbers[11], 'ether')
         }
         /**
@@ -215,47 +206,38 @@ const TokenContainer = (props) => {
         let withDrawTime = Number(numbers[2])
 
         // withDrawTime = new Date(withDrawTime * 1000)
-        let nextEpochTime = withDrawTime + 8 * 24 * 3600
+        let nextEpochTime = withDrawTime + (8 * 24 * 3600)
 
         // let showFluid = currtimestamp - withDrawTime
 
         // TODO check after transaction contract become ok
-        if (withDrawable > 0 || withDrawableExit > 0) {
+        if ((withDrawable > 0 || withDrawableExit > 0)) {
           setShowFluid(true)
         }
         // if (showFluid <= 0 && (withDrawable > 0 || withDrawableExit > 0)) {
         //   setShowFluid(true)
         // }
-        let controller = await StakeAndYieldContract.methods.controller().call()
+        let controller = await StakeAndYieldContract.methods
+          .controller()
+          .call()
+
 
         let maxRedeem = 0
 
-        if (tokenName === 'deus') {
-          const deusContract = makeContract(
-            web3,
-            ERC20ABI,
-            addresses['token']['deus'][chainId]
-          )
-          const deusBalance = await deusContract.methods
-            .balanceOf(controller)
-            .call()
+        if (tokenName === "deus") {
+          const deusContract = makeContract(web3, abi, addresses['token']["deus"][chainId])
+          const deusBalance = await deusContract.methods.balanceOf(controller).call()
           maxRedeem = web3.utils.fromWei(deusBalance, 'ether')
         }
 
-        if (tokenName === 'dea') {
-          const deaContract = makeContract(
-            web3,
-            ERC20ABI,
-            addresses['token']['dea'][chainId]
-          )
-          const deaBalance = await deaContract.methods
-            .balanceOf(controller)
-            .call()
+        if (tokenName === "dea") {
+          const deaContract = makeContract(web3, abi, addresses['token']["dea"][chainId])
+          const deaBalance = await deaContract.methods.balanceOf(controller).call()
           maxRedeem = web3.utils.fromWei(deaBalance, 'ether')
         }
 
-        console.log(tokenName, maxRedeem)
-        console.log(controller)
+        console.log(tokenName, maxRedeem);
+        console.log(controller);
 
         let stakeTypeName = ''
         let strategyLink = ''
@@ -362,7 +344,7 @@ const TokenContainer = (props) => {
       if (tokenAddress && tokenName) {
         const ContractToken = makeContract(
           web3,
-          ERC20ABI,
+          abi,
           addresses['token'][tokenName][chainId]
         )
         let balanceToken = await ContractToken.methods.balanceOf(owner).call()
@@ -372,7 +354,7 @@ const TokenContainer = (props) => {
           abis['vaults'],
           addresses['vaults'][tokenName][chainId]
         )
-        const Contract = makeContract(web3, ERC20ABI, tokenAddress)
+        const Contract = makeContract(web3, abi, tokenAddress)
         let balanceWallet = await Contract.methods.balanceOf(owner).call()
         balanceWallet = web3.utils.fromWei(balanceWallet, 'ether')
         let allowance = await ContractToken.methods
@@ -443,17 +425,8 @@ const TokenContainer = (props) => {
   }, [owner, chainId, userInfo.balance, onlyLocking])
 
   React.useEffect(() => {
-    if (
-      Number(userInfo.balance) > 0 ||
-      Number(userInfo.withDrawable) > 0 ||
-      Number(userInfo.withDrawableExit) > 0
-    ) {
-      handleTriggerClick(
-        title,
-        userInfo.balance,
-        userInfo.withDrawable,
-        userInfo.withDrawableExit
-      )
+    if (Number(userInfo.balance) > 0 || Number(userInfo.withDrawable) > 0 || Number(userInfo.withDrawableExit) > 0) {
+      handleTriggerClick(title, userInfo.balance, userInfo.withDrawable, userInfo.withDrawableExit)
     } else {
       handleTriggerClick(title, false)
     }
@@ -487,14 +460,8 @@ const TokenContainer = (props) => {
   }
   return (
     <div
-      className={`token-container ${onlyLocking ? 'uni-background' : ''} ${
-        (!isZero(userInfo.balance) ||
-          !isZero(userInfo.withDrawable) ||
-          !isZero(userInfo.withDrawableExit)) &&
-        !onlyLocking
-          ? 'staked-pool'
-          : ''
-      }`}
+      className={`token-container ${onlyLocking ? 'uni-background' : ''} ${(!isZero(userInfo.balance) || !isZero(userInfo.withDrawable) || !isZero(userInfo.withDrawableExit)) && !onlyLocking ? 'staked-pool' : ''
+        }`}
     >
       <Collapsible
         handleTriggerClick={() => handleTriggerClick(title)}

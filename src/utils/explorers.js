@@ -16,11 +16,13 @@ const EXPLORER_PREFIXES = {
   100: 'mainnet',
   97: 'testnet.',
   128: '',
-  256: 'testnet.',
+  256: 'testnet.'
 }
 
 function getEtherscanLink(chainId, data, type) {
-  const prefix = `https://${EXPLORER_PREFIXES[chainId] || EXPLORER_PREFIXES[1]}etherscan.io`
+  const prefix = `https://${
+    EXPLORER_PREFIXES[chainId] || EXPLORER_PREFIXES[1]
+  }etherscan.io`
 
   switch (type) {
     case 'transaction': {
@@ -36,8 +38,9 @@ function getEtherscanLink(chainId, data, type) {
 }
 
 function getBlockscoutLink(chainId, data, type) {
-  const prefix = `https://blockscout.com/xdai/${EXPLORER_PREFIXES[chainId] || EXPLORER_PREFIXES[100]
-    }`
+  const prefix = `https://blockscout.com/xdai/${
+    EXPLORER_PREFIXES[chainId] || EXPLORER_PREFIXES[100]
+  }`
 
   switch (type) {
     case 'transaction': {
@@ -53,8 +56,9 @@ function getBlockscoutLink(chainId, data, type) {
 }
 
 function getBscscanLink(chainId, data, type) {
-  const prefix = `https://${EXPLORER_PREFIXES[chainId] || EXPLORER_PREFIXES[56]
-    }bscscan.com`
+  const prefix = `https://${
+    EXPLORER_PREFIXES[chainId] || EXPLORER_PREFIXES[56]
+  }bscscan.com`
 
   switch (type) {
     case 'transaction': {
@@ -69,8 +73,9 @@ function getBscscanLink(chainId, data, type) {
   }
 }
 function getHechoInfo(chainId, data, type) {
-  const prefix = `https://${EXPLORER_PREFIXES[chainId] || EXPLORER_PREFIXES[128]
-    }hecoinfo.com`
+  const prefix = `https://${
+    EXPLORER_PREFIXES[chainId] || EXPLORER_PREFIXES[128]
+  }hecoinfo.com`
 
   switch (type) {
     case 'transaction': {
@@ -196,7 +201,7 @@ export function SwapTranaction(type, payload) {
 
     case TransactionState.FAILED:
       if (!payload.hash) {
-        ToastTransaction('warn', 'Transaction Rejected', "", { autoClose: true })
+        ToastTransaction('warn', 'Transaction Rejected')
         return
       }
       ToastTransaction(
@@ -306,7 +311,7 @@ export function ApproveTranaction(type, payload) {
 }
 
 //to do
-export function CustomTranaction(type, payload) {
+export function CustomTransaction(type, payload) {
   toast.dismiss()
 
   switch (type) {
@@ -343,18 +348,22 @@ export function CustomTranaction(type, payload) {
       break
 
     case TransactionState.FAILED:
+      if (!payload.hash) {
+        ToastTransaction('warn', 'Transaction Rejected')
+        return
+      }
       ToastTransaction(
         'warn',
-        'Transaction Failed'
-        // <ExternalLink
-        //   href={getTransactionLink(
-        //     payload.chainId,
-        //     payload.hash,
-        //     'transaction'
-        //   )}
-        // >
-        //   {`View On Explorer`}
-        // </ExternalLink>
+        'Transaction Failed',
+        <ExternalLink
+          href={getTransactionLink(
+            payload.chainId,
+            payload.hash,
+            'transaction'
+          )}
+        >
+          {`View On Explorer`}
+        </ExternalLink>
       )
       break
 

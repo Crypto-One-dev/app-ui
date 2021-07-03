@@ -1,5 +1,5 @@
 import moment from 'moment'
-import { CustomTranaction } from './explorers'
+import { CustomTransaction } from './explorers'
 import { TransactionState } from './constant'
 
 // const INFURA_URL =
@@ -26,16 +26,14 @@ const sendTransaction = (
         .send({ from: owner })
         .once('transactionHash', (tx) => {
           hash = tx
-          CustomTranaction(TransactionState.LOADING, {
+          CustomTransaction(TransactionState.LOADING, {
             hash,
             chainId,
             message
           })
         })
-
         .once('receipt', ({ transactionHash }) => {
-          console.log({ transactionHash })
-          CustomTranaction(TransactionState.SUCCESS, {
+          CustomTransaction(TransactionState.SUCCESS, {
             hash: transactionHash,
             chainId,
             message
@@ -43,8 +41,8 @@ const sendTransaction = (
           resolve()
         })
         .once('error', (error) => {
-          console.log('error happend', error)
-          CustomTranaction(TransactionState.FAILED, {
+          console.log('************error happend', error)
+          CustomTransaction(TransactionState.FAILED, {
             hash,
             chainId
           })
@@ -56,10 +54,62 @@ const sendTransaction = (
   })
 }
 
+const sendTransactionDeposit = (
+  contract,
+  methodName,
+  params,
+  owner,
+  chainId,
+  message,
+  web3
+) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let hash = null
+      let check = true
+      contract.methods[methodName](...params)
+        .send({ from: owner })
+        .once('transactionHash', (tx) => {
+          hash = tx
+          CustomTransaction(TransactionState.LOADING, {
+            hash,
+            chainId,
+            message
+          })
+        })
+      const interval = setInterval(async () => {
+        let tx = await web3.eth.getTransactionReceipt(hash)
+        if (tx) {
+          check = false
+          if (tx.status) {
+            CustomTransaction(TransactionState.SUCCESS, {
+              hash: tx.transactionHash,
+              chainId,
+              message
+            })
+            resolve()
+          } else {
+            CustomTransaction(TransactionState.FAILED, {
+              hash,
+              chainId
+            })
+            reject()
+          }
+          if (!check) {
+            clearInterval(interval)
+          }
+        }
+      }, 15000)
+    } catch (error) {
+      console.log('**************error happend in send Transaction2', error)
+    }
+  })
+}
+
 const diffHours = (customDate) => {
   const date = moment(customDate)
   let now = moment(new Date())
   return date.diff(now)
 }
 
-export { makeContract, diffHours, sendTransaction }
+export { makeContract, diffHours, sendTransaction, sendTransactionDeposit }

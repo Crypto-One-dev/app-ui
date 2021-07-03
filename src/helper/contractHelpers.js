@@ -12,38 +12,59 @@ import { ChainMap } from '../constant/web3'
 import { getContractAddr } from '../utils/contracts'
 
 const getContract = (abi, address, web3) => {
-    const _web3 = web3 ?? web3NoAccount
-    return new _web3.eth.Contract(abi, address)
+  const _web3 = web3 ?? web3NoAccount
+  return new _web3.eth.Contract(abi, address)
 }
 
 export const getMultiSwapContract = (web3, chainId = ChainMap.MAINNET) => {
-    return getContract(muliSwapAbi, getContractAddr("multi_swap_contract", chainId), web3)
+  return getContract(
+    muliSwapAbi,
+    getContractAddr('multi_swap_contract', chainId),
+    web3
+  )
 }
 
-export const getDeusAutomaticMarketMakerContract = (web3, chainId = ChainMap.MAINNET) => {
-    return getContract(DeusAMMAbi, getContractAddr("amm", chainId), web3)
+export const getDeusAutomaticMarketMakerContract = (
+  web3,
+  chainId = ChainMap.MAINNET
+) => {
+  return getContract(DeusAMMAbi, getContractAddr('amm', chainId), web3)
 }
 
 export const getUniswapRouterContract = (web3, chainId = ChainMap.MAINNET) => {
-    return getContract(UniswapRouterAbi, getContractAddr("uniswap_router", chainId), web3)
+  return getContract(
+    UniswapRouterAbi,
+    getContractAddr('uniswap_router', chainId),
+    web3
+  )
 }
 
 export const getERC20Contract = (address, web3) => {
-    return getContract(ERC20Abi, address, web3)
+  return getContract(ERC20Abi, address, web3)
 }
 
 export const getMultiCallContract = (web3, chainId = ChainMap.MAINNET) => {
-    return getContract(MultiCallAbi, MULTICALL_NETWORKS[chainId], web3)
+  console.log({
+    MultiCallAbi,
+    chian: MULTICALL_NETWORKS[chainId],
+    web3,
+    chainId
+  })
+  return getContract(MultiCallAbi, MULTICALL_NETWORKS[chainId], web3)
 }
 
 export const getUniswapV2Contract = (address, web3) => {
-    return getContract(UniswapV2Abi, address, web3)
+  return getContract(UniswapV2Abi, address, web3)
 }
 
 export const getSealedSwapperContract = (address, web3) => {
-    return getContract(SealedSwapperAbi, address, web3)
+  return getContract(SealedSwapperAbi, address, web3)
 }
 
 export const getMuonContract = (web3, chainId = ChainMap.MAINNET) => {
-    return getContract(MuonPresaleAbi, getContractAddr("muon_presale", chainId), web3)
+  return getContract(
+    MuonPresaleAbi,
+    getContractAddr('muon_presale', chainId),
+    web3
+  )
 }
